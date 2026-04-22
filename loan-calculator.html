@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Loan & Mortgage Calculator | ucandoit.ca</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdad8",
+                    "secondary-fixed-dim": "#b6d088",
+                    "secondary-fixed": "#d2eca2",
+                    "surface-dim": "#d8dad9",
+                    "inverse-primary": "#a5d0b9",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#c1ecd4",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#50652a",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "on-surface-variant": "#414844",
+                    "on-secondary-fixed-variant": "#394d14",
+                    "on-secondary-container": "#546a2e",
+                    "on-background": "#191c1b",
+                    "on-secondary-fixed": "#131f00",
+                    "secondary-container": "#cfe99f",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#410007",
+                    "on-tertiary-container": "#ff807f",
+                    "tertiary-container": "#77131c",
+                    "primary": "#012d1d",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1b",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c1c8c2",
+                    "background": "#f8faf8",
+                    "outline": "#717973",
+                    "on-primary-container": "#86af99",
+                    "surface-container-high": "#e6e9e7",
+                    "primary-container": "#1b4332",
+                    "surface": "#f8faf8",
+                    "surface-tint": "#3f6653",
+                    "on-primary-fixed-variant": "#274e3d",
+                    "primary-fixed-dim": "#a5d0b9",
+                    "surface-container-highest": "#e1e3e1",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f2f4f2",
+                    "inverse-on-surface": "#eff1ef",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#002114",
+                    "inverse-surface": "#2e3130",
+                    "surface-variant": "#e1e3e1",
+                    "tertiary": "#55000b",
+                    "surface-container": "#eceeec",
+                    "surface-bright": "#f8faf8",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#861f25"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.5rem",
+                    "lg": "1rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .boreal-gradient {
+            background: linear-gradient(135deg, #012d1d 0%, #1b4332 100%);
+        }
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl border-b border-surface-container">
+<nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<a class="text-2xl font-black text-emerald-950 dark:text-emerald-50 tracking-tighter font-headline" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+<div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
+<div class="relative group">
+<button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Word Tools <span class="material-symbols-outlined text-base">expand_more</span></button>
+<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-48 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="anagram-finder.html">Anagram Finder</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="word-unscrambler.html">Word Unscrambler</a>
+</div>
+</div>
+<div class="relative group">
+<button class="text-emerald-950 dark:text-emerald-50 border-b-2 border-emerald-900 dark:border-emerald-400 pb-1 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Calculators <span class="material-symbols-outlined text-base">expand_more</span></button>
+<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+<a class="px-4 py-2 text-emerald-950 dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="loan-calculator.html">Mortgage Calculator</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="board-foot-calculator.html">Board Foot Calculator</a>
+</div>
+</div>
+<div class="relative group">
+<button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Games <span class="material-symbols-outlined text-base">expand_more</span></button>
+<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-letters-game.html">Countdown Letters</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-conundrum.html">Countdown Conundrum</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-numbers-game.html">Countdown Numbers</a>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<main class="pt-20 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+<!-- Hero Editorial Section -->
+<div class="relative mb-8">
+<div class="max-w-2xl">
+<span class="inline-block px-4 py-1.5 bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest rounded-full mb-4">Financial Tools</span>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold text-primary mb-4 tracking-tighter leading-[0.9] max-w-3xl">
+                    Mortgage <br/>
+<span class="text-on-primary-container italic">Calculated.</span>
+</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl font-medium leading-relaxed italic border-l-4 border-secondary-fixed pl-6">
+                    Navigate your Canadian home-buying journey with precision. Our tool provides a clear landscape of your future financial commitments.
+                </p>
+</div>
+<!-- Background Decoration (Asymmetric) -->
+<div class="absolute -top-10 -right-10 w-64 h-64 bg-primary-container/10 rounded-full blur-3xl -z-10"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Left Column: The Form -->
+<div class="lg:col-span-7 space-y-12">
+<section class="bg-surface-container-low p-8 md:p-12 rounded-xl">
+<h2 class="font-headline text-2xl font-bold mb-10 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+                        Loan Parameters
+                    </h2>
+<div class="space-y-10">
+	<!-- Purchase Price -->
+	<div class="space-y-4">
+	<div class="flex justify-between items-end">
+	<label class="font-headline font-bold text-sm text-primary uppercase tracking-wider" for="purchase-price">Purchase Price</label>
+	<div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border-b-2 border-outline-variant focus-within:border-primary transition-colors">
+	<span class="text-on-surface-variant font-medium">$</span>
+	<input id="purchase-price" class="border-none p-0 focus:ring-0 font-bold text-lg text-primary w-28 text-right" type="text" value="650,000"/>
+	</div>
+	</div>
+	<input id="purchase-price-range" class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" max="2500000" min="100000" step="5000" type="range" value="650000"/>
+	</div>
+	<!-- Down Payment -->
+	<div class="space-y-4">
+	<div class="flex justify-between items-end">
+	<label class="font-headline font-bold text-sm text-primary uppercase tracking-wider" for="down-payment">Down Payment</label>
+	<div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border-b-2 border-outline-variant focus-within:border-primary transition-colors">
+	<span class="text-on-surface-variant font-medium">$</span>
+	<input id="down-payment" class="border-none p-0 focus:ring-0 font-bold text-lg text-primary w-28 text-right" type="text" value="55,000"/>
+	</div>
+	</div>
+	<input id="down-payment-range" class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" max="650000" min="0" step="1000" type="range" value="55000"/>
+	<p id="down-payment-note" class="text-xs text-on-surface-variant">Minimum down payment is calculated using Canadian federal rules.</p>
+	</div>
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+	<!-- Interest Rate -->
+	<div class="space-y-4">
+	<label class="font-headline font-bold text-sm text-primary uppercase tracking-wider" for="interest-rate">Interest Rate</label>
+	<div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border-b-2 border-outline-variant focus-within:border-primary transition-colors">
+	<input id="interest-rate" class="border-none p-0 focus:ring-0 font-bold text-lg text-primary w-full text-right" type="text" value="4.89"/>
+	<span class="text-on-surface-variant font-medium">%</span>
+	</div>
+	<input id="interest-rate-range" class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" max="15" min="0.1" step="0.05" type="range" value="4.89"/>
+	</div>
+	<!-- Amortization -->
+	<div class="space-y-4">
+	<label class="font-headline font-bold text-sm text-primary uppercase tracking-wider" for="amortization-years">Amortization</label>
+	<div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border-b-2 border-outline-variant focus-within:border-primary transition-colors">
+	<input id="amortization-years" class="border-none p-0 focus:ring-0 font-bold text-lg text-primary w-full text-right" type="text" value="25"/>
+	<span class="text-on-surface-variant font-medium">Yrs</span>
+	</div>
+	<input id="amortization-years-range" class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-tertiary" max="30" min="1" step="1" type="range" value="25"/>
+	</div>
+	</div>
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+	<div class="space-y-4">
+	<label class="font-headline font-bold text-sm text-primary uppercase tracking-wider" for="payment-frequency">Payment Frequency</label>
+	<select id="payment-frequency" class="w-full bg-white border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary rounded-lg font-bold text-primary py-3">
+	<option value="monthly">Monthly</option>
+	<option value="semi-monthly">Semi-monthly</option>
+	<option value="bi-weekly">Bi-weekly</option>
+	<option value="accelerated-bi-weekly">Accelerated bi-weekly</option>
+	</select>
+	</div>
+	<div class="space-y-4">
+	<label class="font-headline font-bold text-sm text-primary uppercase tracking-wider" for="term-years">Term</label>
+	<select id="term-years" class="w-full bg-white border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary rounded-lg font-bold text-primary py-3">
+	<option value="1">1 year</option>
+	<option value="2">2 years</option>
+	<option value="3">3 years</option>
+	<option value="4">4 years</option>
+	<option value="5" selected>5 years</option>
+	<option value="7">7 years</option>
+	<option value="10">10 years</option>
+	</select>
+	</div>
+	</div>
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+	<label class="flex items-center gap-3 bg-white rounded-lg px-4 py-3 text-sm font-bold text-primary">
+	<input id="first-time-buyer" class="rounded text-primary focus:ring-primary" type="checkbox"/>
+	First-time buyer
+	</label>
+	<label class="flex items-center gap-3 bg-white rounded-lg px-4 py-3 text-sm font-bold text-primary">
+	<input id="new-build" class="rounded text-primary focus:ring-primary" type="checkbox"/>
+	New build
+	</label>
+	</div>
+	<div id="calculator-warnings" class="hidden rounded-lg bg-tertiary-fixed px-4 py-3 text-sm font-bold text-tertiary"></div>
+	</div>
+	</section>
+<!-- Informational Editorial Block -->
+<div class="relative rounded-xl overflow-hidden min-h-[300px] flex items-end">
+<img class="absolute inset-0 w-full h-full object-cover grayscale-[0.2] brightness-75" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7q3lD-zA-andUI2TbAloacVjrPK3f4gdAW6aof-tBf5HDKO1W-vl-qX4DeBZhrwKstwjD1NMoKoQ7nHmQGvuvqQvZ7MBoav0oYvEIYGItXec50UoEJw_zQNhFLmc8vIpTiYA_MMWwKy8gxYDKH8iqgbT2zg9HlEEtQMbcbMF4VyzVX20Hs58lMV0L0zp_PNGqULnPtQXKz9oofVt-LgWqq-u_pjIgdjXxj3q2WXyYWwdALrztJWlZ9dKcd84iiimL3BGgK4083_w"/>
+<div class="relative z-10 p-8 glass-panel m-4 rounded-lg border border-white/20">
+	<h3 class="font-headline font-bold text-primary mb-2">Understanding Canadian Rates</h3>
+	<p class="text-sm text-on-surface-variant leading-relaxed">
+	                            Canadian mortgages use semi-annual compounding, federal down payment thresholds, mortgage default insurance rules, and a qualifying stress test. This estimate follows the same core rules used by FCAC and CMHC public tools.
+	                        </p>
+</div>
+</div>
+</div>
+<!-- Right Column: Results & Sidebar -->
+<div class="lg:col-span-5 space-y-8">
+<!-- Results Card -->
+<div class="boreal-gradient rounded-xl p-8 text-white shadow-2xl relative overflow-hidden">
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-white/5 rounded-full"></div>
+	<h2 id="payment-heading" class="font-headline text-sm font-bold uppercase tracking-widest mb-8 opacity-80">Estimated Monthly Payment</h2>
+	<div class="mb-12">
+	<span id="payment-amount" class="text-5xl md:text-6xl font-black tracking-tighter">$0.00</span>
+	<p id="payment-subtitle" class="mt-2 text-primary-fixed text-sm font-medium">Principal &amp; Interest Only</p>
+	</div>
+	<div class="space-y-4 pt-8 border-t border-white/10">
+	<div class="flex justify-between items-center">
+	<span class="text-sm opacity-70">Mortgage Principal</span>
+	<span id="principal-amount" class="font-bold font-headline">$0</span>
+	</div>
+	<div class="flex justify-between items-center">
+	<span class="text-sm opacity-70">Insurance Premium</span>
+	<span id="insurance-premium" class="font-bold font-headline">$0</span>
+	</div>
+	<div class="flex justify-between items-center">
+	<span class="text-sm opacity-70">Total Interest Paid</span>
+	<span id="interest-paid" class="font-bold font-headline">$0</span>
+	</div>
+	<div class="flex justify-between items-center">
+	<span class="text-sm opacity-70">Stress Test Payment</span>
+	<span id="stress-payment" class="font-bold font-headline">$0</span>
+	</div>
+	<div class="flex justify-between items-center text-tertiary-fixed">
+	<span class="text-sm opacity-90">Overall Cost</span>
+	<span id="overall-cost" class="font-bold font-headline text-lg">$0</span>
+	</div>
+	</div>
+	<div id="rule-summary" class="mt-8 rounded-lg bg-white/10 p-4 text-sm leading-relaxed text-primary-fixed"></div>
+	</div>
+	</div>
+	</div>
+</main>
+<!-- Footer -->
+<footer class="bg-emerald-50 dark:bg-emerald-950 w-full py-12 mt-20">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="space-y-2">
+<div class="font-headline font-bold text-emerald-950 dark:text-emerald-50">ucandoit.ca</div>
+<p class="font-body text-sm tracking-wide leading-relaxed text-emerald-700 dark:text-emerald-400 max-w-sm">
+                    © 2024 ucandoit.ca
+                </p>
+</div>
+	</div>
+	</footer>
+	<script>
+const INSURANCE_CAP = 1500000;
+const STRESS_TEST_FLOOR = 5.25;
+const STRESS_TEST_BUFFER = 2;
+const FREQUENCIES = {
+  'monthly': { label: 'Monthly', paymentsPerYear: 12 },
+  'semi-monthly': { label: 'Semi-monthly', paymentsPerYear: 24 },
+  'bi-weekly': { label: 'Bi-weekly', paymentsPerYear: 26 },
+  'accelerated-bi-weekly': { label: 'Accelerated bi-weekly', paymentsPerYear: 26, accelerated: true }
+};
+
+const fields = {
+  purchasePrice: document.getElementById('purchase-price'),
+  purchasePriceRange: document.getElementById('purchase-price-range'),
+  downPayment: document.getElementById('down-payment'),
+  downPaymentRange: document.getElementById('down-payment-range'),
+  interestRate: document.getElementById('interest-rate'),
+  interestRateRange: document.getElementById('interest-rate-range'),
+  amortizationYears: document.getElementById('amortization-years'),
+  amortizationYearsRange: document.getElementById('amortization-years-range'),
+  paymentFrequency: document.getElementById('payment-frequency'),
+  termYears: document.getElementById('term-years'),
+  firstTimeBuyer: document.getElementById('first-time-buyer'),
+  newBuild: document.getElementById('new-build')
+};
+
+const output = {
+  paymentHeading: document.getElementById('payment-heading'),
+  paymentAmount: document.getElementById('payment-amount'),
+  paymentSubtitle: document.getElementById('payment-subtitle'),
+  principalAmount: document.getElementById('principal-amount'),
+  insurancePremium: document.getElementById('insurance-premium'),
+  interestPaid: document.getElementById('interest-paid'),
+  stressPayment: document.getElementById('stress-payment'),
+  overallCost: document.getElementById('overall-cost'),
+  downPaymentNote: document.getElementById('down-payment-note'),
+  warnings: document.getElementById('calculator-warnings'),
+  ruleSummary: document.getElementById('rule-summary')
+};
+
+function parseNumber(value) {
+  const parsed = Number(String(value).replace(/[^0-9.]/g, ''));
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function formatMoney(value, decimals = 0) {
+  return new Intl.NumberFormat('en-CA', {
+    style: 'currency',
+    currency: 'CAD',
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  }).format(value);
+}
+
+function formatInputMoney(value) {
+  return Math.round(value).toLocaleString('en-CA');
+}
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function minimumDownPayment(price) {
+  if (price <= 500000) return price * 0.05;
+  if (price < INSURANCE_CAP) return 25000 + (price - 500000) * 0.10;
+  return price * 0.20;
+}
+
+function insurancePremiumRate(loanToValue, useHomeStart = false) {
+  if (loanToValue <= 0.80) return 0;
+  if (useHomeStart) {
+    if (loanToValue <= 0.85) return 0.03;
+    if (loanToValue <= 0.90) return 0.033;
+    if (loanToValue <= 0.95) return 0.042;
+    return null;
+  }
+  if (loanToValue <= 0.85) return 0.028;
+  if (loanToValue <= 0.90) return 0.031;
+  if (loanToValue <= 0.95) return 0.04;
+  return null;
+}
+
+function periodicRate(annualRatePercent, paymentsPerYear) {
+  const nominal = annualRatePercent / 100;
+  return Math.pow(1 + nominal / 2, 2 / paymentsPerYear) - 1;
+}
+
+function standardPayment(principal, annualRatePercent, amortizationYears, paymentsPerYear) {
+  const paymentCount = Math.round(amortizationYears * paymentsPerYear);
+  const rate = periodicRate(annualRatePercent, paymentsPerYear);
+  if (principal <= 0 || paymentCount <= 0) return 0;
+  if (rate === 0) return principal / paymentCount;
+  return principal * rate / (1 - Math.pow(1 + rate, -paymentCount));
+}
+
+function paymentForFrequency(principal, annualRatePercent, amortizationYears, frequencyKey) {
+  const frequency = FREQUENCIES[frequencyKey];
+  if (frequency.accelerated) {
+    return standardPayment(principal, annualRatePercent, amortizationYears, 12) / 2;
+  }
+  return standardPayment(principal, annualRatePercent, amortizationYears, frequency.paymentsPerYear);
+}
+
+function mortgageSnapshot(principal, annualRatePercent, amortizationYears, frequencyKey) {
+  const frequency = FREQUENCIES[frequencyKey];
+  const payment = paymentForFrequency(principal, annualRatePercent, amortizationYears, frequencyKey);
+  let balance = principal;
+  let interest = 0;
+  let payments = 0;
+  const maxPayments = Math.ceil(amortizationYears * frequency.paymentsPerYear * 2);
+  const rate = periodicRate(annualRatePercent, frequency.paymentsPerYear);
+
+  while (balance > 0.005 && payments < maxPayments) {
+    const interestForPeriod = balance * rate;
+    const principalForPeriod = Math.min(payment - interestForPeriod, balance);
+    if (principalForPeriod <= 0) break;
+    balance -= principalForPeriod;
+    interest += interestForPeriod;
+    payments++;
+  }
+
+  return { payment, interest, payments, totalCost: principal + interest };
+}
+
+function termInterest(principal, payment, annualRatePercent, frequencyKey, termYears) {
+  const frequency = FREQUENCIES[frequencyKey];
+  const rate = periodicRate(annualRatePercent, frequency.paymentsPerYear);
+  const termPayments = Math.round(termYears * frequency.paymentsPerYear);
+  let balance = principal;
+  let interest = 0;
+
+  for (let i = 0; i < termPayments && balance > 0.005; i++) {
+    const interestForPeriod = balance * rate;
+    const principalForPeriod = Math.min(payment - interestForPeriod, balance);
+    if (principalForPeriod <= 0) break;
+    balance -= principalForPeriod;
+    interest += interestForPeriod;
+  }
+
+  return { interest, balance };
+}
+
+function syncFromRange(range, text, formatter = value => value) {
+  text.value = formatter(parseNumber(range.value));
+}
+
+function syncToRange(text, range, formatter = value => value) {
+  const value = clamp(parseNumber(text.value), parseNumber(range.min), parseNumber(range.max));
+  range.value = value;
+  text.value = formatter(value);
+}
+
+function calculateMortgage() {
+  const price = clamp(parseNumber(fields.purchasePrice.value), 100000, 2500000);
+  const minDown = minimumDownPayment(price);
+  const down = clamp(parseNumber(fields.downPayment.value), 0, price);
+  const rate = clamp(parseNumber(fields.interestRate.value), 0.1, 15);
+  const requestedAmortization = Math.round(clamp(parseNumber(fields.amortizationYears.value), 1, 30));
+  const downPaymentPercent = price > 0 ? down / price : 0;
+  const needsInsurance = downPaymentPercent < 0.20;
+  const useHomeStart = needsInsurance && requestedAmortization > 25 && (fields.firstTimeBuyer.checked || fields.newBuild.checked);
+  const allowsThirtyYears = !needsInsurance || fields.firstTimeBuyer.checked || fields.newBuild.checked;
+  const amortization = requestedAmortization > 25 && !allowsThirtyYears ? 25 : requestedAmortization;
+  const frequencyKey = fields.paymentFrequency.value;
+  const frequency = FREQUENCIES[frequencyKey];
+  const termYears = parseNumber(fields.termYears.value);
+  const warnings = [];
+
+  fields.purchasePrice.value = formatInputMoney(price);
+  fields.purchasePriceRange.value = price;
+  fields.downPaymentRange.max = price;
+  fields.downPayment.value = formatInputMoney(down);
+  fields.downPaymentRange.value = down;
+  fields.interestRate.value = rate.toFixed(2);
+  fields.interestRateRange.value = rate;
+  fields.amortizationYears.value = amortization;
+  fields.amortizationYearsRange.value = amortization;
+
+  if (down < minDown) {
+    warnings.push(`Down payment is below the Canadian minimum of ${formatMoney(minDown)}.`);
+  }
+  if (requestedAmortization > 25 && !allowsThirtyYears) {
+    warnings.push('For insured high-ratio mortgages, 30-year amortization requires first-time buyer or new build eligibility.');
+  }
+
+  const baseMortgage = Math.max(price - down, 0);
+  let premium = 0;
+
+  if (needsInsurance) {
+    if (price >= INSURANCE_CAP) {
+      warnings.push('Mortgage default insurance is not available at this price with less than 20% down.');
+    } else {
+      const premiumRate = insurancePremiumRate(baseMortgage / price, useHomeStart);
+      if (premiumRate === null) {
+        warnings.push('Down payment must be high enough to keep the loan-to-value at 95% or below.');
+      } else {
+        premium = baseMortgage * premiumRate;
+      }
+    }
+  }
+
+  const insuredMortgage = baseMortgage + premium;
+  const stressRate = Math.max(rate + STRESS_TEST_BUFFER, STRESS_TEST_FLOOR);
+  const snapshot = mortgageSnapshot(insuredMortgage, rate, amortization, frequencyKey);
+  const stressPayment = paymentForFrequency(insuredMortgage, stressRate, amortization, frequencyKey);
+  const term = termInterest(insuredMortgage, snapshot.payment, rate, frequencyKey, termYears);
+
+  output.paymentHeading.textContent = `Estimated ${frequency.label} Payment`;
+  output.paymentAmount.textContent = formatMoney(snapshot.payment, 2);
+  output.paymentSubtitle.textContent = `${frequency.paymentsPerYear} payments/year · principal & interest`;
+  output.principalAmount.textContent = formatMoney(baseMortgage);
+  output.insurancePremium.textContent = premium > 0 ? formatMoney(premium) : 'Not required';
+  output.interestPaid.textContent = formatMoney(snapshot.interest);
+  output.stressPayment.textContent = `${formatMoney(stressPayment, 2)} @ ${stressRate.toFixed(2)}%`;
+  output.overallCost.textContent = formatMoney(snapshot.totalCost);
+  output.downPaymentNote.textContent = `Minimum down payment: ${formatMoney(minDown)} · Your down payment: ${(downPaymentPercent * 100).toFixed(2)}%`;
+  output.ruleSummary.textContent = `Canadian estimate using semi-annual compounding. ${needsInsurance ? `${useHomeStart ? 'CMHC Home Start' : 'Default'} insurance premium is added to the mortgage principal.` : 'With 20%+ down, default insurance is not required.'} Estimated term interest over ${termYears} years: ${formatMoney(term.interest)}; balance at renewal: ${formatMoney(term.balance)}.`;
+
+  output.warnings.classList.toggle('hidden', warnings.length === 0);
+  output.warnings.textContent = warnings.join(' ');
+}
+
+[
+  [fields.purchasePriceRange, fields.purchasePrice, formatInputMoney],
+  [fields.downPaymentRange, fields.downPayment, formatInputMoney],
+  [fields.interestRateRange, fields.interestRate, value => Number(value).toFixed(2)],
+  [fields.amortizationYearsRange, fields.amortizationYears, value => Math.round(value)]
+].forEach(([range, text, formatter]) => {
+  range.addEventListener('input', () => {
+    syncFromRange(range, text, formatter);
+    calculateMortgage();
+  });
+  text.addEventListener('change', () => {
+    syncToRange(text, range, formatter);
+    calculateMortgage();
+  });
+});
+
+[fields.paymentFrequency, fields.termYears, fields.firstTimeBuyer, fields.newBuild].forEach(field => {
+  field.addEventListener('change', calculateMortgage);
+});
+
+calculateMortgage();
+	</script>
+	</body></html>

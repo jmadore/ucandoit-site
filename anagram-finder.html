@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Anagram Finder | ucandoit.ca</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="canadian-words.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#012d1d",
+                        "on-surface-variant": "#414844",
+                        "tertiary-fixed": "#ffdad8",
+                        "surface-tint": "#3f6653",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#002114",
+                        "on-tertiary-container": "#ff807f",
+                        "outline": "#717973",
+                        "on-background": "#191c1b",
+                        "surface-container-low": "#f2f4f2",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e1e3e1",
+                        "surface-dim": "#d8dad9",
+                        "outline-variant": "#c1c8c2",
+                        "background": "#f8faf8",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#a5d0b9",
+                        "secondary-fixed": "#d2eca2",
+                        "surface-container-high": "#e6e9e7",
+                        "on-primary-fixed-variant": "#274e3d",
+                        "on-surface": "#191c1b",
+                        "inverse-on-surface": "#eff1ef",
+                        "tertiary": "#55000b",
+                        "on-primary-container": "#86af99",
+                        "tertiary-container": "#77131c",
+                        "on-secondary-container": "#546a2e",
+                        "on-tertiary-fixed-variant": "#861f25",
+                        "on-secondary-fixed": "#131f00",
+                        "inverse-surface": "#2e3130",
+                        "surface-container": "#eceeec",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e1e3e1",
+                        "secondary-fixed-dim": "#b6d088",
+                        "surface": "#f8faf8",
+                        "secondary-container": "#cfe99f",
+                        "primary-fixed-dim": "#a5d0b9",
+                        "primary-fixed": "#c1ecd4",
+                        "primary-container": "#1b4332",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#394d14",
+                        "tertiary-fixed-dim": "#ffb3b0",
+                        "surface-bright": "#f8faf8",
+                        "on-tertiary-fixed": "#410007",
+                        "error-container": "#ffdad6",
+                        "secondary": "#50652a",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #012d1d 0%, #1b4332 100%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl border-b border-surface-container">
+<nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<a class="text-2xl font-black text-emerald-950 dark:text-emerald-50 tracking-tighter font-headline" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+<div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
+<div class="relative group">
+<button class="text-emerald-950 dark:text-emerald-50 border-b-2 border-emerald-900 dark:border-emerald-400 pb-1 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Word Tools <span class="material-symbols-outlined text-base">expand_more</span></button>
+<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-48 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+<a class="px-4 py-2 text-emerald-950 dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="anagram-finder.html">Anagram Finder</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="word-unscrambler.html">Word Unscrambler</a>
+</div>
+</div>
+<div class="relative group">
+<button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Calculators <span class="material-symbols-outlined text-base">expand_more</span></button>
+<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="loan-calculator.html">Mortgage Calculator</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="board-foot-calculator.html">Board Foot Calculator</a>
+</div>
+</div>
+<div class="relative group">
+<button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Games <span class="material-symbols-outlined text-base">expand_more</span></button>
+<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-letters-game.html">Countdown Letters</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-conundrum.html">Countdown Conundrum</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-numbers-game.html">Countdown Numbers</a>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<main class="flex-grow pt-20">
+<!-- Hero Section -->
+<section class="relative pt-8 pb-16 px-8 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full opacity-10 bg-[url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center"></div>
+</div>
+<div class="relative z-10 max-w-5xl mx-auto">
+<div class="mb-8">
+<h1 class="text-5xl md:text-7xl font-headline font-extrabold text-primary tracking-tighter leading-[0.9] mb-4 max-w-3xl">
+                        Anagram<br/><span class="text-secondary">Finder</span>
+</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl font-medium leading-relaxed italic border-l-4 border-secondary-fixed pl-6">
+                        Enter your letters to find all possible anagrams and word combinations.
+                    </p>
+</div>
+<!-- Main Input Tool -->
+<div class="bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-[0_32px_64px_-4px_rgba(25,28,27,0.05)] max-w-3xl">
+<div class="flex flex-col gap-6">
+<div class="relative">
+<label class="block text-xs font-bold uppercase tracking-widest text-secondary mb-3">Your Letters</label>
+<input class="w-full bg-surface-container-highest border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary transition-colors text-3xl font-headline font-bold py-4 px-0 placeholder:text-outline-variant placeholder:font-normal" placeholder="e.g. maple" type="text"/>
+<script>
+
+
+// --- Rack-based Anagram Finder Logic ---
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.querySelector('input[type="text"]');
+    const button = document.getElementById('find-anagrams-btn');
+    const resultsSection = document.getElementById('anagram-results');
+    const resultCount = document.getElementById('result-count');
+    const totalCombinations = document.getElementById('total-combinations');
+    const longestWord = document.getElementById('longest-word');
+
+    // Get a frequency signature for a word
+    function getCharFrequency(word) {
+        const freq = new Array(26).fill(0);
+        for (const char of word.toLowerCase()) {
+            const code = char.charCodeAt(0) - 97;
+            if (code >= 0 && code < 26) {
+                freq[code]++;
+            }
+        }
+        return freq;
+    }
+
+    function canBuildWord(word, availableLetters) {
+        const wordFreq = getCharFrequency(word);
+        for (let i = 0; i < wordFreq.length; i++) {
+            if (wordFreq[i] > availableLetters[i]) return false;
+        }
+        return true;
+    }
+
+    function escapeHtml(value) {
+        return value
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    // Find every dictionary word that can be made from the input rack.
+    function findAnagrams(letters) {
+        const cleaned = letters.toLowerCase().replace(/[^a-z]/g, '');
+        if (!cleaned) return [];
+        const availableLetters = getCharFrequency(cleaned);
+        const matches = window.CANADIAN_WORDS.filter(word =>
+            word.length <= cleaned.length && canBuildWord(word, availableLetters)
+        );
+        return matches.sort((a, b) => b.length - a.length || a.localeCompare(b));
+    }
+
+    function renderResults(words) {
+        resultCount.textContent = `${words.length} ${words.length === 1 ? 'Word' : 'Words'}`;
+        totalCombinations.textContent = words.length;
+        longestWord.textContent = words.length ? `${words[0]} (${words[0].length})` : 'None';
+
+        // Group by word length
+        let groups = {};
+        for (let w of words) {
+            let len = w.length;
+            if (!groups[len]) groups[len] = [];
+            groups[len].push(w);
+        }
+        // Clear previous
+        resultsSection.innerHTML = '';
+        Object.keys(groups).sort((a, b) => b - a).forEach(len => {
+            let group = groups[len];
+            let groupDiv = document.createElement('div');
+            groupDiv.className = 'space-y-4';
+            groupDiv.innerHTML = `
+                <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-outline flex items-center gap-4">
+                    ${len} Letter Words
+                    <div class="flex-grow h-px bg-outline-variant opacity-30"></div>
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    ${group.map(word => `<div class="bg-surface-container-lowest p-4 rounded-lg text-center font-bold text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer">${escapeHtml(word)}</div>`).join('')}
+                </div>
+            `;
+            resultsSection.appendChild(groupDiv);
+        });
+        if (words.length === 0) {
+            resultsSection.innerHTML = '<div class="text-center text-outline-variant py-8">No anagrams found.</div>';
+        }
+    }
+
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const val = input.value.trim();
+        const results = findAnagrams(val);
+        renderResults(results);
+    });
+
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            button.click();
+        }
+    });
+});
+</script>
+</div>
+<button id="find-anagrams-btn" class="signature-gradient text-on-primary font-headline font-bold py-5 px-8 rounded-xl flex items-center justify-center gap-3 active:scale-95 transition-transform group">
+<span>Find Anagrams</span>
+<span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+	<!-- Content Area with Asymmetric Layout -->
+	<section class="max-w-7xl mx-auto px-8 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12">
+	<!-- Left Side: Results -->
+	<div class="lg:col-span-8 space-y-12">
+<div class="flex items-center justify-between">
+<h2 class="text-3xl font-headline font-bold text-primary tracking-tight">Found Results</h2>
+<div class="flex gap-2">
+<span class="px-3 py-1 rounded-full bg-surface-container-high text-xs font-bold text-secondary">Dictionary: EN-CA</span>
+<span id="result-count" class="px-3 py-1 rounded-full bg-surface-container-high text-xs font-bold text-secondary">0 Words</span>
+</div>
+</div>
+<!-- Result Groups -->
+<div id="anagram-results" class="space-y-10">
+</div>
+</div>
+	<!-- Right Side: Tool Stats -->
+	<div class="lg:col-span-4 space-y-8">
+	<!-- Stats/Tips Card -->
+	<div class="bg-primary-container rounded-xl p-8 text-on-primary">
+<div class="flex items-start gap-4 mb-6">
+<span class="material-symbols-outlined text-tertiary-fixed text-4xl">lightbulb</span>
+<div>
+<h4 class="font-headline font-bold text-xl leading-tight">Pro Tip</h4>
+<p class="text-on-primary-container text-sm mt-1 opacity-90">Use the "Canada Edition" toggle to prioritize Canadian spellings like 'colour' or 'centre'.</p>
+</div>
+</div>
+<div class="space-y-4 pt-4 border-t border-white/10">
+<div class="flex justify-between text-sm">
+<span class="opacity-70">Total Combinations</span>
+<span id="total-combinations" class="font-bold">0</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="opacity-70">Longest Word</span>
+<span id="longest-word" class="font-bold">None</span>
+</div>
+</div>
+	</div>
+	</div>
+</section>
+<!-- SEO/Description Section -->
+<section class="bg-surface-container-low py-20">
+<div class="max-w-4xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div>
+<h2 class="text-2xl font-headline font-bold text-primary mb-4">How it works</h2>
+<p class="text-on-surface-variant leading-relaxed mb-6">Our anagram engine scans the official Canadian English dictionary to find every possible word combination from your scrambled letters. Whether you're playing word games or solving puzzles, we provide accurate, instant results.</p>
+</div>
+<div>
+<h2 class="text-2xl font-headline font-bold text-primary mb-4">Beyond Anagrams</h2>
+<p class="text-on-surface-variant leading-relaxed mb-6">Explore our suite of editorial tools designed for the curious mind. From crosswords to complex unscramblers, ucandoit.ca is your digital destination for wordplay and Canadian culture.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-tertiary opacity-40">eco</span>
+<span class="material-symbols-outlined text-tertiary opacity-40">grid_view</span>
+<span class="material-symbols-outlined text-tertiary opacity-40">potted_plant</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto bg-[#f2f4f2] dark:bg-[#1e211f]">
+<div class="flex flex-col md:flex-row justify-between items-center px-10 py-12 gap-6 max-w-7xl mx-auto font-headline text-sm uppercase tracking-widest text-[#50652a] dark:text-[#e1e3e1]">
+<div class="flex flex-col gap-2">
+<div class="text-[#012d1d] font-bold text-lg lowercase tracking-tighter">ucandoit.ca</div>
+<p class="normal-case tracking-normal opacity-70">© 2024 ucandoit.ca — A Canadian Digital Editorial. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body></html>

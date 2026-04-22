@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="canadian-words.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdad8",
+                    "secondary-fixed-dim": "#b6d088",
+                    "secondary-fixed": "#d2eca2",
+                    "surface-dim": "#d8dad9",
+                    "inverse-primary": "#a5d0b9",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#c1ecd4",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#50652a",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "on-surface-variant": "#414844",
+                    "on-secondary-fixed-variant": "#394d14",
+                    "on-secondary-container": "#546a2e",
+                    "on-background": "#191c1b",
+                    "on-secondary-fixed": "#131f00",
+                    "secondary-container": "#cfe99f",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#410007",
+                    "on-tertiary-container": "#ff807f",
+                    "tertiary-container": "#77131c",
+                    "primary": "#012d1d",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1b",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c1c8c2",
+                    "background": "#f8faf8",
+                    "outline": "#717973",
+                    "on-primary-container": "#86af99",
+                    "surface-container-high": "#e6e9e7",
+                    "primary-container": "#1b4332",
+                    "surface": "#f8faf8",
+                    "surface-tint": "#3f6653",
+                    "on-primary-fixed-variant": "#274e3d",
+                    "primary-fixed-dim": "#a5d0b9",
+                    "surface-container-highest": "#e1e3e1",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f2f4f2",
+                    "inverse-on-surface": "#eff1ef",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#002114",
+                    "inverse-surface": "#2e3130",
+                    "surface-variant": "#e1e3e1",
+                    "tertiary": "#55000b",
+                    "surface-container": "#eceeec",
+                    "surface-bright": "#f8faf8",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#861f25"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.5rem",
+                    "lg": "1rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .main-gradient {
+            background: linear-gradient(135deg, #012d1d 0%, #1b4332 100%);
+        }
+        .tile-shadow {
+            box-shadow: 0 4px 0 0 #c1c8c2;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim selection:text-primary">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl border-b border-surface-container">
+<nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<a class="text-2xl font-black text-emerald-950 dark:text-emerald-50 tracking-tighter font-headline" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+<div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
+<div class="relative group">
+<button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Word Tools <span class="material-symbols-outlined text-base">expand_more</span></button>
+<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-48 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="anagram-finder.html">Anagram Finder</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="word-unscrambler.html">Word Unscrambler</a>
+</div>
+</div>
+<div class="relative group">
+<button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Calculators <span class="material-symbols-outlined text-base">expand_more</span></button>
+<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="loan-calculator.html">Mortgage Calculator</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="board-foot-calculator.html">Board Foot Calculator</a>
+</div>
+</div>
+<div class="relative group">
+<button class="text-emerald-950 dark:text-emerald-50 border-b-2 border-emerald-900 dark:border-emerald-400 pb-1 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Games <span class="material-symbols-outlined text-base">expand_more</span></button>
+<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+<a class="px-4 py-2 text-emerald-950 dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-letters-game.html">Countdown Letters</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-conundrum.html">Countdown Conundrum</a>
+<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-numbers-game.html">Countdown Numbers</a>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<main class="pt-20 pb-16 px-6 max-w-7xl mx-auto min-h-screen">
+<!-- Editorial Header -->
+<header class="mb-8 relative">
+<div class="inline-block px-4 py-1.5 bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest rounded-full mb-4">
+                WORD CHALLENGE
+            </div>
+<h1 class="text-5xl md:text-7xl font-black font-headline text-primary tracking-tighter max-w-3xl leading-[0.9] mb-4">
+                Countdown <span class="text-tertiary block sm:inline">Letters</span>
+</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl font-medium leading-relaxed italic border-l-4 border-secondary-fixed pl-6 mt-6">
+                Nine letters. Thirty seconds. Can you find the longest word hidden in the northern mist?
+            </p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Game Canvas -->
+<div class="lg:col-span-8 space-y-6">
+<!-- The Letter Display Area -->
+<div class="bg-surface-container-low p-5 md:p-6 rounded-xl relative overflow-hidden">
+<div id="tiles-container" class="grid grid-cols-9 gap-2 md:gap-3 mb-6 w-full">
+<!-- Letter Tiles -->
+<div class="aspect-[4/5] min-w-0 bg-surface-container-lowest rounded-lg flex items-center justify-center border-b-4 border-outline-variant group">
+<span class="text-2xl sm:text-3xl md:text-4xl font-black font-headline text-primary">C</span>
+</div>
+<div class="aspect-[4/5] min-w-0 bg-surface-container-lowest rounded-lg flex items-center justify-center border-b-4 border-outline-variant">
+<span class="text-2xl sm:text-3xl md:text-4xl font-black font-headline text-primary">A</span>
+</div>
+<div class="aspect-[4/5] min-w-0 bg-surface-container-lowest rounded-lg flex items-center justify-center border-b-4 border-outline-variant">
+<span class="text-2xl sm:text-3xl md:text-4xl font-black font-headline text-primary">N</span>
+</div>
+<div class="aspect-[4/5] min-w-0 bg-surface-container-lowest rounded-lg flex items-center justify-center border-b-4 border-outline-variant">
+<span class="text-2xl sm:text-3xl md:text-4xl font-black font-headline text-primary">A</span>
+</div>
+<div class="aspect-[4/5] min-w-0 bg-surface-container-lowest rounded-lg flex items-center justify-center border-b-4 border-outline-variant">
+<span class="text-2xl sm:text-3xl md:text-4xl font-black font-headline text-primary">D</span>
+</div>
+<div class="aspect-[4/5] min-w-0 bg-surface-container-lowest rounded-lg flex items-center justify-center border-b-4 border-outline-variant">
+<span class="text-2xl sm:text-3xl md:text-4xl font-black font-headline text-primary">A</span>
+</div>
+<!-- Empty slots -->
+<div class="aspect-[4/5] min-w-0 bg-surface-container-highest/30 rounded-lg flex items-center justify-center border-2 border-dashed border-outline-variant/50">
+<span class="material-symbols-outlined text-outline-variant text-xl sm:text-2xl">question_mark</span>
+</div>
+<div class="aspect-[4/5] min-w-0 bg-surface-container-highest/30 rounded-lg flex items-center justify-center border-2 border-dashed border-outline-variant/50">
+<span class="material-symbols-outlined text-outline-variant text-xl sm:text-2xl">question_mark</span>
+</div>
+<div class="aspect-[4/5] min-w-0 bg-surface-container-highest/30 rounded-lg flex items-center justify-center border-2 border-dashed border-outline-variant/50">
+<span class="material-symbols-outlined text-outline-variant text-xl sm:text-2xl">question_mark</span>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="flex flex-col md:flex-row items-center justify-center gap-3">
+<button id="btn-vowel" class="w-full md:w-auto px-7 py-3 bg-primary text-on-primary font-headline font-bold rounded-lg main-gradient flex items-center justify-center gap-3 scale-95 active:scale-90 transition-all">
+<span class="inline-flex h-7 w-7 items-center justify-center rounded bg-white/15 font-headline text-base font-black leading-none" aria-hidden="true">A</span>
+                            VOWEL
+                        </button>
+<button id="btn-consonant" class="w-full md:w-auto px-7 py-3 bg-secondary text-on-secondary font-headline font-bold rounded-lg flex items-center justify-center gap-3 scale-95 active:scale-90 transition-all">
+<span class="inline-flex h-7 w-7 items-center justify-center rounded bg-white/15 font-headline text-base font-black leading-none" aria-hidden="true">C</span>
+                            CONSONANT
+                        </button>
+<button id="btn-auto-pick" class="w-full md:w-auto px-7 py-3 bg-surface-container-high text-primary font-headline font-bold rounded-lg flex items-center justify-center gap-3 scale-95 active:scale-90 transition-all">
+<span class="material-symbols-outlined">auto_awesome</span>
+                            AUTO PICK
+                        </button>
+<button id="btn-reset" class="p-4 bg-tertiary-fixed text-tertiary font-headline font-bold rounded-lg scale-95 active:scale-90 transition-all">
+<span class="material-symbols-outlined">restart_alt</span>
+</button>
+</div>
+<label class="mt-4 flex items-center justify-center gap-3 text-sm font-bold text-primary">
+<input id="sound-toggle" class="rounded text-primary focus:ring-primary" type="checkbox"/>
+<span class="material-symbols-outlined text-lg">volume_up</span>
+Countdown music
+</label>
+<audio id="countdown-music" preload="auto" src="countdown-music.mp3"></audio>
+</div>
+<!-- Input and Timer Section -->
+<div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-center bg-surface-container-lowest p-6 rounded-xl border-l-8 border-primary shadow-sm">
+<div class="space-y-4">
+<label class="block text-sm font-bold text-primary tracking-widest uppercase mb-2">Your Longest Word</label>
+<div class="relative">
+<input id="word-input" disabled class="w-full bg-surface-container-highest/50 border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-2xl font-headline font-bold py-4 px-2 placeholder:text-outline transition-all" placeholder="Type word here..." type="text"/>
+<button id="btn-submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-tertiary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">send</span>
+</button>
+</div>
+<p class="text-xs text-on-surface-variant italic">Press Enter to submit before the time runs out.</p>
+</div>
+<div class="flex flex-col items-center justify-center gap-4">
+<div class="relative w-24 h-24 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" stroke-width="7"></circle>
+<circle id="timer-circle" class="text-tertiary transition-all duration-1000" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" stroke-dasharray="263.89" stroke-dashoffset="0" stroke-linecap="round" stroke-width="7"></circle>
+</svg>
+<span id="timer-count" class="absolute text-3xl font-black font-headline text-primary">30</span>
+</div>
+<span class="text-sm font-bold text-on-surface-variant tracking-tighter">SECONDS REMAINING</span>
+</div>
+</div>
+<div id="game-result" class="hidden mt-4 p-6 rounded-xl border-l-4" aria-live="polite"></div>
+<!-- Game Rules Editorial Piece -->
+<article class="bg-surface-container-low p-8 rounded-xl">
+<h3 class="text-2xl font-black font-headline text-primary mb-6">How to Master the Letter Challenge</h3>
+<div class="grid md:grid-cols-2 gap-8 text-on-surface-variant leading-relaxed">
+<p>In this digital rendition of the classic parlor game, balance is your greatest ally. Selecting five consonants and four vowels is often the preferred strategy of seasonal winners, providing a rich phonetic palette.</p>
+<p>Remember, the Canadian lexicon is expansive. While we celebrate common tongue, our systems recognize a vast array of technical, scientific, and culturally significant terms. Every letter counts.</p>
+</div>
+</article>
+</div>
+<!-- Sidebar -->
+<aside class="lg:col-span-4 space-y-12">
+<!-- Scoreboard Card -->
+<div class="bg-primary text-white p-8 rounded-xl main-gradient">
+  <h4 class="font-headline font-bold text-primary-fixed mb-6 uppercase tracking-widest text-sm">Session Highlights</h4>
+  <div class="space-y-6">
+    <div class="flex justify-between items-center border-b border-white/10 pb-4">
+      <span class="text-sm font-medium opacity-80 italic">Current Streak</span>
+      <span id="session-streak" class="text-3xl font-black font-headline tracking-tighter">0</span>
+    </div>
+    <div class="flex justify-between items-center border-b border-white/10 pb-4">
+      <span class="text-sm font-medium opacity-80 italic">Best Word</span>
+      <span id="best-word" class="text-xl font-bold font-headline tracking-tight text-secondary-fixed">—</span>
+    </div>
+    <div class="flex justify-between items-center border-b border-white/10 pb-4">
+      <span class="text-sm font-medium opacity-80 italic">Best Score</span>
+      <span id="best-score" class="text-3xl font-black font-headline tracking-tighter">0</span>
+    </div>
+    <div class="flex justify-between items-center">
+      <span class="text-sm font-medium opacity-80 italic">Rounds Played</span>
+      <span id="rounds-played" class="text-3xl font-black font-headline tracking-tighter">0</span>
+    </div>
+  </div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 mt-20 bg-emerald-50">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="font-headline font-bold text-emerald-950">
+                ucandoit.ca
+            </div>
+<div class="text-emerald-900 text-sm tracking-wide leading-relaxed font-body">
+                © 2024 ucandoit.ca — A Premium Experience.
+            </div>
+</div>
+</footer>
+<script>
+// ── Constants ──────────────────────────────────────────────────────────────
+const VOWEL_POOL     = 'AAAAAAAAAEEEEEEEEEEEEIIIIIIIIIOOOOOOOOUUUU'.split('');
+const CONSONANT_POOL = 'BBCCDDDDFGGHHHJKLLLLMMNNNNNNPPRRRRRRSSSSSTTTTTTTVVWWXYYYZ'.split('');
+const TIMER_MAX      = 30;
+const CIRCUMFERENCE  = 263.89;
+const AUTO_PICK_VOWELS = 4;
+
+// ── Session state ───────────────────────────────────────────────────────────
+let phase     = 'picking'; // 'picking' | 'playing' | 'checking' | 'result'
+let letters   = [];
+let vowelBag  = [...VOWEL_POOL];
+let consonantBag = [...CONSONANT_POOL];
+let timerID   = null;
+let timeLeft  = TIMER_MAX;
+let streak    = 0;
+let bestWord  = '';
+let bestScore = 0;
+let rounds    = 0;
+let WORD_LIST = buildWordList();
+
+// ── Sanitise user input (A-Z only, prevents XSS in DOM insertions) ──────────
+function sanitize(str) {
+  return str.toUpperCase().replace(/[^A-Z]/g, '');
+}
+
+// ── Word list setup ─────────────────────────────────────────────────────────
+function buildWordList() {
+  const siteWords = Array.isArray(window.CANADIAN_WORDS) ? window.CANADIAN_WORDS : [];
+  return new Set(
+    siteWords
+      .map(sanitize)
+      .filter(word => /^[A-Z]{3,9}$/.test(word))
+  );
+}
+
+// ── Tile rendering ──────────────────────────────────────────────────────────
+function stopCountdownMusic() {
+  const music = document.getElementById('countdown-music');
+  music.pause();
+  music.currentTime = 0;
+}
+
+function playCountdownMusic() {
+  const soundToggle = document.getElementById('sound-toggle');
+  if (!soundToggle.checked) return;
+
+  const music = document.getElementById('countdown-music');
+  music.currentTime = Math.min(TIMER_MAX - timeLeft, TIMER_MAX);
+  music.play().catch(() => {
+    soundToggle.checked = false;
+  });
+}
+
+function handleSoundToggle() {
+  if (document.getElementById('sound-toggle').checked && phase === 'playing') {
+    playCountdownMusic();
+  } else {
+    stopCountdownMusic();
+  }
+}
+
+function renderTiles() {
+  const container = document.getElementById('tiles-container');
+  while (container.firstChild) container.removeChild(container.firstChild);
+  for (let i = 0; i < 9; i++) {
+    const el = document.createElement('div');
+    if (i < letters.length) {
+      el.className = 'aspect-[4/5] min-w-0 bg-surface-container-lowest rounded-lg flex items-center justify-center border-b-4 border-outline-variant tile-shadow';
+      const span = document.createElement('span');
+      span.className = 'text-2xl sm:text-3xl md:text-4xl font-black font-headline text-primary';
+      span.textContent = letters[i];
+      el.appendChild(span);
+    } else {
+      el.className = 'aspect-[4/5] min-w-0 bg-surface-container-highest/30 rounded-lg flex items-center justify-center border-2 border-dashed border-outline-variant/50';
+      const icon = document.createElement('span');
+      icon.className = 'material-symbols-outlined text-outline-variant text-xl sm:text-2xl text-xl sm:text-2xl';
+      icon.textContent = 'question_mark';
+      el.appendChild(icon);
+    }
+    container.appendChild(el);
+  }
+}
+
+// ── Letter selection ────────────────────────────────────────────────────────
+function drawFromBag(bag) {
+  const idx = Math.floor(Math.random() * bag.length);
+  const [letter] = bag.splice(idx, 1);
+  return letter;
+}
+
+function pickLetter(bag) {
+  if (phase !== 'picking' || letters.length >= 9 || bag.length === 0) return;
+  letters.push(drawFromBag(bag));
+  renderTiles();
+  if (letters.length === 9) startGame();
+}
+
+function autoPickLetters() {
+  if (phase !== 'picking' || letters.length >= 9) return;
+
+  while (letters.length < 9) {
+    const selectedVowels = letters.filter(letter => VOWEL_POOL.includes(letter)).length;
+    const shouldPickVowel = selectedVowels < AUTO_PICK_VOWELS && vowelBag.length > 0;
+    const bag = shouldPickVowel || consonantBag.length === 0 ? vowelBag : consonantBag;
+    if (bag.length === 0) break;
+    letters.push(drawFromBag(bag));
+  }
+
+  renderTiles();
+  if (letters.length === 9) startGame();
+}
+
+document.getElementById('btn-vowel').addEventListener('click',
+  () => pickLetter(vowelBag));
+document.getElementById('btn-consonant').addEventListener('click',
+  () => pickLetter(consonantBag));
+document.getElementById('btn-auto-pick').addEventListener('click', autoPickLetters);
+document.getElementById('sound-toggle').addEventListener('change', handleSoundToggle);
+
+// ── Timer ───────────────────────────────────────────────────────────────────
+function updateTimerUI() {
+  const countEl  = document.getElementById('timer-count');
+  const circleEl = document.getElementById('timer-circle');
+  countEl.textContent = timeLeft;
+  circleEl.style.strokeDashoffset = CIRCUMFERENCE * (1 - timeLeft / TIMER_MAX);
+  const urgent = timeLeft <= 10;
+  countEl.classList.toggle('text-primary',  !urgent);
+  countEl.classList.toggle('text-red-500',   urgent);
+  circleEl.classList.toggle('text-tertiary', !urgent);
+  circleEl.classList.toggle('text-red-500',  urgent);
+}
+
+function startGame() {
+  phase    = 'playing';
+  timeLeft = TIMER_MAX;
+  rounds++;
+  document.getElementById('rounds-played').textContent = rounds;
+
+  const vBtn = document.getElementById('btn-vowel');
+  const cBtn = document.getElementById('btn-consonant');
+  const aBtn = document.getElementById('btn-auto-pick');
+  vBtn.disabled = true; cBtn.disabled = true; aBtn.disabled = true;
+  vBtn.classList.add('opacity-40', 'cursor-not-allowed');
+  cBtn.classList.add('opacity-40', 'cursor-not-allowed');
+  aBtn.classList.add('opacity-40', 'cursor-not-allowed');
+
+  const input = document.getElementById('word-input');
+  input.disabled = false;
+  input.value = '';
+  input.focus();
+
+  document.getElementById('game-result').classList.add('hidden');
+  updateTimerUI();
+  playCountdownMusic();
+
+  timerID = setInterval(() => {
+    timeLeft--;
+    updateTimerUI();
+    if (timeLeft <= 0) {
+      clearInterval(timerID);
+      showResult('timeout', document.getElementById('word-input').value.trim());
+    }
+  }, 1000);
+}
+
+// ── Word validation ─────────────────────────────────────────────────────────
+function canMakeWord(word) {
+  const pool = [...letters];
+  for (const ch of sanitize(word)) {
+    const idx = pool.indexOf(ch);
+    if (idx === -1) return false;
+    pool.splice(idx, 1);
+  }
+  return true;
+}
+
+function isValidWord(word) {
+  return WORD_LIST.has(sanitize(word));
+}
+
+function findBestPossibleWords() {
+  let bestLength = 0;
+  let bestWords = [];
+
+  for (const candidate of WORD_LIST) {
+    if (candidate.length < bestLength || !canMakeWord(candidate)) continue;
+
+    if (candidate.length > bestLength) {
+      bestLength = candidate.length;
+      bestWords = [];
+    }
+    bestWords.push(candidate);
+  }
+
+  return bestWords.sort((a, b) => a.localeCompare(b));
+}
+
+function formatBestPossibleWords(words) {
+  if (words.length === 0) return 'No valid words found from this rack.';
+
+  const length = words[0].length;
+  const wordLabel = words.length === 1 ? 'word' : 'words';
+  return `Best possible ${length}-letter ${wordLabel}`;
+}
+
+// ── Result display ──────────────────────────────────────────────────────────
+function setResult(bgBorderClasses, titleText, subtitleText, bestWords = null) {
+  const el = document.getElementById('game-result');
+  el.className = 'mt-4 p-6 rounded-xl border-l-4 ' + bgBorderClasses;
+  el.classList.remove('hidden');
+  while (el.firstChild) el.removeChild(el.firstChild);
+
+  const title = document.createElement('p');
+  title.className = 'font-headline font-bold text-xl';
+  title.textContent = titleText;
+  el.appendChild(title);
+
+  if (subtitleText) {
+    const sub = document.createElement('p');
+    sub.className = 'text-sm text-on-surface-variant mt-1';
+    sub.textContent = subtitleText;
+    el.appendChild(sub);
+  }
+
+  if (bestWords) {
+    const best = document.createElement('div');
+    best.className = 'mt-4 pt-4 border-t border-outline-variant/40';
+
+    const label = document.createElement('p');
+    label.className = 'text-sm font-bold text-primary mb-3';
+    label.textContent = formatBestPossibleWords(bestWords);
+    best.appendChild(label);
+
+    if (bestWords.length > 0) {
+      const wordList = document.createElement('div');
+      wordList.className = 'flex flex-wrap gap-2';
+      for (const word of bestWords) {
+        const chip = document.createElement('span');
+        chip.className = 'px-3 py-1 rounded-full bg-surface-container-lowest text-primary text-xs font-bold tracking-wide';
+        chip.textContent = word;
+        wordList.appendChild(chip);
+      }
+      best.appendChild(wordList);
+    }
+
+    el.appendChild(best);
+  }
+}
+
+function showResult(outcome, rawWord) {
+  clearInterval(timerID);
+  stopCountdownMusic();
+  phase = 'result';
+  document.getElementById('word-input').disabled = true;
+  document.getElementById('btn-submit').disabled = false;
+
+  const word = sanitize(rawWord || '');
+  const bestWords = findBestPossibleWords();
+
+  if (outcome === 'timeout') {
+    streak = 0;
+    document.getElementById('session-streak').textContent = streak;
+    setResult('bg-surface-container-low border-outline-variant',
+      word ? `Time's up! "${word}" was not submitted.` : "Time's up! No word submitted.",
+      'Streak reset. Hit ↺ to play again.',
+      bestWords);
+    return;
+  }
+  if (outcome === 'invalid_letters') {
+    streak = 0;
+    document.getElementById('session-streak').textContent = streak;
+    setResult('bg-error-container border-error',
+      `"${word}" uses letters you don't have.`,
+      'Streak reset.',
+      bestWords);
+    return;
+  }
+  if (outcome === 'invalid_word') {
+    streak = 0;
+    document.getElementById('session-streak').textContent = streak;
+    setResult('bg-error-container border-error',
+      `"${word}" is not a recognised word.`,
+      'Streak reset.',
+      bestWords);
+    return;
+  }
+
+  // valid
+  const score = word.length;
+  streak++;
+  if (score > bestScore) {
+    bestScore = score;
+    bestWord  = word;
+    document.getElementById('best-word').textContent  = bestWord;
+    document.getElementById('best-score').textContent = bestScore;
+  }
+  document.getElementById('session-streak').textContent = streak;
+  setResult('bg-secondary-container border-secondary',
+    `${word}  +${score} pts`,
+    `${score}-letter word · Streak: ${streak}`,
+    bestWords);
+}
+
+function handleSubmit() {
+  if (phase !== 'playing') return;
+  const raw = document.getElementById('word-input').value.trim();
+  if (!raw) return;
+
+  phase = 'checking';
+  clearInterval(timerID);
+  stopCountdownMusic();
+  document.getElementById('word-input').disabled = true;
+  document.getElementById('btn-submit').disabled = true;
+
+  if (!canMakeWord(raw)) { showResult('invalid_letters', raw); return; }
+
+  setResult('bg-surface-container-low border-outline-variant',
+    `Checking "${sanitize(raw)}"…`, null);
+
+  if (!isValidWord(raw)) { showResult('invalid_word', raw); return; }
+  showResult('valid', raw);
+}
+
+document.getElementById('btn-submit').addEventListener('click', handleSubmit);
+document.getElementById('word-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleSubmit();
+});
+
+// ── Reset ───────────────────────────────────────────────────────────────────
+function resetGame() {
+  clearInterval(timerID);
+  stopCountdownMusic();
+  letters  = [];
+  vowelBag = [...VOWEL_POOL];
+  consonantBag = [...CONSONANT_POOL];
+  phase    = 'picking';
+  timeLeft = TIMER_MAX;
+
+  const vBtn = document.getElementById('btn-vowel');
+  const cBtn = document.getElementById('btn-consonant');
+  const aBtn = document.getElementById('btn-auto-pick');
+  vBtn.disabled = false; cBtn.disabled = false; aBtn.disabled = false;
+  vBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+  cBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+  aBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+
+  const input = document.getElementById('word-input');
+  input.value = ''; input.disabled = true;
+  document.getElementById('btn-submit').disabled = false;
+
+  const countEl  = document.getElementById('timer-count');
+  const circleEl = document.getElementById('timer-circle');
+  countEl.textContent = TIMER_MAX;
+  countEl.classList.remove('text-red-500'); countEl.classList.add('text-primary');
+  circleEl.style.strokeDashoffset = 0;
+  circleEl.classList.remove('text-red-500'); circleEl.classList.add('text-tertiary');
+
+  document.getElementById('game-result').classList.add('hidden');
+  renderTiles();
+}
+
+document.getElementById('btn-reset').addEventListener('click', resetGame);
+
+// Initialise on load
+renderTiles();
+</script>
+</body></html>
