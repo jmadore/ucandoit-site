@@ -3,6 +3,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Word Unscrambler | ucandoit.ca</title>
+<script src="canadian-words.js"></script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -136,12 +137,12 @@
 <div class="bg-surface-container-low rounded-xl p-8 mb-12">
 <div class="flex flex-col md:flex-row gap-4">
 <div class="flex-grow relative group">
-<input class="w-full bg-surface-container-highest border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-2xl py-6 px-6 rounded-t-lg font-headline font-bold transition-all" placeholder="Enter letters (e.g., OTRSE)" type="text"/>
+<input id="unscramble-input" class="w-full bg-surface-container-highest border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-2xl py-6 px-6 rounded-t-lg font-headline font-bold transition-all" placeholder="Enter letters (e.g., OTRSE)" type="text"/>
 <div class="absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant">
 <span class="material-symbols-outlined text-3xl">keyboard_alt</span>
 </div>
 </div>
-<button class="primary-gradient text-on-primary px-10 py-6 rounded-xl font-headline font-extrabold text-xl scale-95 active:scale-90 transition-transform flex items-center justify-center gap-2">
+<button id="unscramble-btn" class="primary-gradient text-on-primary px-10 py-6 rounded-xl font-headline font-extrabold text-xl scale-95 active:scale-90 transition-transform flex items-center justify-center gap-2">
                             Unscramble
                             <span class="material-symbols-outlined">auto_fix_high</span>
 </button>
@@ -151,67 +152,93 @@
 <span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">info</span> Supports wildcards (?)</span>
 </div>
 </div>
-<!-- Results Bento Grid -->
-<div class="space-y-12">
-<div class="flex items-end justify-between border-b border-outline-variant/30 pb-4">
-<h2 class="font-headline font-bold text-3xl text-primary">Found Results</h2>
-<span class="text-secondary font-bold text-sm tracking-widest uppercase">142 Matches Found</span>
-</div>
-<!-- Length Group: 5 Letters -->
-<section>
-<div class="flex items-center gap-4 mb-6">
-<div class="h-[1px] flex-grow bg-outline-variant/30"></div>
-<span class="font-headline font-bold text-on-surface-variant px-4 py-1 bg-surface-container-high rounded-full">5 Letters</span>
-<div class="h-[1px] flex-grow bg-outline-variant/30"></div>
-</div>
-<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-<div class="bg-surface-container-lowest p-4 rounded-xl text-center group hover:bg-secondary-container transition-colors cursor-pointer">
-<span class="block font-headline font-black text-xl text-primary group-hover:text-on-secondary-container">STORE</span>
-<span class="text-[10px] font-bold text-secondary tracking-widest uppercase mt-1">8 pts</span>
-</div>
-<div class="bg-surface-container-lowest p-4 rounded-xl text-center group hover:bg-secondary-container transition-colors cursor-pointer">
-<span class="block font-headline font-black text-xl text-primary group-hover:text-on-secondary-container">ROTES</span>
-<span class="text-[10px] font-bold text-secondary tracking-widest uppercase mt-1">8 pts</span>
-</div>
-<div class="bg-surface-container-lowest p-4 rounded-xl text-center group hover:bg-secondary-container transition-colors cursor-pointer">
-<span class="block font-headline font-black text-xl text-primary group-hover:text-on-secondary-container">TORSE</span>
-<span class="text-[10px] font-bold text-secondary tracking-widest uppercase mt-1">8 pts</span>
-</div>
-<div class="bg-surface-container-lowest p-4 rounded-xl text-center group hover:bg-secondary-container transition-colors cursor-pointer border-2 border-tertiary/20">
-<span class="block font-headline font-black text-xl text-tertiary">STERO</span>
-<span class="text-[10px] font-bold text-tertiary tracking-widest uppercase mt-1">RARE</span>
+<!-- Results -->
+<div id="unscramble-results" class="space-y-10"></div>
 </div>
 </div>
-</section>
-<!-- Length Group: 4 Letters -->
-<section>
-<div class="flex items-center gap-4 mb-6">
-<div class="h-[1px] flex-grow bg-outline-variant/30"></div>
-<span class="font-headline font-bold text-on-surface-variant px-4 py-1 bg-surface-container-high rounded-full">4 Letters</span>
-<div class="h-[1px] flex-grow bg-outline-variant/30"></div>
-</div>
-<div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4">
-<div class="bg-surface-container-lowest p-4 rounded-xl text-center group hover:bg-secondary-container transition-all">
-<span class="block font-headline font-bold text-primary">REST</span>
-</div>
-<div class="bg-surface-container-lowest p-4 rounded-xl text-center group hover:bg-secondary-container transition-all">
-<span class="block font-headline font-bold text-primary">ROTS</span>
-</div>
-<div class="bg-surface-container-lowest p-4 rounded-xl text-center group hover:bg-secondary-container transition-all">
-<span class="block font-headline font-bold text-primary">ORES</span>
-</div>
-<div class="bg-surface-container-lowest p-4 rounded-xl text-center group hover:bg-secondary-container transition-all">
-<span class="block font-headline font-bold text-primary">TORE</span>
-</div>
-<div class="bg-surface-container-lowest p-4 rounded-xl text-center group hover:bg-secondary-container transition-all">
-<span class="block font-headline font-bold text-primary">SORT</span>
-</div>
-</div>
-</section>
-</div>
-</div>
-	</div>
-	</main>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('unscramble-input');
+    const button = document.getElementById('unscramble-btn');
+    const results = document.getElementById('unscramble-results');
+
+    function getCharFrequency(word) {
+        const freq = new Array(26).fill(0);
+        for (const char of word.toLowerCase()) {
+            const code = char.charCodeAt(0) - 97;
+            if (code >= 0 && code < 26) freq[code]++;
+        }
+        return freq;
+    }
+
+    function canBuildWord(word, available) {
+        const freq = getCharFrequency(word);
+        for (let i = 0; i < freq.length; i++) {
+            if (freq[i] > available[i]) return false;
+        }
+        return true;
+    }
+
+    function unscramble(letters) {
+        const cleaned = letters.toLowerCase().replace(/[^a-z]/g, '');
+        if (!cleaned) return [];
+        const available = getCharFrequency(cleaned);
+        return window.CANADIAN_WORDS
+            .filter(w => w.length >= 2 && w.length <= cleaned.length && canBuildWord(w, available))
+            .sort((a, b) => b.length - a.length || a.localeCompare(b));
+    }
+
+    function render(words) {
+        results.textContent = '';
+        if (!words.length) {
+            const empty = document.createElement('div');
+            empty.className = 'text-center text-outline-variant py-8';
+            empty.textContent = 'No words found.';
+            results.appendChild(empty);
+            return;
+        }
+        const groups = {};
+        for (const w of words) {
+            if (!groups[w.length]) groups[w.length] = [];
+            groups[w.length].push(w);
+        }
+        Object.keys(groups).sort((a, b) => b - a).forEach(len => {
+            const section = document.createElement('div');
+            section.className = 'space-y-4';
+
+            const heading = document.createElement('h3');
+            heading.className = 'text-sm font-bold uppercase tracking-[0.2em] text-outline flex items-center gap-4';
+            heading.appendChild(document.createTextNode(len + ' Letter Words'));
+            const rule = document.createElement('div');
+            rule.className = 'flex-grow h-px bg-outline-variant opacity-30';
+            heading.appendChild(rule);
+
+            const grid = document.createElement('div');
+            grid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4';
+            groups[len].forEach(w => {
+                const card = document.createElement('div');
+                card.className = 'bg-surface-container-lowest p-4 rounded-lg text-center font-bold text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer';
+                card.textContent = w;
+                grid.appendChild(card);
+            });
+
+            section.appendChild(heading);
+            section.appendChild(grid);
+            results.appendChild(section);
+        });
+    }
+
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        render(unscramble(input.value.trim()));
+    });
+
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') button.click();
+    });
+});
+</script>
 <!-- Footer -->
 <footer class="w-full py-12 mt-20 bg-emerald-50 dark:bg-emerald-950">
 <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
