@@ -1,274 +1,223 @@
 <!DOCTYPE html>
-<html class="light" lang="en"><head>
+<html class="light" lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>ucandoit.ca — Tools & Games</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary-fixed": "#ffdad8",
-                        "secondary-fixed-dim": "#b6d088",
-                        "secondary-fixed": "#d2eca2",
-                        "surface-dim": "#d8dad9",
-                        "inverse-primary": "#a5d0b9",
-                        "on-primary": "#ffffff",
-                        "primary-fixed": "#c1ecd4",
-                        "on-secondary": "#ffffff",
-                        "secondary": "#50652a",
-                        "tertiary-fixed-dim": "#ffb3b0",
-                        "on-surface-variant": "#414844",
-                        "on-secondary-fixed-variant": "#394d14",
-                        "on-secondary-container": "#546a2e",
-                        "on-background": "#191c1b",
-                        "on-secondary-fixed": "#131f00",
-                        "secondary-container": "#cfe99f",
-                        "on-error": "#ffffff",
-                        "on-tertiary-fixed": "#410007",
-                        "on-tertiary-container": "#ff807f",
-                        "tertiary-container": "#77131c",
-                        "primary": "#012d1d",
-                        "on-tertiary": "#ffffff",
-                        "on-surface": "#191c1b",
-                        "surface-container-lowest": "#ffffff",
-                        "outline-variant": "#c1c8c2",
-                        "background": "#f8faf8",
-                        "outline": "#717973",
-                        "on-primary-container": "#86af99",
-                        "surface-container-high": "#e6e9e7",
-                        "primary-container": "#1b4332",
-                        "surface": "#f8faf8",
-                        "surface-tint": "#3f6653",
-                        "on-primary-fixed-variant": "#274e3d",
-                        "primary-fixed-dim": "#a5d0b9",
-                        "surface-container-highest": "#e1e3e1",
-                        "error": "#ba1a1a",
-                        "surface-container-low": "#f2f4f2",
-                        "inverse-on-surface": "#eff1ef",
-                        "error-container": "#ffdad6",
-                        "on-primary-fixed": "#002114",
-                        "inverse-surface": "#2e3130",
-                        "surface-variant": "#e1e3e1",
-                        "tertiary": "#a61d24",
-                        "surface-container": "#eceeec",
-                        "surface-bright": "#f8faf8",
-                        "on-error-container": "#93000a",
-                        "on-tertiary-fixed-variant": "#861f25"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "fontFamily": {
-                        "headline": ["Manrope"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    }
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "tertiary-fixed": "#ffdad8",
+                    "secondary-fixed-dim": "#b6d088",
+                    "secondary-fixed": "#d2eca2",
+                    "surface-dim": "#d8dad9",
+                    "inverse-primary": "#a5d0b9",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#c1ecd4",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#50652a",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "on-surface-variant": "#414844",
+                    "on-secondary-fixed-variant": "#394d14",
+                    "on-secondary-container": "#546a2e",
+                    "on-background": "#191c1b",
+                    "on-secondary-fixed": "#131f00",
+                    "secondary-container": "#cfe99f",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#410007",
+                    "on-tertiary-container": "#ff807f",
+                    "tertiary-container": "#77131c",
+                    "primary": "#012d1d",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1b",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c1c8c2",
+                    "background": "#f8faf8",
+                    "outline": "#717973",
+                    "on-primary-container": "#86af99",
+                    "surface-container-high": "#e6e9e7",
+                    "primary-container": "#1b4332",
+                    "surface": "#f8faf8",
+                    "surface-tint": "#3f6653",
+                    "on-primary-fixed-variant": "#274e3d",
+                    "primary-fixed-dim": "#a5d0b9",
+                    "surface-container-highest": "#e1e3e1",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f2f4f2",
+                    "inverse-on-surface": "#eff1ef",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#002114",
+                    "inverse-surface": "#2e3130",
+                    "surface-variant": "#e1e3e1",
+                    "tertiary": "#a61d24",
+                    "surface-container": "#eceeec",
+                    "surface-bright": "#f8faf8",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#861f25"
                 },
+                "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+                },
+                "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+                }
             },
-        }
-    </script>
+        },
+    }
+</script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .boreal-gradient {
-            background: linear-gradient(135deg, #012d1d 0%, #1b4332 100%);
-        }
-        .canadian-accent-gradient {
-            background: linear-gradient(135deg, #a61d24 0%, #77131c 100%);
-        }
-        .glass-overlay {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-        }
-    </style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+</style>
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
-<!-- TopNavBar -->
+
+<!-- Nav -->
 <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl border-b border-surface-container">
-<nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-<a class="text-2xl font-black text-emerald-950 dark:text-emerald-50 tracking-tighter font-headline" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
-<div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
-<div class="relative group">
-<button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Word Tools <span class="material-symbols-outlined text-base">expand_more</span></button>
-<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-48 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
-<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="anagram-finder.html">Anagram Finder</a>
-<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="word-unscrambler.html">Word Unscrambler</a>
-</div>
-</div>
-<div class="relative group">
-<button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Calculators <span class="material-symbols-outlined text-base">expand_more</span></button>
-<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
-<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="loan-calculator.html">Mortgage Calculator</a>
-<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="board-foot-calculator.html">Board Foot Calculator</a>
-</div>
-</div>
-<div class="relative group">
-<button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Games <span class="material-symbols-outlined text-base">expand_more</span></button>
-<div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
-<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-letters-game.html">Countdown Letters</a>
-<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-conundrum.html">Countdown Conundrum</a>
-<a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-numbers-game.html">Countdown Numbers</a>
-</div>
-</div>
-</div>
-</nav>
+    <nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+        <a class="text-2xl font-black text-emerald-950 dark:text-emerald-50 tracking-tighter font-headline" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+        <div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Word Tools <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-48 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="anagram-finder.html">Anagram Finder</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="word-unscrambler.html">Word Unscrambler</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Calculators <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="loan-calculator.html">Mortgage Calculator</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="board-foot-calculator.html">Board Foot Calculator</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Games <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-letters-game.html">Countdown Letters</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-conundrum.html">Countdown Conundrum</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-numbers-game.html">Countdown Numbers</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 </header>
-<main class="pt-24 min-h-screen">
-<!-- Hero Section: Editorial & Asymmetrical -->
-<section class="max-w-7xl mx-auto px-8 pt-8 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-<div class="lg:col-span-7">
-<h1 class="font-headline text-5xl md:text-7xl font-extrabold text-primary tracking-tighter leading-[0.9] mb-4 max-w-3xl">
-                    The Great Northern <br/><span class="text-tertiary italic">Digital Workshop.</span>
-</h1>
-<p class="text-lg text-on-surface-variant max-w-2xl font-medium leading-relaxed italic border-l-4 border-secondary-fixed pl-6 mb-8">
-                    A curated collection of Canadian-made tools, calculators, and games designed with precision and the clarity of a crisp morning.
-                </p>
-<div class="flex gap-4">
-<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-bold boreal-gradient flex items-center gap-2 group shadow-xl shadow-primary/20">
-                        Explore All Tools
-                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</button>
-<button class="bg-surface-container-high text-primary px-8 py-4 rounded-xl font-bold hover:bg-tertiary/10 transition-colors">
-                        Learn Our Story
-                    </button>
-</div>
-</div>
-<div class="lg:col-span-5 relative">
-<div class="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700">
-<img alt="Canadian Rockies Landscape" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPQ8oBQZiEfRdQZiC7ygLwnOYtSKnCSF84dNZqMCWNUiK6DG7r9QfT_XQFlYiaqE4pD47XKnNQGHGiCUX4YmofaN5yZWGmFaZpd2cVy04esAFrehEymu_pzDnWmrlCQWu0--rEE2FSmGvweeUlqL-ZBSBUUTBOIvZ_CeO3b9HqyTwQ2voDd08VDfB3d3JmcEF21aklCVZpw7yaAg3ovlqDxtMQpNr3306Q_bjmnXOve7JFah3TP3pEkWIsY28KIl0NpEcGIZSFBIQ"/>
-</div>
-<!-- Floating Decorative Element -->
-<div class="absolute -bottom-8 -left-8 glass-overlay p-6 rounded-2xl shadow-xl max-w-[240px] border border-white/50">
-<div class="text-tertiary mb-2">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">eco</span>
-</div>
-<p class="text-sm font-headline font-bold text-primary">Hand-crafted in Canada</p>
-<p class="text-xs text-on-surface-variant mt-1">Built for speed, privacy, and the curious mind.</p>
-</div>
-</div>
-</section>
-<!-- Tool Grid -->
-<section class="bg-surface-container-low py-24 px-8">
-<div class="max-w-7xl mx-auto">
-<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-<div>
-<span class="text-tertiary font-bold tracking-widest text-xs uppercase mb-2 block">Our Collections</span>
-<h2 class="font-headline text-4xl md:text-5xl font-extrabold text-primary tracking-tight">Essential Toolkits</h2>
-</div>
-<div class="flex gap-2">
-<button class="p-3 rounded-full bg-surface-container-lowest text-primary hover:bg-tertiary hover:text-on-tertiary transition-colors">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
-<button class="p-3 rounded-full bg-surface-container-lowest text-primary hover:bg-tertiary hover:text-on-tertiary transition-colors">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- Word Tools Category -->
-<div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
-<div>
-<div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-tertiary-fixed group-hover:text-tertiary transition-colors">
-<span class="material-symbols-outlined text-3xl">auto_stories</span>
-</div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-4">Word Tools</h3>
-<ul class="space-y-3">
-<li class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary cursor-pointer transition-colors">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Dictionary &amp; Thesaurus
-                                </li>
-<li class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary cursor-pointer transition-colors">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Scrabble Solver
-                                </li>
-<li class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary cursor-pointer transition-colors">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Anagram Finder
-                                </li>
-</ul>
-</div>
-<button class="mt-8 text-primary font-bold flex items-center gap-2 group/btn hover:text-tertiary transition-colors">
-                            Explore Words <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">trending_flat</span>
-</button>
-</div>
-<!-- Calculators Category -->
-<div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
-<div>
-<div class="w-14 h-14 bg-secondary-fixed rounded-2xl flex items-center justify-center text-secondary mb-6 group-hover:bg-tertiary-fixed group-hover:text-tertiary transition-colors">
-<span class="material-symbols-outlined text-3xl">calculate</span>
-</div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-4">Calculators</h3>
-<ul class="space-y-3">
-<li class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary cursor-pointer transition-colors">
-<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-variant"></span> Mortgage Planner
-                                </li>
-<li class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary cursor-pointer transition-colors">
-<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-variant"></span> Board Foot Calculator
-                                </li>
-<li class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary cursor-pointer transition-colors">
-<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-variant"></span> Unit Converter
-                                </li>
-</ul>
-</div>
-<button class="mt-8 text-primary font-bold flex items-center gap-2 group/btn hover:text-tertiary transition-colors">
-                            Start Calculating <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">trending_flat</span>
-</button>
-</div>
-<!-- Games Category -->
-<div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 relative overflow-hidden">
-<!-- Decorative Maple Accent -->
-<div class="absolute -right-4 -top-4 text-tertiary/10 scale-150 rotate-12">
-<span class="material-symbols-outlined text-9xl">eco</span>
-</div>
-<div>
-<div class="w-14 h-14 bg-tertiary-fixed rounded-2xl flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined text-3xl">videogame_asset</span>
-</div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-4">Mind Games</h3>
-<ul class="space-y-3">
-<li>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary transition-colors" href="countdown-letters-game.html">
-<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Countdown Letters
-</a>
-</li>
-<li>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary transition-colors" href="countdown-conundrum.html">
-<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Countdown Conundrum
-</a>
-</li>
-<li>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary transition-colors" href="countdown-numbers-game.html">
-<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Countdown Numbers
-</a>
-</li>
-</ul>
-</div>
-<a class="mt-8 text-primary font-bold flex items-center gap-2 group/btn hover:text-tertiary transition-colors" href="countdown-letters-game.html">
-                            Play Now <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">trending_flat</span>
-</a>
-</div>
-</div>
-</div>
-</section>
+
+<main class="pt-24 min-h-screen bg-surface-container-low">
+    <div class="max-w-7xl mx-auto px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Word Tools -->
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+                <div>
+                    <div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-tertiary-fixed group-hover:text-tertiary transition-colors">
+                        <span class="material-symbols-outlined text-3xl">auto_stories</span>
+                    </div>
+                    <h3 class="font-headline text-2xl font-bold text-primary mb-4">Word Tools</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary transition-colors" href="anagram-finder.html">
+                                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Anagram Finder
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary transition-colors" href="word-unscrambler.html">
+                                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Word Unscrambler
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a class="mt-8 text-primary font-bold flex items-center gap-2 group/btn hover:text-tertiary transition-colors" href="anagram-finder.html">
+                    Explore Words <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">trending_flat</span>
+                </a>
+            </div>
+
+            <!-- Calculators -->
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+                <div>
+                    <div class="w-14 h-14 bg-secondary-fixed rounded-2xl flex items-center justify-center text-secondary mb-6 group-hover:bg-tertiary-fixed group-hover:text-tertiary transition-colors">
+                        <span class="material-symbols-outlined text-3xl">calculate</span>
+                    </div>
+                    <h3 class="font-headline text-2xl font-bold text-primary mb-4">Calculators</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary transition-colors" href="loan-calculator.html">
+                                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Mortgage Calculator
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary transition-colors" href="board-foot-calculator.html">
+                                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Board Foot Calculator
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a class="mt-8 text-primary font-bold flex items-center gap-2 group/btn hover:text-tertiary transition-colors" href="loan-calculator.html">
+                    Start Calculating <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">trending_flat</span>
+                </a>
+            </div>
+
+            <!-- Games -->
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 text-tertiary/10 scale-150 rotate-12">
+                    <span class="material-symbols-outlined text-9xl">eco</span>
+                </div>
+                <div>
+                    <div class="w-14 h-14 bg-tertiary-fixed rounded-2xl flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl">videogame_asset</span>
+                    </div>
+                    <h3 class="font-headline text-2xl font-bold text-primary mb-4">Mind Games</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary transition-colors" href="countdown-letters-game.html">
+                                <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Countdown Letters
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary transition-colors" href="countdown-conundrum.html">
+                                <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Countdown Conundrum
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center gap-3 text-on-surface-variant hover:text-tertiary transition-colors" href="countdown-numbers-game.html">
+                                <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Countdown Numbers
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a class="mt-8 text-primary font-bold flex items-center gap-2 group/btn hover:text-tertiary transition-colors" href="countdown-letters-game.html">
+                    Play Now <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">trending_flat</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
 </main>
-<!-- Footer -->
-<footer class="w-full py-12 mt-20 bg-emerald-50 dark:bg-emerald-950 border-t border-emerald-100 dark:border-emerald-900">
-<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-<div class="flex flex-col gap-2">
-<span class="font-headline font-bold text-emerald-950 dark:text-emerald-50 text-xl flex items-center gap-2">
-<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">eco</span>
-                    ucandoit.ca
-                </span>
-<p class="font-body text-sm tracking-wide leading-relaxed text-emerald-700 dark:text-emerald-400">
-                    © 2024 ucandoit.ca — A Canadian Digital Experience.
-                </p>
-</div>
-</div>
+
+<footer class="w-full py-12 bg-emerald-50 dark:bg-emerald-950 border-t border-emerald-100 dark:border-emerald-900">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex flex-col gap-2">
+            <span class="font-headline font-bold text-emerald-950 dark:text-emerald-50 text-xl flex items-center gap-2">
+                <span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">eco</span>
+                ucandoit.ca
+            </span>
+            <p class="font-body text-sm tracking-wide leading-relaxed text-emerald-700 dark:text-emerald-400">
+                © 2024 ucandoit.ca
+            </p>
+        </div>
+    </div>
 </footer>
-</body></html>
+
+</body>
+</html>
