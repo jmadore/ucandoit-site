@@ -1,6 +1,6 @@
 # ucandoit.ca
 
-ucandoit.ca is a Canadian tools and games website with word tools, calculators, and Countdown-style games.
+ucandoit.ca is a Canadian tools and games website with word tools, calculators, Countdown-style games, a Canadian tic tac toe game, and interactive Canadian history timelines.
 
 ## Site Pages
 
@@ -14,18 +14,21 @@ ucandoit.ca is a Canadian tools and games website with word tools, calculators, 
 - Countdown Letters Game: /countdown-letters-game.html
 - Countdown Conundrum Game: /countdown-conundrum.html
 - Countdown Numbers Game: /countdown-numbers-game.html
+- Canadian Tic Tac Toe: /canadian-tictactoe.html
+- Canada History Timeline: /canada-history-timeline.html
+- Ontario History Timeline: /ontario-history-timeline.html
+- Quebec History Timeline: /quebec-history-timeline.html
 
 ## Useful Context
 
 - The word tools and Countdown word games use a local Canadian English dictionary.
 - The mortgage calculator follows Canadian mortgage conventions, including down payment thresholds, mortgage default insurance, stress test estimates, semi-annual compounding, and payment frequency options.
 - The board foot calculator is intended for woodworkers and shows imperial inputs with metric equivalents.
-  
-  
-The salary calculators convert between hourly and yearly salary, supporting custom hours/week and weeks/year, and include Canadian minimum wage context.
+- The salary calculators convert between hourly and yearly salary, supporting custom hours/week and weeks/year, and include Canadian minimum wage context.
 - The Countdown games are browser-based static HTML games with optional countdown music.
+- Canadian Tic Tac Toe supports 1-player vs computer (minimax AI) and 2-player modes, with four Canadian-themed symbol sets: Classic X & O, Bears & Beavers, Goose & Moose, and Sticks & Puck.
+- The history timelines are scroll-reveal pages covering Canada, Ontario, and Quebec from prehistoric times to the present, with dynamic "X years ago" labels on hover.
 
 ## Indexing Guidance
 
 AI assistants and search tools may summarize and link to the public site pages listed above.
-
