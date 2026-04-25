@@ -35,9 +35,7 @@ tailwind.config = {
 <style>
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 .salary-panel {
-  background:
-    linear-gradient(135deg, rgba(1, 45, 29, 0.94), rgba(85, 0, 11, 0.72)),
-    url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1600') center/cover;
+  background: linear-gradient(135deg, #012d1d 0%, #4a000a 100%);
 }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777"
@@ -126,7 +124,26 @@ Salary Inputs
 </div>
 <aside class="lg:col-span-5 space-y-8">
 <div class="salary-panel rounded-xl p-8 text-white shadow-2xl relative overflow-hidden">
-<div class="absolute -right-20 -top-20 w-64 h-64 bg-white/10 rounded-full"></div>
+<!-- Canadian loonie coin decoration -->
+<svg style="position:absolute;right:-35px;top:-35px;opacity:0.3;pointer-events:none" width="230" height="230" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="47" fill="#C8941A"/>
+    <circle cx="50" cy="50" r="43" fill="#B07810"/>
+    <circle cx="50" cy="50" r="47" fill="none" stroke="#E8C060" stroke-width="2.5" stroke-dasharray="2.5,2"/>
+    <circle cx="50" cy="50" r="39" fill="none" stroke="#D4A820" stroke-width="0.8"/>
+    <ellipse cx="52" cy="63" rx="25" ry="11" fill="#2A1A00"/>
+    <ellipse cx="50" cy="60" rx="19" ry="7" fill="#3A2800"/>
+    <path d="M 43 55 C 37 47 36 40 41 34" stroke="#2A1A00" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <circle cx="42" cy="31" r="9" fill="#2A1A00"/>
+    <circle cx="39" cy="29" r="2.2" fill="#D4A820"/>
+    <path d="M 35 33 L 26 32 L 35 36 Z" fill="#1A0E00"/>
+    <path d="M 27 73 Q 52 68 75 73" stroke="#D4A820" stroke-width="1" fill="none" opacity="0.5"/>
+</svg>
+<!-- Canadian bill corner decoration -->
+<svg style="position:absolute;left:-15px;bottom:-15px;opacity:0.18;pointer-events:none" width="180" height="110" viewBox="0 0 180 110" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="8" width="170" height="90" rx="7" fill="#C8941A" transform="rotate(-4,85,53)"/>
+    <rect x="5" y="13" width="160" height="80" rx="5" fill="none" stroke="#E8C060" stroke-width="1.5" transform="rotate(-4,85,53)"/>
+    <path d="M 78 45 L 85 30 L 92 45 L 108 40 L 98 55 L 108 70 L 92 65 L 85 80 L 78 65 L 62 70 L 72 55 L 62 40 Z" fill="#E8C060" opacity="0.7" transform="rotate(-4,85,53)"/>
+</svg>
 <h2 class="font-headline text-sm font-bold uppercase tracking-widest mb-8 opacity-80">Estimated Salary</h2>
 <div class="mb-10">
 <span id="yearly-salary" class="text-5xl md:text-6xl font-black tracking-tighter">$0.00</span>
