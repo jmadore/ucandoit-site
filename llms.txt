@@ -1,6 +1,6 @@
 # ucandoit.ca
 
-ucandoit.ca is a Canadian tools and games website with word tools, calculators, Countdown-style games, a Canadian tic tac toe game, and interactive Canadian history timelines.
+ucandoit.ca is a Canadian tools and games website with word tools, calculators, Countdown-style games, Canadian-themed browser games, and interactive Canadian history timelines.
 
 ## Site Pages
 
@@ -14,7 +14,9 @@ ucandoit.ca is a Canadian tools and games website with word tools, calculators, 
 - Countdown Letters Game: /countdown-letters-game.html
 - Countdown Conundrum Game: /countdown-conundrum.html
 - Countdown Numbers Game: /countdown-numbers-game.html
+- Newfoundland Phrase Match: /newfoundland-phrase-match.html
 - Canadian Tic Tac Toe: /canadian-tictactoe.html
+- Canadian Goose Game: /canadian-goose-game.html
 - Canada History Timeline: /canada-history-timeline.html
 - Ontario History Timeline: /ontario-history-timeline.html
 - Quebec History Timeline: /quebec-history-timeline.html
@@ -26,7 +28,9 @@ ucandoit.ca is a Canadian tools and games website with word tools, calculators, 
 - The board foot calculator is intended for woodworkers and shows imperial inputs with metric equivalents.
 - The salary calculators convert between hourly and yearly salary, supporting custom hours/week and weeks/year, and include Canadian minimum wage context.
 - The Countdown games are browser-based static HTML games with optional countdown music.
-- Canadian Tic Tac Toe supports 1-player vs computer (minimax AI) and 2-player modes, with four Canadian-themed symbol sets: Classic X & O, Bears & Beavers, Goose & Moose, and Sticks & Puck.
+- Newfoundland Phrase Match is a two-column matching game where players connect Newfoundland phrases to their meanings.
+- Canadian Tic Tac Toe supports 1-player vs computer (minimax AI) and 2-player modes, with Canadian-themed symbol sets: Classic X & O, Beaver & Bear, Goose & Moose, Hockey, Curling, and Timmies.
+- Canadian Goose Game is a canvas-based jumping game where players dodge rocks and collect loonies.
 - The history timelines are scroll-reveal pages covering Canada, Ontario, and Quebec from prehistoric times to the present, with dynamic "X years ago" labels on hover.
 
 ## Indexing Guidance
