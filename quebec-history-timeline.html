@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quebec History Timeline — ucandoit.ca</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "tertiary-fixed": "#ffdad8",
+                    "secondary-fixed-dim": "#b6d088",
+                    "secondary-fixed": "#d2eca2",
+                    "surface-dim": "#d8dad9",
+                    "inverse-primary": "#a5d0b9",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#c1ecd4",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#50652a",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "on-surface-variant": "#414844",
+                    "on-secondary-fixed-variant": "#394d14",
+                    "on-secondary-container": "#546a2e",
+                    "on-background": "#191c1b",
+                    "on-secondary-fixed": "#131f00",
+                    "secondary-container": "#cfe99f",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#410007",
+                    "on-tertiary-container": "#ff807f",
+                    "tertiary-container": "#77131c",
+                    "primary": "#012d1d",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1b",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c1c8c2",
+                    "background": "#f8faf8",
+                    "outline": "#717973",
+                    "on-primary-container": "#86af99",
+                    "surface-container-high": "#e6e9e7",
+                    "primary-container": "#1b4332",
+                    "surface": "#f8faf8",
+                    "surface-tint": "#3f6653",
+                    "on-primary-fixed-variant": "#274e3d",
+                    "primary-fixed-dim": "#a5d0b9",
+                    "surface-container-highest": "#e1e3e1",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f2f4f2",
+                    "inverse-on-surface": "#eff1ef",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#002114",
+                    "inverse-surface": "#2e3130",
+                    "surface-variant": "#e1e3e1",
+                    "tertiary": "#a61d24",
+                    "surface-container": "#eceeec",
+                    "surface-bright": "#f8faf8",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#861f25"
+                },
+                "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+                },
+                "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+                }
+            },
+        },
+    }
+</script>
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .timeline-item {
+        opacity: 0;
+        transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .timeline-item.from-left  { transform: translateX(-36px); }
+    .timeline-item.from-right { transform: translateX(36px); }
+    .timeline-item.visible    { opacity: 1; transform: translate(0); }
+
+    .years-ago-pill {
+        opacity: 0;
+        transform: translateY(-4px);
+        transition: opacity 0.18s ease, transform 0.18s ease;
+        pointer-events: none;
+    }
+    .timeline-card:hover .years-ago-pill {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (max-width: 767px) {
+        .timeline-item.from-left,
+        .timeline-item.from-right {
+            transform: translateY(24px);
+        }
+    }
+</style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777"
+         crossorigin="anonymous"></script>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+<!-- Nav -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl border-b border-surface-container">
+    <nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+        <a class="text-2xl font-black text-emerald-950 dark:text-emerald-50 tracking-tighter font-headline" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+        <div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Word Tools <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-48 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="anagram-finder.html">Anagram Finder</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="word-unscrambler.html">Word Unscrambler</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Calculators <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="yearly-to-hourly-salary.html">Yearly to Hourly Salary</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="loan-calculator.html">Mortgage Calculator</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="board-foot-calculator.html">Board Foot Calculator</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="hourly-to-yearly-salary.html">Hourly to Yearly Salary</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Games <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-letters-game.html">Countdown Letters</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-conundrum.html">Countdown Conundrum</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-numbers-game.html">Countdown Numbers</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-tertiary hover:text-tertiary/70 transition-all duration-300 flex items-center gap-1" type="button">History <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="canada-history-timeline.html">Canada History</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="ontario-history-timeline.html">Ontario History</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="quebec-history-timeline.html">Quebec History</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero -->
+<section class="pt-32 pb-16 text-center px-6 bg-gradient-to-b from-surface-container-low to-surface">
+    <div class="inline-flex items-center gap-2 bg-tertiary/10 text-tertiary text-sm font-semibold px-4 py-1.5 rounded-full mb-6 font-headline">
+        <span class="material-symbols-outlined text-base">location_on</span> Québec
+    </div>
+    <h1 class="font-headline text-4xl md:text-6xl font-black text-primary tracking-tight mb-4">Quebec History Timeline</h1>
+    <p class="text-on-surface-variant text-lg max-w-xl mx-auto">From the first peoples to the present day. Hover over any event to see how long ago it happened.</p>
+</section>
+
+<!-- Timeline -->
+<main class="max-w-5xl mx-auto px-4 pb-32" id="timeline-root">
+    <div class="relative" id="timeline-spine">
+        <div class="absolute left-1/2 top-0 bottom-0 w-px bg-emerald-200 -translate-x-1/2 hidden md:block" aria-hidden="true"></div>
+    </div>
+</main>
+
+<footer class="border-t border-surface-container py-10 text-center text-sm text-on-surface-variant">
+    <a class="font-headline font-black text-primary tracking-tighter text-lg" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+    <p class="mt-2">Source: <a class="underline hover:text-primary transition-colors" href="https://en.wikipedia.org/wiki/Timeline_of_Quebec_history" rel="noopener" target="_blank">Wikipedia — Timeline of Quebec history</a></p>
+</footer>
+
+<script>
+const EVENTS = [
+    // Prehistory
+    { year: -10000, label: "~10,000 BCE",     desc: "Indigenous peoples began settling in Quebec as nomadic hunter-gatherers following the retreat of glaciers, marking the beginning of human habitation in the region." },
+    { year: -8000,  label: "~8,000 BCE",      desc: "Early Paleo-Indians inhabited southern Quebec, becoming the ancestors of Eastern Woodlands peoples." },
+    { year: -3000,  label: "~3,000 BCE",      desc: "Archaic cultures developed in the St. Lawrence River Valley, showing increasing social complexity and trade networks reaching the Gulf of Mexico." },
+    { year: -1000,  label: "~1,000 BCE",      desc: "The Woodland Period commenced; Indigenous groups practiced horticulture, created ceramics, and built complex societies." },
+    { year: 1000,   label: "~1000 CE",        desc: "Iroquoian-speaking peoples established large agricultural villages along the St. Lawrence River valley." },
+    { year: 1200,   label: "~1200 CE",        desc: "Algonquian-speaking groups including the Innu and Algonquin inhabited the boreal forests north of the St. Lawrence." },
+    { year: 1300,   label: "~1300 CE",        desc: "Inuit peoples expanded into northern Quebec, developing the Thule culture ancestral to modern Inuit." },
+    { year: 1450,   label: "~1450",           desc: "The Haudenosaunee (Iroquois) Confederacy formed to resolve disputes among Great Lakes nations, creating one of the world's earliest democratic confederacies." },
+
+    // Exploration
+    { year: 1524,   label: "1524",            desc: "Giovanni da Verrazzano explored the East Coast from Florida to Newfoundland for France, opening the door to French claims in North America." },
+    { year: 1534,   label: "July 24, 1534",   desc: "Jacques Cartier planted a cross on the Gaspé Peninsula and claimed the land for France, beginning French colonial ambitions in what would become Quebec." },
+    { year: 1535,   label: "1535",            desc: "Cartier explored the St. Lawrence River, named the Bay of Saint-Laurent, and sailed to the Iroquoian village of Hochelaga (present-day Montreal)." },
+    { year: 1541,   label: "1541",            desc: "Cartier established Charlesbourg-Royal fort near the Rivière du Cap Rouge — the first permanent European settlement attempt in North America." },
+    { year: 1600,   label: "1600",            desc: "Pierre de Chauvin de Tonnetuit founded a fur-trading post at Tadoussac, establishing the fur trade that would define New France's economy for generations." },
+    { year: 1603,   label: "1603",            desc: "Samuel de Champlain took possession of lands he called Acadia and Newfoundland, laying the groundwork for permanent French colonization." },
+    { year: 1605,   label: "1605",            desc: "Dugua and Champlain established Port-Royal in present-day Nova Scotia — France's first lasting settlement in North America." },
+    { year: 1606,   label: "1606",            desc: "Marc Lescarbot produced \"Le Théâtre de Neptune\" at Port-Royal — the first European theatrical production in North America." },
+
+    // New France founded
+    { year: 1608,   label: "July 3, 1608",    desc: "Samuel de Champlain founded Quebec City, establishing the capital of New France on the shores of the St. Lawrence." },
+    { year: 1609,   label: "1609",            desc: "Champlain and his Indigenous allies defeated the Iroquois in battle near Lake Champlain, creating an alliance with Huron peoples that shaped the colony's fate for decades." },
+    { year: 1625,   label: "1625",            desc: "The Jesuits arrived in New France, beginning an intensive missionary effort among Indigenous peoples that would shape the colony's spiritual and political life." },
+    { year: 1627,   label: "1627",            desc: "Cardinal Richelieu established the Compagnie de la Nouvelle France, restricting settlement to Roman Catholics and introducing the seigneurial system of land tenure." },
+    { year: 1629,   label: "1629",            desc: "The Kirke Brothers captured Quebec City on July 16, temporarily transferring the colony to English hands." },
+    { year: 1632,   label: "1632",            desc: "France recovered Quebec and Acadia via the Treaty of Saint-Germain-en-Laye, restoring French sovereignty over the colony." },
+    { year: 1634,   label: "1634",            desc: "Sieur de La Violette founded the fur-trading post that became Trois-Rivières. Disease began decimating the Huron peoples as European contact intensified." },
+    { year: 1635,   label: "1635",            desc: "The Jesuits established the Collège de Québec, the colony's first institution of higher learning. Samuel de Champlain died on Christmas Day." },
+    { year: 1639,   label: "1639",            desc: "The Société Notre-Dame de Montréal was founded. Ursuline nuns and Augustinian Hospitalières arrived, establishing schools and hospitals in the colony." },
+    { year: 1642,   label: "May 17, 1642",    desc: "Paul de Chomedey de Maisonneuve and Jeanne Mance established Ville-Marie (Montreal) on the island at the confluence of the St. Lawrence and Ottawa rivers." },
+    { year: 1648,   label: "1648",            desc: "Iroquois forces began their campaign to destroy the Huron Nation, triggering the dispersal of Huron refugees throughout New France and decimating France's key trading partners." },
+    { year: 1659,   label: "1659",            desc: "François de Laval became the first Bishop of New France, establishing the Catholic Church's dominant role in Quebec society that would last three centuries." },
+
+    // Royal Province
+    { year: 1663,   label: "1663",            desc: "New France became a royal province under Louis XIV with the creation of the Sovereign Council. François de Laval founded the Séminaire de Québec (later Université Laval)." },
+    { year: 1665,   label: "1665",            desc: "Jean Talon was appointed intendant of New France. The Carignan-Salières Regiment of 1,300 soldiers arrived, destroying five Mohawk villages and ending Iroquois raids on the colony." },
+    { year: 1666,   label: "1666",            desc: "The first North American census recorded 3,215 French inhabitants in New France. French forces invaded Iroquois territory, burning villages and destroying crops." },
+    { year: 1667,   label: "1667",            desc: "A peace treaty was signed with the Iroquois. The first Filles du roi (\"King's Daughters\") arrived — young women sent by Louis XIV to help build the colony's population." },
+    { year: 1672,   label: "1672",            desc: "Louis Buade de Frontenac became Governor of New France, presiding over a period of expansion and conflict with the Iroquois and English colonies." },
+    { year: 1689,   label: "August 5, 1689",  desc: "Fifteen hundred Iroquois warriors attacked the settlement of Lachine, killing or capturing most of the inhabitants — the deadliest raid in New France's history." },
+    { year: 1690,   label: "1690",            desc: "Sir William Phips demanded the surrender of Fort Quebec; Governor Frontenac famously refused with \"the mouth of my cannon.\" Phips's fleet withdrew." },
+    { year: 1692,   label: "1692",            desc: "Marie-Madeleine Jarret de Verchères, age 14, became a hero of New France by defending her family's fort against an Iroquois attack for eight days." },
+    { year: 1701,   label: "August 4, 1701",  desc: "The Great Peace of Montreal was signed between 39 First Nations and the French government, ending decades of warfare and establishing a lasting alliance." },
+    { year: 1712,   label: "1712",            desc: "New France reached its greatest extent — stretching from Newfoundland to Lake Superior and from Hudson Bay to the Gulf of Mexico." },
+    { year: 1720,   label: "1720",            desc: "Quebec City was fortified by the King of France, building the walls that still define the city's historic core today." },
+    { year: 1734,   label: "1734",            desc: "Marie-Joseph Angélique, a Black enslaved woman, was hanged in Montreal after being convicted (likely unjustly) of setting fire to her owner's house." },
+    { year: 1745,   label: "1745",            desc: "The Fortress of Louisbourg fell to the English, threatening New France's Atlantic access and foreshadowing the eventual British conquest." },
+
+    // Conquest
+    { year: 1754,   label: "1754",            desc: "The French and Indian War began. A census showed New France's population at 55,009 versus 1,170,800 in the British Thirteen Colonies — a disparity that sealed the colony's fate." },
+    { year: 1755,   label: "1755",            desc: "The Acadian Expulsion began on July 28 as British forces deported thousands of French-speaking Acadians from their homeland in a forced diaspora across the Atlantic world." },
+    { year: 1756,   label: "1756",            desc: "Louis-Joseph de Montcalm arrived in Quebec City as French commander. The Seven Years' War officially began in Europe on August 29." },
+    { year: 1759,   label: "September 13, 1759", desc: "James Wolfe defeated Montcalm at the Battle of the Plains of Abraham outside Quebec City. Both commanders were mortally wounded. Quebec surrendered five days later, ending French rule." },
+    { year: 1760,   label: "September 8, 1760", desc: "Montreal capitulated to British forces; Governor Vaudreuil surrendered on terms of capitulation, ending the French military regime and placing all of New France under British control." },
+
+    // British Rule
+    { year: 1763,   label: "February 10, 1763", desc: "The Treaty of Paris ended the Seven Years' War; France ceded New France to Britain. The Royal Proclamation of October 7 renamed the region the Province of Quebec." },
+    { year: 1764,   label: "1764",            desc: "William Brown and Thomas Gilmore published the first Quebec Gazette on June 21. Civil courts were established, ending three years of military rule." },
+    { year: 1774,   label: "June 22, 1774",   desc: "The Quebec Act received Royal Assent, restoring French civil law and the Catholic Church's rights in the colony — enraging American colonists who saw it as threatening their expansion." },
+    { year: 1775,   label: "1775",            desc: "American Continental forces invaded Quebec during the Revolutionary War. Montreal fell in November, but the assault on Quebec City on December 31 was repulsed." },
+    { year: 1783,   label: "1783",            desc: "The Treaty of Paris ended the American Revolution. The first of 8,000 United Empire Loyalists arrived and settled in the province, dramatically reshaping its demographics." },
+    { year: 1785,   label: "August 28, 1785", desc: "Fleury Mesplet founded the Montreal Gazette, which continues publishing today as Canada's oldest newspaper." },
+    { year: 1786,   label: "1786",            desc: "John Molson founded Molson Breweries in Montreal, establishing what would become one of Canada's oldest and most iconic companies." },
+
+    // Lower Canada
+    { year: 1791,   label: "June 10, 1791",   desc: "The Constitutional Act divided the province into Upper and Lower Canada, granting each its own elected assembly. Quebec's francophone majority finally had a representative institution." },
+    { year: 1792,   label: "1792",            desc: "The first elections of Lower Canada were held, and Jean-Antoine Panet was elected Speaker of the Legislative Assembly — the first time francophones governed themselves since the Conquest." },
+    { year: 1804,   label: "1804",            desc: "Slavery was abolished in Lower Canada. The Montreal fortifications were dismantled, signalling a new era of peaceful development." },
+    { year: 1806,   label: "1806",            desc: "Le Canadien newspaper was founded by members of the Parti Canadien to advocate for the rights of French Canadians against the British merchant elite." },
+    { year: 1817,   label: "1817",            desc: "The Bank of Montreal was founded, becoming Canada's first chartered bank and cementing Montreal's role as the financial capital of British North America." },
+    { year: 1821,   label: "1821",            desc: "McGill University obtained its royal charter, growing from a bequest by fur trader James McGill into one of Canada's leading universities." },
+    { year: 1825,   label: "1825",            desc: "The Lachine Canal opened, allowing ships to bypass the Lachine Rapids and making Montreal the commercial hub of the St. Lawrence trade system." },
+    { year: 1832,   label: "1832",            desc: "A devastating cholera epidemic killed 6,000 people in Lower Canada, largely brought by Irish immigrants fleeing poverty. The Assembly granted full political rights to Jews — a first in the British Empire." },
+    { year: 1834,   label: "June 24, 1834",   desc: "The Saint-Jean-Baptiste Society was founded on the feast day of John the Baptist, establishing the national celebration of French-Canadian identity still observed today." },
+    { year: 1834,   label: "1834",            desc: "The Parti Patriote presented the Ninety-Two Resolutions to London, demanding democratic reforms including an elected upper house and control of colonial revenue." },
+    { year: 1837,   label: "1837–1838",       desc: "The Rebellions of Lower Canada erupted after Britain rejected the Ninety-Two Resolutions. Patriots fought British forces at Saint-Denis, Saint-Charles, and Saint-Eustache. The rebellion was crushed; twelve Patriots were hanged at Pied-du-Courant Prison." },
+    { year: 1839,   label: "February 11, 1839", desc: "Lord Durham published his landmark report calling for the union of the Canadas and the assimilation of French Canadians — a proposal that galvanized French-Canadian national identity." },
+    { year: 1840,   label: "July 23, 1840",   desc: "The Act of Union received Royal Assent, merging Upper and Lower Canada into a single Province of Canada and giving both halves equal representation despite their unequal populations." },
+
+    // Province of Canada & Confederation
+    { year: 1848,   label: "1848",            desc: "Article 41 of the Union Act was amended, legalizing the use of French in Parliament and courts — reversing one of the Act of Union's most offensive provisions." },
+    { year: 1849,   label: "April 25, 1849",  desc: "The Rebellion Losses Bill was signed into law, compensating victims of the 1837 rebellions. An enraged Tory mob burned down the Parliament buildings in Montreal, ending the city's role as capital." },
+    { year: 1850,   label: "1850",            desc: "French-Canadian emigration to the United States began on a large scale, as tens of thousands left for the textile mills of New England over the following decades." },
+    { year: 1854,   label: "1854",            desc: "The French seigneurial system of land tenancy was abolished in Canada East after two centuries, freeing farmers from feudal obligations to their landlords." },
+    { year: 1864,   label: "1864",            desc: "The Quebec Conference drew up the Quebec Resolutions, the constitutional blueprint for Canadian Confederation, in seventeen days of meetings at the Château Frontenac." },
+    { year: 1867,   label: "July 1, 1867",    desc: "The British North America Act created the Dominion of Canada, with Quebec joining Ontario, Nova Scotia, and New Brunswick as founding provinces. Quebec retained control over civil law, language, and education." },
+
+    // Early Province
+    { year: 1868,   label: "1868",            desc: "Thomas D'Arcy McGee, the Montreal-West MP and passionate advocate for Confederation, was assassinated by an Irish Fenian — Canada's only federal political assassination." },
+    { year: 1874,   label: "1874",            desc: "The Montreal Stock Exchange was founded, further consolidating the city's status as Canada's financial centre." },
+    { year: 1879,   label: "1879",            desc: "McGill University students established the rules of ice hockey, codifying the sport that would become Canada's national passion." },
+    { year: 1884,   label: "1884",            desc: "La Presse newspaper was founded in Montreal, becoming one of the most influential French-language newspapers in North America." },
+    { year: 1885,   label: "November 16, 1885", desc: "Louis Riel was hanged for treason following the North-West Rebellion. The execution inflamed Quebec, where Riel was seen as a French and Catholic martyr, deepening the English-French divide." },
+    { year: 1887,   label: "1887",            desc: "Honoré Mercier became premier as head of the Parti National, championing Quebec autonomy and provincial rights against federal encroachment." },
+    { year: 1892,   label: "1892",            desc: "Montreal introduced electric streetcars, modernizing the city's transit and accelerating urban growth." },
+    { year: 1896,   label: "1896",            desc: "Wilfrid Laurier — born in Saint-Lin, Quebec — became Canada's first Quebecer and first francophone Prime Minister, serving for fifteen years." },
+
+    // 20th Century early
+    { year: 1900,   label: "December 6, 1900", desc: "Alphonse Desjardins established the first credit union in North America in Lévis, founding the Caisse populaire movement that would reshape Quebec's financial landscape." },
+    { year: 1907,   label: "1907",            desc: "The Quebec Bridge collapsed during construction, killing 75 workers in one of Canada's worst engineering disasters. It would collapse again in 1916, killing 13 more." },
+    { year: 1910,   label: "1910",            desc: "Henri Bourassa founded Le Devoir newspaper in Montreal to champion French-Canadian nationalism and Catholic social values, independent of any political party." },
+    { year: 1917,   label: "1917",            desc: "Conscription riots erupted across Quebec as the federal government imposed compulsory military service. Most French Canadians opposed fighting in what they saw as Britain's war." },
+    { year: 1919,   label: "May 8, 1919",     desc: "Université Laval's Montreal branch became autonomous and was renamed Université de Montréal, giving French Canadians a major research university of their own." },
+    { year: 1922,   label: "1922",            desc: "Joseph-Armand Bombardier engineered his first snowmobile prototype, launching an invention that transformed travel in northern Quebec. CKAC became Quebec's first radio station." },
+    { year: 1929,   label: "1929",            desc: "The Wall Street stock market crash plunged Quebec into the Great Depression, causing mass unemployment and widespread suffering throughout the 1930s." },
+
+    // Duplessis Era
+    { year: 1936,   label: "1936",            desc: "Maurice Duplessis and the Union Nationale won the provincial election, beginning the \"Grande Noirceur\" (Great Darkness) — an era of conservative, Church-aligned, anti-union rule that would last until 1960." },
+    { year: 1939,   label: "1939",            desc: "Canada declared war on Germany on September 10. Quebec adopted the motto \"Je me souviens\" (I remember). Most Quebecers opposed the war; the conscription crisis would deepen the divide with English Canada." },
+    { year: 1940,   label: "1940",            desc: "Quebec women gained the right to vote provincially — one of the last provinces to grant this right, largely due to opposition from the Catholic Church and Premier Duplessis." },
+    { year: 1942,   label: "1942",            desc: "A federal conscription referendum saw Quebec vote overwhelmingly against while the rest of Canada voted in favour, crystallizing Quebec's sense of isolation within Confederation." },
+    { year: 1944,   label: "April 14, 1944",  desc: "Hydro-Québec was created through the nationalization of Montreal Light, Heat & Power, taking a first step toward Quebec control of its own natural resources. Canadian soldiers landed at Juno Beach on D-Day." },
+    { year: 1948,   label: "January 21, 1948", desc: "Quebec adopted a new provincial flag — the Fleurdelisé — replacing the Union Flag and asserting a distinct French-Canadian identity. The manifesto \"Refus global\" was published, launching Quebec's cultural awakening." },
+    { year: 1949,   label: "1949",            desc: "The Asbestos Strike became a turning point in Quebec labour history: workers defied both Duplessis and the Church to demand better conditions, galvanizing a generation of reformers including Pierre Trudeau." },
+    { year: 1955,   label: "March 17, 1955",  desc: "The Richard Riot erupted outside the Montreal Forum after NHL President Clarence Campbell suspended Maurice \"Rocket\" Richard. The outburst revealed the depth of French-Canadian resentment toward English institutions." },
+    { year: 1959,   label: "September 7, 1959", desc: "Premier Maurice Duplessis died in office, ending 16 years of Union Nationale rule and opening the door to the sweeping social changes of the Quiet Revolution." },
+
+    // Quiet Revolution
+    { year: 1960,   label: "1960",            desc: "Jean Lesage's Liberal Party was elected on a platform of \"Maîtres chez nous\" (Masters in our own house), launching the Quiet Revolution — a rapid transformation of Quebec's political, cultural, and economic life." },
+    { year: 1963,   label: "1963",            desc: "FLQ (Front de libération du Québec) members were sentenced for bombings. Hydro-Québec acquired eight private hydroelectricity producers, expanding public control of the province's energy resources." },
+    { year: 1964,   label: "1964",            desc: "Quebec's Ministry of Education was created, transferring control of schooling from the Catholic clergy to the provincial government — a cornerstone of the Quiet Revolution." },
+    { year: 1967,   label: "1967",            desc: "Expo 67 opened in Montreal, dazzling the world and showcasing a confident, modern Quebec. French President Charles de Gaulle declared \"Vive le Québec libre!\" from Montreal's City Hall, triggering a diplomatic crisis. René Lévesque founded the Mouvement Souveraineté-Association in October." },
+    { year: 1968,   label: "October 26, 1968", desc: "The Parti Québécois was created through merger, uniting the sovereigntist movement behind René Lévesque. Pierre Trudeau was elected Prime Minister of Canada. The Legislative Council (Quebec's upper house) was abolished." },
+    { year: 1969,   label: "1969",            desc: "Parliament passed the Official Languages Act, making French and English official languages of Canada. Quebec's \"Bill 63\" confirmed parental choice in language of instruction, provoking fierce debate about French-language survival." },
+    { year: 1970,   label: "October 1970",    desc: "The October Crisis: FLQ terrorists kidnapped British diplomat James Cross and kidnapped and murdered Quebec Labour Minister Pierre Laporte. Prime Minister Trudeau invoked the War Measures Act, sending troops into Montreal and suspending civil liberties." },
+    { year: 1974,   label: "1974",            desc: "\"Bill 22\" made French the official language of Quebec — the first such law since the Conquest — though it satisfied neither anglophones nor francophone nationalists." },
+    { year: 1975,   label: "1975",            desc: "The Quebec Charter of Human Rights and Freedoms was passed, establishing broad protections for civil and economic rights predating even the Canadian Charter." },
+    { year: 1976,   label: "November 15, 1976", desc: "The Parti Québécois was elected with 41% of the vote and 71 seats, bringing René Lévesque to power and making Quebec sovereignty a near-term political reality for the first time." },
+    { year: 1976,   label: "Summer 1976",     desc: "Montreal hosted the Summer Olympic Games, a spectacle that left the city with a $1.5 billion debt that would take 30 years to repay." },
+    { year: 1977,   label: "August 26, 1977", desc: "\"Bill 101\" — the Charter of the French Language — became law, making French the language of the workplace, government, courts, and education. It became the cornerstone of Quebec's linguistic policy." },
+    { year: 1980,   label: "May 20, 1980",    desc: "The first sovereignty-association referendum was held. Quebec voted 60% against, with René Lévesque telling his supporters: \"À la prochaine fois\" (Until next time)." },
+    { year: 1981,   label: "November 4–5, 1981", desc: "The \"Night of the Long Knives\": Prime Minister Trudeau reached a constitutional accord with nine English-speaking premiers while Quebec's delegation slept, permanently excluding Quebec from the 1982 constitution." },
+
+    // Modern Era
+    { year: 1982,   label: "April 17, 1982",  desc: "Canada patriated its constitution without Quebec's consent. The Supreme Court subsequently struck down parts of Bill 101, intensifying the constitutional crisis." },
+    { year: 1987,   label: "1987",            desc: "The Meech Lake Accord was agreed upon by all premiers, recognizing Quebec as a \"distinct society\" — but it was never ratified after failing in Manitoba and Newfoundland." },
+    { year: 1989,   label: "December 6, 1989", desc: "A gunman killed 14 women at the École Polytechnique de Montréal in a targeted attack on female engineering students. The tragedy became a defining moment of national grief and a catalyst for gun control." },
+    { year: 1990,   label: "1990",            desc: "The Oka Crisis unfolded as Mohawk activists blockaded construction on sacred land near Kanesatake. Lucien Bouchard resigned from cabinet to found the Bloc Québécois. The Meech Lake Accord collapsed." },
+    { year: 1992,   label: "October 26, 1992", desc: "The Charlottetown Accord — a broader constitutional deal — was rejected nationwide and in Quebec, leaving the constitutional question unresolved." },
+    { year: 1993,   label: "June 9, 1993",    desc: "The Montreal Canadiens won the Stanley Cup for the 24th time — their last championship to date — defeating the Los Angeles Kings in five games." },
+    { year: 1994,   label: "1994",            desc: "The Parti Québécois was elected under Jacques Parizeau, setting the stage for a second referendum. The new Civil Code of Quebec took effect on January 1." },
+    { year: 1995,   label: "October 30, 1995", desc: "The second sovereignty referendum produced a dramatic 50.58% vote to remain in Canada — the narrowest margin in Canadian history, with only 54,288 votes separating the two sides. Parizeau resigned." },
+    { year: 1998,   label: "January 1998",    desc: "A catastrophic ice storm struck Montreal and southwestern Quebec, leaving 3 million people without power for weeks. The Saguenay region had already been devastated by severe flooding in 1996." },
+    { year: 2006,   label: "2006",            desc: "The Dawson College shooting in Montreal killed one student and injured nineteen, prompting renewed debate about gun control in Canada." },
+    { year: 2013,   label: "July 6, 2013",    desc: "A runaway oil train derailed and exploded in the town of Lac-Mégantic, killing 47 people and destroying the town centre in Canada's worst railway disaster in nearly a century." },
+    { year: 2017,   label: "January 29, 2017", desc: "A gunman opened fire inside the Centre Culturel Islamique de Québec, killing six Muslim worshippers during evening prayers in one of the worst terrorist attacks on Canadian soil." },
+    { year: 2017,   label: "November 2017",   desc: "Valérie Plante became the first female mayor of Montreal, defeating incumbent Denis Coderre in an upset election victory." },
+    { year: 2018,   label: "October 1, 2018", desc: "The Coalition Avenir Québec (CAQ) under François Legault won a strong majority government, ending a decade of Liberal rule and shifting Quebec politics toward nationalist but non-sovereigntist priorities." },
+    { year: 2019,   label: "2019",            desc: "Bill 21 — the Act Respecting the Laicity of the State — was passed, prohibiting public servants in positions of authority from wearing religious symbols, sparking intense national debate." },
+    { year: 2020,   label: "2020",            desc: "The COVID-19 pandemic struck Quebec particularly hard, killing roughly 12,000 Quebecers — more than any other province — before vaccines brought the crisis under control." },
+    { year: 2022,   label: "October 3, 2022", desc: "The CAQ won a massive majority election victory with 41% of the vote, cementing its position as Quebec's dominant political force." },
+];
+
+const currentYear = new Date().getFullYear();
+const spine = document.getElementById('timeline-spine');
+
+function yearsAgoText(year) {
+    const diff = year < 0 ? currentYear + Math.abs(year) : currentYear - year;
+    return diff.toLocaleString('en-CA') + ' years ago';
+}
+
+EVENTS.forEach((ev, i) => {
+    const isLeft = i % 2 === 0;
+    const ago = yearsAgoText(ev.year);
+
+    const card = `
+        <div class="timeline-card group/card relative bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-5 border border-surface-container hover:border-emerald-200 cursor-default">
+            <span class="years-ago-pill absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-primary text-on-primary text-xs font-semibold font-headline px-3 py-1 rounded-full shadow-md">${ago}</span>
+            <div class="flex items-start gap-3 mb-2">
+                <span class="inline-block bg-tertiary text-on-tertiary text-xs font-bold font-headline px-2.5 py-0.5 rounded-full shrink-0 mt-0.5">${ev.label}</span>
+            </div>
+            <p class="text-sm text-on-surface-variant leading-relaxed">${ev.desc}</p>
+        </div>`;
+
+    const dot = `<div class="flex flex-col items-center shrink-0"><div class="w-4 h-4 rounded-full bg-emerald-600 ring-4 ring-surface border-2 border-white shadow-sm z-10"></div></div>`;
+
+    const fromClass = isLeft ? 'from-left' : 'from-right';
+
+    let row;
+    if (isLeft) {
+        row = `
+        <div class="timeline-item ${fromClass} mb-10 md:mb-14 md:grid md:grid-cols-[1fr_2rem_1fr] md:gap-6 md:items-center">
+            <div class="md:text-right relative pb-2 md:pb-0">${card}</div>
+            <div class="hidden md:flex justify-center">${dot}</div>
+            <div class="hidden md:block"></div>
+        </div>`;
+    } else {
+        row = `
+        <div class="timeline-item ${fromClass} mb-10 md:mb-14 md:grid md:grid-cols-[1fr_2rem_1fr] md:gap-6 md:items-center">
+            <div class="hidden md:block"></div>
+            <div class="hidden md:flex justify-center">${dot}</div>
+            <div class="relative pb-2 md:pb-0">${card}</div>
+        </div>`;
+    }
+
+    spine.insertAdjacentHTML('beforeend', row);
+});
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

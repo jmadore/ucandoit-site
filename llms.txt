@@ -9,6 +9,8 @@ ucandoit.ca is a Canadian tools and games website with word tools, calculators, 
 - Word Unscrambler: /word-unscrambler.html
 - Mortgage Calculator: /loan-calculator.html
 - Board Foot Calculator: /board-foot-calculator.html
+- Hourly to Yearly Salary Calculator: /hourly-to-yearly-salary.html
+- Yearly to Hourly Salary Calculator: /yearly-to-hourly-salary.html
 - Countdown Letters Game: /countdown-letters-game.html
 - Countdown Conundrum Game: /countdown-conundrum.html
 - Countdown Numbers Game: /countdown-numbers-game.html
@@ -18,6 +20,9 @@ ucandoit.ca is a Canadian tools and games website with word tools, calculators, 
 - The word tools and Countdown word games use a local Canadian English dictionary.
 - The mortgage calculator follows Canadian mortgage conventions, including down payment thresholds, mortgage default insurance, stress test estimates, semi-annual compounding, and payment frequency options.
 - The board foot calculator is intended for woodworkers and shows imperial inputs with metric equivalents.
+  
+  
+The salary calculators convert between hourly and yearly salary, supporting custom hours/week and weeks/year, and include Canadian minimum wage context.
 - The Countdown games are browser-based static HTML games with optional countdown music.
 
 ## Indexing Guidance
