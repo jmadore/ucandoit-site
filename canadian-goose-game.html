@@ -103,6 +103,10 @@ const GOOSE_W = 94, GOOSE_H = 62;
 const ROCK_W = 50, ROCK_H = 48;
 const LOONIE_R = 17;
 const HIT_SHR = 10;
+const ROCK_TOP_GRACE = 14;
+const ROCK_SIDE_GRACE = 14;
+const ROCK_BOTTOM_GRACE = 8;
+const ROCK_BOUNCE_VY = -8;
 const BG_TW = Math.ceil((1000 / 780) * 220);
 const MILESTONES = { 100: 'EH? 100!', 250: 'BEAUTY! 250!', 500: 'DOUBLE DOUBLE! 500!', 750: 'GREAT WHITE NORTH!', 1000: '1000! BLESS!', 1500: 'TIMBIEBS! 1500!', 2000: 'LEGEND! 2000!' };
 
@@ -173,6 +177,7 @@ function update() {
     if (MILESTONES[score]) addFlash(MILESTONES[score], canvas.width / 2, 75, 90, true, true);
   }
 
+  const prevGooseBottom = goose.y + GOOSE_H;
   goose.vy += GRAVITY;
   goose.y += goose.vy;
   if (goose.y >= GROUND_Y - GOOSE_H) { goose.y = GROUND_Y - GOOSE_H; goose.vy = 0; goose.jumps = 0; }
@@ -184,8 +189,25 @@ function update() {
     rocks[i].x -= speed;
     if (rocks[i].x + rocks[i].w < 0) { rocks.splice(i, 1); continue; }
     const r = rocks[i];
-    if (goose.x + HIT_SHR < r.x + r.w && goose.x + GOOSE_W - HIT_SHR > r.x &&
-        goose.y + HIT_SHR < r.y + r.h && goose.y + GOOSE_H - HIT_SHR > r.y) {
+    const gooseLeft = goose.x + HIT_SHR;
+    const gooseRight = goose.x + GOOSE_W - HIT_SHR;
+    const gooseTop = goose.y + HIT_SHR;
+    const gooseBottom = goose.y + GOOSE_H - HIT_SHR;
+    const rockLeft = r.x + ROCK_SIDE_GRACE;
+    const rockRight = r.x + r.w - ROCK_SIDE_GRACE;
+    const rockTop = r.y;
+    const rockBottom = r.y + r.h - ROCK_BOTTOM_GRACE;
+    const overlapsRock = gooseLeft < rockRight && gooseRight > rockLeft &&
+        gooseTop < rockBottom && gooseBottom > rockTop;
+    const landedOnTop = overlapsRock && goose.vy >= 0 &&
+        prevGooseBottom <= rockTop + ROCK_TOP_GRACE && gooseBottom <= rockTop + ROCK_TOP_GRACE * 1.8;
+
+    if (landedOnTop) {
+      goose.y = rockTop - GOOSE_H;
+      goose.vy = ROCK_BOUNCE_VY;
+      goose.jumps = 1;
+      addFlash('BOING!', goose.x + GOOSE_W - 8, goose.y + 12, 28, false, false);
+    } else if (overlapsRock) {
       state = 'dead';
       if (score > highScore) { highScore = score; localStorage.setItem('gooseHS', highScore); }
       updateHUD();
