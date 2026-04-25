@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="nav-section" content="Calculators">
+<meta name="nav-label" content="Salary Calculator">
+<meta name="nav-section-order" content="2">
+<meta name="nav-item-order" content="3">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Salary Calculator — Hourly to Yearly &amp; Yearly to Hourly | ucandoit.ca</title>
+<meta name="description" content="Convert between hourly wage and yearly salary using custom hours per week and weeks per year. Includes Canadian minimum wage table by province.">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.salary-panel-green {
+  background:
+    radial-gradient(circle at 88% 14%, rgba(210, 236, 162, 0.18), transparent 28%),
+    linear-gradient(135deg, #012d1d 0%, #1b4332 62%, #2d6a4f 100%);
+}
+.salary-panel-red {
+  background:
+    radial-gradient(circle at 88% 14%, rgba(255, 218, 216, 0.2), transparent 28%),
+    linear-gradient(135deg, #4a000a 0%, #7b0018 62%, #a61d24 100%);
+}
+.salary-page {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(207, 233, 159, 0.42), transparent 26%),
+    radial-gradient(circle at 92% 0%, rgba(255, 218, 216, 0.72), transparent 24%),
+    linear-gradient(135deg, #f8faf8 0%, #eef2ec 58%, #f8eee9 100%);
+}
+.hero-copy { max-width: 42rem; }
+.loonie-medallion {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: clamp(5.5rem, 15vw, 8.25rem);
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: #e5c95a;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+.loonie-medallion img {
+  width: 168%;
+  height: 118%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  transform: translate(-19%, -4%) scale(1.12);
+}
+.salary-result {
+  position: relative;
+  z-index: 1;
+  padding-right: clamp(0rem, 18vw, 8rem);
+}
+.salary-value {
+  display: block;
+  font-size: clamp(3rem, 7.5vw, 5.6rem);
+  line-height: 0.92;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 640px) {
+  .salary-result { padding-right: 0; padding-top: 5.5rem; }
+  .loonie-medallion { top: 1rem; right: 1rem; width: 5rem; }
+}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1W7WL78VTT"></script>
+<script src="analytics.js"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<script src="https://cdn.tailwindcss.com/3.4.16?plugins=forms,container-queries"></script>
+<script src="tailwind-config.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body antialiased">
+<!-- Shared site navigation -->
+<div id="site-nav"></div>
+<script src="nav.js?v=20260425"></script>
+
+<main class="salary-page pt-24 pb-16 px-5 md:px-8 min-h-screen">
+<div class="max-w-7xl mx-auto">
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+
+  <!-- ── Left column ── -->
+  <div class="lg:col-span-7 space-y-8">
+    <div>
+      <span class="inline-block px-4 py-1.5 bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest rounded-full mb-4">SALARY CALCULATOR</span>
+      <h1 id="page-heading" class="font-headline text-5xl md:text-7xl font-extrabold text-primary mb-4 tracking-tighter leading-[0.9] max-w-3xl"></h1>
+      <p id="page-desc" class="hero-copy text-lg text-on-surface-variant font-medium leading-relaxed"></p>
+    </div>
+
+    <section class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 rounded-xl">
+      <div class="flex items-center justify-between mb-10 flex-wrap gap-4">
+        <h2 class="font-headline text-2xl font-bold flex items-center gap-3">
+          <span class="material-symbols-outlined text-secondary">calculate</span>
+          Salary Inputs
+        </h2>
+        <!-- Direction toggle -->
+        <div class="flex rounded-lg border border-outline-variant overflow-hidden text-sm font-headline font-semibold">
+          <button id="btn-h2y" type="button"
+            class="px-4 py-2 transition-colors"
+            onclick="setMode('hourly-to-yearly')">
+            Hourly → Yearly
+          </button>
+          <button id="btn-y2h" type="button"
+            class="px-4 py-2 transition-colors border-l border-outline-variant"
+            onclick="setMode('yearly-to-hourly')">
+            Yearly → Hourly
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Hourly wage input (shown in hourly-to-yearly mode) -->
+        <label id="input-hourly-group" class="space-y-3">
+          <span class="font-headline font-bold text-sm text-primary uppercase tracking-wider">Hourly Wage</span>
+          <span class="flex items-center gap-2 bg-white px-4 py-3 rounded-lg border-b-2 border-outline-variant focus-within:border-primary transition-colors">
+            <span class="text-on-surface-variant font-medium">$</span>
+            <input id="input-hourly" class="border-none p-0 focus:ring-0 font-bold text-lg text-primary w-full text-right" min="0" step="0.01" type="number" value="25.00"/>
+            <span class="text-on-surface-variant font-medium">/hr</span>
+          </span>
+        </label>
+
+        <!-- Yearly salary input (shown in yearly-to-hourly mode) -->
+        <label id="input-yearly-group" class="space-y-3 hidden">
+          <span class="font-headline font-bold text-sm text-primary uppercase tracking-wider">Yearly Salary</span>
+          <span class="flex items-center gap-2 bg-white px-4 py-3 rounded-lg border-b-2 border-outline-variant focus-within:border-primary transition-colors">
+            <span class="text-on-surface-variant font-medium">$</span>
+            <input id="input-yearly" class="border-none p-0 focus:ring-0 font-bold text-lg text-primary w-full text-right" min="0" step="100" type="number" value="52000"/>
+            <span class="text-on-surface-variant font-medium">/yr</span>
+          </span>
+        </label>
+
+        <!-- Shared: hours per week -->
+        <label class="space-y-3">
+          <span class="font-headline font-bold text-sm text-primary uppercase tracking-wider">Hours per Week</span>
+          <span class="flex items-center gap-2 bg-white px-4 py-3 rounded-lg border-b-2 border-outline-variant focus-within:border-primary transition-colors">
+            <input id="input-hours" class="border-none p-0 focus:ring-0 font-bold text-lg text-primary w-full text-right" min="1" max="168" step="0.25" type="number" value="40"/>
+            <span class="text-on-surface-variant font-medium">hrs</span>
+          </span>
+        </label>
+
+        <!-- Shared: weeks per year -->
+        <label class="space-y-3">
+          <span class="font-headline font-bold text-sm text-primary uppercase tracking-wider">Weeks per Year</span>
+          <span class="flex items-center gap-2 bg-white px-4 py-3 rounded-lg border-b-2 border-outline-variant focus-within:border-primary transition-colors">
+            <input id="input-weeks" class="border-none p-0 focus:ring-0 font-bold text-lg text-primary w-full text-right" min="1" max="52" step="1" type="number" value="52"/>
+            <span class="text-on-surface-variant font-medium">weeks</span>
+          </span>
+        </label>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Right column ── -->
+  <aside class="lg:col-span-5 space-y-8">
+    <div id="result-panel" class="salary-panel-green rounded-xl p-8 text-white shadow-2xl relative overflow-hidden">
+      <div class="loonie-medallion" aria-hidden="true"><img src="assets/loonie.jpeg" alt=""/></div>
+      <h2 id="panel-header" class="font-headline text-sm font-bold uppercase tracking-widest mb-8 opacity-80"></h2>
+      <div class="salary-result mb-10">
+        <span id="primary-result" class="salary-value font-black tracking-tighter">$0.00</span>
+        <p id="secondary-monthly" class="mt-2 text-primary-fixed text-sm font-medium">$0.00 per month</p>
+        <p id="secondary-weekly" class="mt-1 text-primary-fixed text-sm font-medium">$0.00 per week</p>
+      </div>
+      <div class="space-y-4 pt-8 border-t border-white/10">
+        <div class="flex justify-between items-center">
+          <span id="display-label-primary" class="text-sm opacity-70"></span>
+          <span id="display-primary" class="font-bold font-headline">$0.00</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-sm opacity-70">Hours/Week</span>
+          <span id="display-hours" class="font-bold font-headline">0</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-sm opacity-70">Weeks/Year</span>
+          <span id="display-weeks" class="font-bold font-headline">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-surface-container-lowest border border-outline-variant p-8 rounded-xl">
+      <h3 id="formula-title" class="font-headline font-bold text-primary text-xl mb-4"></h3>
+      <p id="formula-desc" class="text-on-surface-variant leading-relaxed mb-4"></p>
+      <div id="formula-example" class="bg-surface-container-low rounded-lg p-4 font-headline font-black text-primary text-center"></div>
+      <p class="text-on-surface-variant leading-relaxed mt-4 text-sm">Adjust hours or weeks for part-time, overtime, or unpaid leave.</p>
+    </div>
+  </aside>
+
+</section>
+</div>
+</main>
+
+<!-- Min wage table — always visible, useful for both directions -->
+<section class="max-w-4xl mx-auto px-5 md:px-8 mt-16 mb-24">
+  <h2 class="font-headline text-2xl font-bold mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-secondary">public</span>
+    Canadian Minimum Wage by Province (2026)
+  </h2>
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-surface-container-lowest rounded-xl shadow divide-y divide-outline-variant">
+      <thead>
+        <tr class="text-left text-xs font-bold text-primary uppercase tracking-wider">
+          <th class="py-3 px-4">Province/Territory</th>
+          <th class="py-3 px-4">Hourly Rate</th>
+          <th class="py-3 px-4">Yearly Salary<br class="hidden md:inline"/>(40h/week, 52w/year)</th>
+        </tr>
+      </thead>
+      <tbody id="minwage-table-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="bg-emerald-50 dark:bg-emerald-950 w-full py-12 mt-20">
+  <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="space-y-2">
+      <a class="inline-flex items-center" href="index.html" aria-label="ucandoit.ca home">
+        <img class="h-8 w-auto" src="assets/logo.png?v=20260425" alt="ucandoit.ca"/>
+      </a>
+      <p class="font-body text-sm tracking-wide leading-relaxed text-emerald-700 dark:text-emerald-400 max-w-sm">© 2024 ucandoit.ca</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Mode state ──────────────────────────────────────────────────────────────
+let mode = 'hourly-to-yearly';
+
+// Honour ?mode=yearly redirect from old URL
+const urlParam = new URLSearchParams(window.location.search).get('mode');
+if (urlParam === 'yearly') mode = 'yearly-to-hourly';
+
+// ── Element refs ────────────────────────────────────────────────────────────
+const btnH2Y          = document.getElementById('btn-h2y');
+const btnY2H          = document.getElementById('btn-y2h');
+const inputHourlyGrp  = document.getElementById('input-hourly-group');
+const inputYearlyGrp  = document.getElementById('input-yearly-group');
+const inputHourly     = document.getElementById('input-hourly');
+const inputYearly     = document.getElementById('input-yearly');
+const inputHours      = document.getElementById('input-hours');
+const inputWeeks      = document.getElementById('input-weeks');
+const heading         = document.getElementById('page-heading');
+const desc            = document.getElementById('page-desc');
+const resultPanel     = document.getElementById('result-panel');
+const panelHeader     = document.getElementById('panel-header');
+const primaryResult   = document.getElementById('primary-result');
+const secondaryMonthly = document.getElementById('secondary-monthly');
+const secondaryWeekly  = document.getElementById('secondary-weekly');
+const displayLabelPrimary = document.getElementById('display-label-primary');
+const displayPrimary  = document.getElementById('display-primary');
+const displayHours    = document.getElementById('display-hours');
+const displayWeeks    = document.getElementById('display-weeks');
+const formulaTitle    = document.getElementById('formula-title');
+const formulaDesc     = document.getElementById('formula-desc');
+const formulaExample  = document.getElementById('formula-example');
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+function num(input, fallback = 0) {
+  const v = Number(input.value);
+  return Number.isFinite(v) ? Math.max(v, 0) : fallback;
+}
+function fmt(value) {
+  return new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(value);
+}
+
+// ── Mode switcher ────────────────────────────────────────────────────────────
+function setMode(newMode) {
+  mode = newMode;
+  history.replaceState(null, '', '?mode=' + (mode === 'hourly-to-yearly' ? 'hourly' : 'yearly'));
+  applyMode();
+  calculate();
+}
+
+function applyMode() {
+  const isH2Y = mode === 'hourly-to-yearly';
+
+  // Toggle button styles
+  btnH2Y.className = 'px-4 py-2 transition-colors ' +
+    (isH2Y ? 'bg-primary text-white' : 'text-on-surface-variant hover:bg-surface-container-low');
+  btnY2H.className = 'px-4 py-2 transition-colors border-l border-outline-variant ' +
+    (!isH2Y ? 'bg-primary text-white' : 'text-on-surface-variant hover:bg-surface-container-low');
+
+  // Show correct primary input
+  inputHourlyGrp.classList.toggle('hidden', !isH2Y);
+  inputYearlyGrp.classList.toggle('hidden', isH2Y);
+
+  // Heading & description
+  heading.innerHTML = isH2Y
+    ? 'Hourly to Yearly <span class="text-tertiary">Salary</span>'
+    : 'Yearly to Hourly <span class="text-tertiary">Salary</span>';
+  desc.textContent = isH2Y
+    ? 'Convert your hourly wage to an annual salary, factoring in hours per week and weeks per year. Useful for job comparisons, budgeting, and negotiations.'
+    : 'Convert your annual salary to an hourly wage, factoring in hours per week and weeks per year. Useful for job comparisons, budgeting, and negotiations.';
+
+  // Panel gradient & header
+  resultPanel.className = 'rounded-xl p-8 text-white shadow-2xl relative overflow-hidden ' +
+    (isH2Y ? 'salary-panel-green' : 'salary-panel-red');
+  panelHeader.textContent = isH2Y ? 'Estimated Salary' : 'Estimated Hourly Wage';
+  displayLabelPrimary.textContent = isH2Y ? 'Hourly Wage' : 'Yearly Salary';
+
+  // Formula card
+  if (isH2Y) {
+    formulaTitle.textContent = 'Salary formula';
+    formulaDesc.textContent  = 'Annual Salary = Hourly Wage × Hours/Week × Weeks/Year';
+    formulaExample.textContent = '$25 × 40 × 52 = $52,000';
+  } else {
+    formulaTitle.textContent = 'Hourly wage formula';
+    formulaDesc.textContent  = 'Hourly Wage = Yearly Salary ÷ (Hours/Week × Weeks/Year)';
+    formulaExample.textContent = '$52,000 ÷ (40 × 52) = $25.00';
+  }
+}
+
+// ── Calculation ──────────────────────────────────────────────────────────────
+function calculate() {
+  const hours = num(inputHours);
+  const weeks = num(inputWeeks);
+  const divisor = hours * weeks;
+
+  if (mode === 'hourly-to-yearly') {
+    const hourly  = num(inputHourly);
+    const yearly  = hourly * divisor;
+    const monthly = yearly / 12;
+    const weekly  = hourly * hours;
+
+    primaryResult.textContent    = fmt(yearly);
+    secondaryMonthly.textContent = fmt(monthly) + ' per month';
+    secondaryWeekly.textContent  = fmt(weekly) + ' per week';
+    displayPrimary.textContent   = fmt(hourly);
+  } else {
+    const yearly  = num(inputYearly);
+    const hourly  = divisor > 0 ? yearly / divisor : 0;
+    const monthly = yearly / 12;
+    const weekly  = divisor > 0 ? yearly / weeks : 0;
+
+    primaryResult.textContent    = fmt(hourly);
+    secondaryMonthly.textContent = fmt(monthly) + ' per month';
+    secondaryWeekly.textContent  = fmt(weekly) + ' per week';
+    displayPrimary.textContent   = fmt(yearly);
+  }
+
+  displayHours.textContent = hours;
+  displayWeeks.textContent = weeks;
+}
+
+// ── Event listeners ──────────────────────────────────────────────────────────
+[inputHourly, inputYearly, inputHours, inputWeeks].forEach(el => {
+  el.addEventListener('input',  calculate);
+  el.addEventListener('change', calculate);
+});
+
+// ── Minimum wage table ───────────────────────────────────────────────────────
+const minWageData = [
+  { region: "Federal",                    rate: 18.15 },
+  { region: "Alberta",                    rate: 15.00 },
+  { region: "British Columbia",           rate: 17.85 },
+  { region: "Manitoba",                   rate: 16.40 },
+  { region: "New Brunswick",              rate: 15.90 },
+  { region: "Newfoundland and Labrador",  rate: 16.35 },
+  { region: "Northwest Territories",      rate: 16.95 },
+  { region: "Nova Scotia",               rate: 17.00 },
+  { region: "Nunavut",                   rate: 19.75 },
+  { region: "Ontario",                   rate: 17.95 },
+  { region: "Prince Edward Island",      rate: 17.60 },
+  { region: "Quebec",                    rate: 16.60 },
+  { region: "Saskatchewan",             rate: 15.35 },
+  { region: "Yukon",                    rate: 18.51 }
+];
+
+(function renderMinWageTable() {
+  const tbody = document.getElementById('minwage-table-body');
+  tbody.innerHTML = minWageData.map(row => {
+    const yearly = row.rate * 40 * 52;
+    return `<tr class="border-t border-outline-variant hover:bg-surface-container-low">
+      <td class="py-3 px-4 font-medium text-on-surface-variant">${row.region}</td>
+      <td class="py-3 px-4 font-mono text-primary">$${row.rate.toFixed(2)}</td>
+      <td class="py-3 px-4 font-mono text-secondary">${fmt(yearly)}</td>
+    </tr>`;
+  }).join('');
+})();
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+applyMode();
+calculate();
+</script>
+</body>
+</html>

@@ -2,49 +2,15 @@
 <html class="light" lang="en">
 <head>
 <meta charset="utf-8"/>
+<meta name="nav-section" content="Games">
+<meta name="nav-label" content="Newfoundland Phrase Match">
+<meta name="nav-section-order" content="3">
+<meta name="nav-item-order" content="4">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Newfoundland Phrase Match | ucandoit.ca</title>
 <meta name="description" content="Match Newfoundland phrases to their meanings in a two-column Canadian language game.">
 <meta name="ai-token-count" content="104">
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        colors: {
-          "tertiary-fixed": "#ffdad8","secondary-fixed-dim": "#b6d088",
-          "secondary-fixed": "#d2eca2","surface-dim": "#d8dad9",
-          "inverse-primary": "#a5d0b9","on-primary": "#ffffff",
-          "primary-fixed": "#c1ecd4","on-secondary": "#ffffff",
-          "secondary": "#50652a","tertiary-fixed-dim": "#ffb3b0",
-          "on-surface-variant": "#414844","on-secondary-fixed-variant": "#394d14",
-          "on-secondary-container": "#546a2e","on-background": "#191c1b",
-          "on-secondary-fixed": "#131f00","secondary-container": "#cfe99f",
-          "on-error": "#ffffff","on-tertiary-fixed": "#410007",
-          "on-tertiary-container": "#ff807f","tertiary-container": "#77131c",
-          "primary": "#012d1d","on-tertiary": "#ffffff",
-          "on-surface": "#191c1b","surface-container-lowest": "#ffffff",
-          "outline-variant": "#c1c8c2","background": "#f8faf8",
-          "outline": "#717973","on-primary-container": "#86af99",
-          "surface-container-high": "#e6e9e7","primary-container": "#1b4332",
-          "surface": "#f8faf8","surface-tint": "#3f6653",
-          "on-primary-fixed-variant": "#274e3d","primary-fixed-dim": "#a5d0b9",
-          "surface-container-highest": "#e1e3e1","error": "#ba1a1a",
-          "surface-container-low": "#f2f4f2","inverse-on-surface": "#eff1ef",
-          "error-container": "#ffdad6","on-primary-fixed": "#002114",
-          "inverse-surface": "#2e3130","surface-variant": "#e1e3e1",
-          "tertiary": "#55000b","surface-container": "#eceeec",
-          "surface-bright": "#f8faf8","on-error-container": "#93000a",
-          "on-tertiary-fixed-variant": "#861f25"
-        },
-        borderRadius: { DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px" },
-        fontFamily: { headline: ["Manrope"], body: ["Inter"], label: ["Inter"] }
-      }
-    }
-  }
-</script>
 <style>
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .match-board {
@@ -88,6 +54,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<script src="https://cdn.tailwindcss.com/3.4.16?plugins=forms,container-queries"></script>
+<script src="tailwind-config.js"></script>
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim selection:text-primary">
 <!-- Shared site navigation -->

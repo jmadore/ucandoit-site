@@ -2,126 +2,50 @@
 <html class="light" lang="en">
 <head>
 <meta charset="utf-8"/>
+<meta name="nav-section" content="History">
+<meta name="nav-label" content="Ontario History">
+<meta name="nav-section-order" content="4">
+<meta name="nav-item-order" content="2">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Ontario History Timeline — ucandoit.ca</title>
 <meta name="description" content="Explore an interactive timeline of Ontario history from early settlement to modern provincial events.">
-<meta name="ai-token-count" content="100">
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-    tailwind.config = {
-        darkMode: "class",
-        theme: {
-            extend: {
-                "colors": {
-                    "tertiary-fixed": "#ffdad8",
-                    "secondary-fixed-dim": "#b6d088",
-                    "secondary-fixed": "#d2eca2",
-                    "surface-dim": "#d8dad9",
-                    "inverse-primary": "#a5d0b9",
-                    "on-primary": "#ffffff",
-                    "primary-fixed": "#c1ecd4",
-                    "on-secondary": "#ffffff",
-                    "secondary": "#50652a",
-                    "tertiary-fixed-dim": "#ffb3b0",
-                    "on-surface-variant": "#414844",
-                    "on-secondary-fixed-variant": "#394d14",
-                    "on-secondary-container": "#546a2e",
-                    "on-background": "#191c1b",
-                    "on-secondary-fixed": "#131f00",
-                    "secondary-container": "#cfe99f",
-                    "on-error": "#ffffff",
-                    "on-tertiary-fixed": "#410007",
-                    "on-tertiary-container": "#ff807f",
-                    "tertiary-container": "#77131c",
-                    "primary": "#012d1d",
-                    "on-tertiary": "#ffffff",
-                    "on-surface": "#191c1b",
-                    "surface-container-lowest": "#ffffff",
-                    "outline-variant": "#c1c8c2",
-                    "background": "#f8faf8",
-                    "outline": "#717973",
-                    "on-primary-container": "#86af99",
-                    "surface-container-high": "#e6e9e7",
-                    "primary-container": "#1b4332",
-                    "surface": "#f8faf8",
-                    "surface-tint": "#3f6653",
-                    "on-primary-fixed-variant": "#274e3d",
-                    "primary-fixed-dim": "#a5d0b9",
-                    "surface-container-highest": "#e1e3e1",
-                    "error": "#ba1a1a",
-                    "surface-container-low": "#f2f4f2",
-                    "inverse-on-surface": "#eff1ef",
-                    "error-container": "#ffdad6",
-                    "on-primary-fixed": "#002114",
-                    "inverse-surface": "#2e3130",
-                    "surface-variant": "#e1e3e1",
-                    "tertiary": "#a61d24",
-                    "surface-container": "#eceeec",
-                    "surface-bright": "#f8faf8",
-                    "on-error-container": "#93000a",
-                    "on-tertiary-fixed-variant": "#861f25"
-                },
-                "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-                },
-                "fontFamily": {
-                    "headline": ["Manrope"],
-                    "body": ["Inter"],
-                    "label": ["Inter"]
-                }
-            },
-        },
-    }
-</script>
 <style>
-    .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     .timeline-item {
         opacity: 0;
         transition: opacity 0.65s ease, transform 0.65s ease;
     }
     .timeline-item.from-left  { transform: translateX(-36px); }
     .timeline-item.from-right { transform: translateX(36px); }
+    .timeline-item.from-below { transform: translateY(24px); }
     .timeline-item.visible    { opacity: 1; transform: translate(0); }
-
     .years-ago-pill {
         opacity: 0;
         transform: translateY(-4px);
         transition: opacity 0.18s ease, transform 0.18s ease;
         pointer-events: none;
     }
-    .timeline-card:hover .years-ago-pill {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
+    .timeline-card:hover .years-ago-pill { opacity: 1; transform: translateY(0); }
     @media (max-width: 767px) {
         .timeline-item.from-left,
-        .timeline-item.from-right {
-            transform: translateY(24px);
-        }
+        .timeline-item.from-right { transform: translateY(24px); }
     }
 </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777"
-         crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1W7WL78VTT"></script>
 <script src="analytics.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<script src="https://cdn.tailwindcss.com/3.4.16?plugins=forms,container-queries"></script>
+<script src="tailwind-config.js"></script>
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
-<!-- Shared site navigation -->
 <div id="site-nav"></div>
 <script src="nav.js?v=20260425"></script>
 
-<!-- Hero -->
 <section class="pt-32 pb-16 text-center px-6 bg-gradient-to-b from-surface-container-low to-surface">
     <div class="inline-flex items-center gap-2 bg-tertiary/10 text-tertiary text-sm font-semibold px-4 py-1.5 rounded-full mb-6 font-headline">
         <span class="material-symbols-outlined text-base">location_on</span> Ontario
@@ -130,7 +54,6 @@
     <p class="text-on-surface-variant text-lg max-w-xl mx-auto">From the first peoples to the present day. Hover over any event to see how long ago it happened.</p>
 </section>
 
-<!-- Timeline -->
 <main class="max-w-5xl mx-auto px-4 pb-32" id="timeline-root">
     <div class="relative" id="timeline-spine">
         <div class="absolute left-1/2 top-0 bottom-0 w-px bg-emerald-200 -translate-x-1/2 hidden md:block" aria-hidden="true"></div>
@@ -229,62 +152,7 @@ const EVENTS = [
     { year: 2020,   label: "2020",            desc: "Premier Doug Ford declared a state of emergency amid the COVID-19 pandemic, triggering lockdowns and economic disruption across Ontario." },
     { year: 2021,   label: "2021",            desc: "Premier Doug Ford declared a second state of emergency as COVID-19 variants drove a third wave of infections across Ontario." },
 ];
-
-const currentYear = new Date().getFullYear();
-const spine = document.getElementById('timeline-spine');
-
-function yearsAgoText(year) {
-    const diff = year < 0 ? currentYear + Math.abs(year) : currentYear - year;
-    return diff.toLocaleString('en-CA') + ' years ago';
-}
-
-EVENTS.forEach((ev, i) => {
-    const isLeft = i % 2 === 0;
-    const ago = yearsAgoText(ev.year);
-
-    const card = `
-        <div class="timeline-card group/card relative bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-5 border border-surface-container hover:border-emerald-200 cursor-default">
-            <span class="years-ago-pill absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-primary text-on-primary text-xs font-semibold font-headline px-3 py-1 rounded-full shadow-md">${ago}</span>
-            <div class="flex items-start gap-3 mb-2">
-                <span class="inline-block bg-tertiary text-on-tertiary text-xs font-bold font-headline px-2.5 py-0.5 rounded-full shrink-0 mt-0.5">${ev.label}</span>
-            </div>
-            <p class="text-sm text-on-surface-variant leading-relaxed">${ev.desc}</p>
-        </div>`;
-
-    const dot = `<div class="flex flex-col items-center shrink-0"><div class="w-4 h-4 rounded-full bg-emerald-600 ring-4 ring-surface border-2 border-white shadow-sm z-10"></div></div>`;
-
-    const fromClass = isLeft ? 'from-left' : 'from-right';
-
-    let row;
-    if (isLeft) {
-        row = `
-        <div class="timeline-item ${fromClass} mb-10 md:mb-14 md:grid md:grid-cols-[1fr_2rem_1fr] md:gap-6 md:items-center">
-            <div class="md:text-right relative pb-2 md:pb-0">${card}</div>
-            <div class="hidden md:flex justify-center">${dot}</div>
-            <div class="hidden md:block"></div>
-        </div>`;
-    } else {
-        row = `
-        <div class="timeline-item ${fromClass} mb-10 md:mb-14 md:grid md:grid-cols-[1fr_2rem_1fr] md:gap-6 md:items-center">
-            <div class="hidden md:block"></div>
-            <div class="hidden md:flex justify-center">${dot}</div>
-            <div class="relative pb-2 md:pb-0">${card}</div>
-        </div>`;
-    }
-
-    spine.insertAdjacentHTML('beforeend', row);
-});
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
 </script>
+<script src="timeline-engine.js"></script>
 </body>
 </html>

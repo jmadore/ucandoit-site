@@ -1,83 +1,17 @@
 <!DOCTYPE html>
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
+<meta name="nav-section" content="Games">
+<meta name="nav-label" content="Countdown Letters">
+<meta name="nav-section-order" content="3">
+<meta name="nav-item-order" content="1">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Countdown Letters Game | ucandoit.ca</title>
 <meta name="description" content="Play a Countdown-style letters game using a Canadian English dictionary and a 30-second timer.">
 <meta name="ai-token-count" content="430">
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="canadian-words.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "tertiary-fixed": "#ffdad8",
-                    "secondary-fixed-dim": "#b6d088",
-                    "secondary-fixed": "#d2eca2",
-                    "surface-dim": "#d8dad9",
-                    "inverse-primary": "#a5d0b9",
-                    "on-primary": "#ffffff",
-                    "primary-fixed": "#c1ecd4",
-                    "on-secondary": "#ffffff",
-                    "secondary": "#50652a",
-                    "tertiary-fixed-dim": "#ffb3b0",
-                    "on-surface-variant": "#414844",
-                    "on-secondary-fixed-variant": "#394d14",
-                    "on-secondary-container": "#546a2e",
-                    "on-background": "#191c1b",
-                    "on-secondary-fixed": "#131f00",
-                    "secondary-container": "#cfe99f",
-                    "on-error": "#ffffff",
-                    "on-tertiary-fixed": "#410007",
-                    "on-tertiary-container": "#ff807f",
-                    "tertiary-container": "#77131c",
-                    "primary": "#012d1d",
-                    "on-tertiary": "#ffffff",
-                    "on-surface": "#191c1b",
-                    "surface-container-lowest": "#ffffff",
-                    "outline-variant": "#c1c8c2",
-                    "background": "#f8faf8",
-                    "outline": "#717973",
-                    "on-primary-container": "#86af99",
-                    "surface-container-high": "#e6e9e7",
-                    "primary-container": "#1b4332",
-                    "surface": "#f8faf8",
-                    "surface-tint": "#3f6653",
-                    "on-primary-fixed-variant": "#274e3d",
-                    "primary-fixed-dim": "#a5d0b9",
-                    "surface-container-highest": "#e1e3e1",
-                    "error": "#ba1a1a",
-                    "surface-container-low": "#f2f4f2",
-                    "inverse-on-surface": "#eff1ef",
-                    "error-container": "#ffdad6",
-                    "on-primary-fixed": "#002114",
-                    "inverse-surface": "#2e3130",
-                    "surface-variant": "#e1e3e1",
-                    "tertiary": "#55000b",
-                    "surface-container": "#eceeec",
-                    "surface-bright": "#f8faf8",
-                    "on-error-container": "#93000a",
-                    "on-tertiary-fixed-variant": "#861f25"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.5rem",
-                    "lg": "1rem",
-                    "xl": "1.5rem",
-                    "full": "9999px"
-            },
-            "fontFamily": {
-                    "headline": ["Manrope"],
-                    "body": ["Inter"],
-                    "label": ["Inter"]
-            }
-          },
-        },
-      }
-    </script>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -97,6 +31,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<script src="https://cdn.tailwindcss.com/3.4.16?plugins=forms,container-queries"></script>
+<script src="tailwind-config.js"></script>
+<script src="game-engine.js"></script>
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim selection:text-primary">
 <!-- Shared site navigation -->
@@ -248,87 +185,34 @@ Countdown music
 </div>
 </footer>
 <script>
+// ── Engine instances ────────────────────────────────────────────────────────
+const timer = new CountdownTimer({
+  max:      30,
+  onExpire: () => showResult('timeout', document.getElementById('word-input').value.trim()),
+});
+const music = new CountdownMusic({ timerMax: 30 });
+
 // ── Constants ──────────────────────────────────────────────────────────────
 const VOWEL_POOL     = 'AAAAAAAAAEEEEEEEEEEEEIIIIIIIIIOOOOOOOOUUUU'.split('');
 const CONSONANT_POOL = 'BBCCDDDDFGGHHHJKLLLLMMNNNNNNPPRRRRRRSSSSSTTTTTTTVVWWXYYYZ'.split('');
-const TIMER_MAX      = 30;
-const CIRCUMFERENCE  = 263.89;
 const AUTO_PICK_VOWELS = 4;
 
 // ── Session state ───────────────────────────────────────────────────────────
-let phase     = 'picking'; // 'picking' | 'playing' | 'checking' | 'result'
-let letters   = [];
-let vowelBag  = [...VOWEL_POOL];
+let phase        = 'picking';
+let letters      = [];
+let vowelBag     = [...VOWEL_POOL];
 let consonantBag = [...CONSONANT_POOL];
-let timerID   = null;
-let timeLeft  = TIMER_MAX;
 let streak    = 0;
 let bestWord  = '';
 let bestScore = 0;
 let rounds    = 0;
 let WORD_LIST = buildWordList();
 
-// ── Sanitise user input (A-Z only, prevents XSS in DOM insertions) ──────────
-function sanitize(str) {
-  return str.toUpperCase().replace(/[^A-Z]/g, '');
-}
+function sanitize(str) { return str.toUpperCase().replace(/[^A-Z]/g, ''); }
 
-// ── Word list setup ─────────────────────────────────────────────────────────
 function buildWordList() {
   const siteWords = Array.isArray(window.CANADIAN_WORDS) ? window.CANADIAN_WORDS : [];
-  return new Set(
-    siteWords
-      .map(sanitize)
-      .filter(word => /^[A-Z]{3,9}$/.test(word))
-  );
-}
-
-// ── Tile rendering ──────────────────────────────────────────────────────────
-function stopCountdownMusic() {
-  const music = document.getElementById('countdown-music');
-  music.pause();
-  music.currentTime = 0;
-}
-
-function playCountdownMusic() {
-  const soundToggle = document.getElementById('sound-toggle');
-  if (!soundToggle.checked) return;
-
-  const music = document.getElementById('countdown-music');
-  music.currentTime = Math.min(TIMER_MAX - timeLeft, TIMER_MAX);
-  music.play().catch(() => {
-    soundToggle.checked = false;
-  });
-}
-
-function handleSoundToggle() {
-  if (document.getElementById('sound-toggle').checked && phase === 'playing') {
-    playCountdownMusic();
-  } else {
-    stopCountdownMusic();
-  }
-}
-
-function renderTiles() {
-  const container = document.getElementById('tiles-container');
-  while (container.firstChild) container.removeChild(container.firstChild);
-  for (let i = 0; i < 9; i++) {
-    const el = document.createElement('div');
-    if (i < letters.length) {
-      el.className = 'aspect-[4/5] min-w-0 bg-surface-container-lowest rounded-lg flex items-center justify-center border-b-4 border-outline-variant tile-shadow';
-      const span = document.createElement('span');
-      span.className = 'text-2xl sm:text-3xl md:text-4xl font-black font-headline text-primary';
-      span.textContent = letters[i];
-      el.appendChild(span);
-    } else {
-      el.className = 'aspect-[4/5] min-w-0 bg-surface-container-highest/30 rounded-lg flex items-center justify-center border-2 border-dashed border-outline-variant/50';
-      const icon = document.createElement('span');
-      icon.className = 'material-symbols-outlined text-outline-variant text-xl sm:text-2xl text-xl sm:text-2xl';
-      icon.textContent = 'question_mark';
-      el.appendChild(icon);
-    }
-    container.appendChild(el);
-  }
+  return new Set(siteWords.map(sanitize).filter(w => /^[A-Z]{3,9}$/.test(w)));
 }
 
 // ── Letter selection ────────────────────────────────────────────────────────
@@ -338,79 +222,57 @@ function drawFromBag(bag) {
   return letter;
 }
 
+function setPickingDisabled(disabled) {
+  ['btn-vowel', 'btn-consonant', 'btn-auto-pick'].forEach(id => {
+    const btn = document.getElementById(id);
+    btn.disabled = disabled;
+    btn.classList.toggle('opacity-40', disabled);
+    btn.classList.toggle('cursor-not-allowed', disabled);
+  });
+}
+
 function pickLetter(bag) {
   if (phase !== 'picking' || letters.length >= 9 || bag.length === 0) return;
   letters.push(drawFromBag(bag));
-  renderTiles();
+  renderTiles('tiles-container', letters, 9);
   if (letters.length === 9) startGame();
 }
 
 function autoPickLetters() {
   if (phase !== 'picking' || letters.length >= 9) return;
-
   while (letters.length < 9) {
-    const selectedVowels = letters.filter(letter => VOWEL_POOL.includes(letter)).length;
+    const selectedVowels = letters.filter(l => VOWEL_POOL.includes(l)).length;
     const shouldPickVowel = selectedVowels < AUTO_PICK_VOWELS && vowelBag.length > 0;
     const bag = shouldPickVowel || consonantBag.length === 0 ? vowelBag : consonantBag;
     if (bag.length === 0) break;
     letters.push(drawFromBag(bag));
   }
-
-  renderTiles();
+  renderTiles('tiles-container', letters, 9);
   if (letters.length === 9) startGame();
 }
 
-document.getElementById('btn-vowel').addEventListener('click',
-  () => pickLetter(vowelBag));
-document.getElementById('btn-consonant').addEventListener('click',
-  () => pickLetter(consonantBag));
+document.getElementById('btn-vowel').addEventListener('click', () => pickLetter(vowelBag));
+document.getElementById('btn-consonant').addEventListener('click', () => pickLetter(consonantBag));
 document.getElementById('btn-auto-pick').addEventListener('click', autoPickLetters);
-document.getElementById('sound-toggle').addEventListener('change', handleSoundToggle);
+document.getElementById('sound-toggle').addEventListener('change', () => {
+  if (document.getElementById('sound-toggle').checked && phase === 'playing') {
+    music.play(timer.timeLeft);
+  } else {
+    music.stop();
+  }
+});
 
-// ── Timer ───────────────────────────────────────────────────────────────────
-function updateTimerUI() {
-  const countEl  = document.getElementById('timer-count');
-  const circleEl = document.getElementById('timer-circle');
-  countEl.textContent = timeLeft;
-  circleEl.style.strokeDashoffset = CIRCUMFERENCE * (1 - timeLeft / TIMER_MAX);
-  const urgent = timeLeft <= 10;
-  countEl.classList.toggle('text-primary',  !urgent);
-  countEl.classList.toggle('text-red-500',   urgent);
-  circleEl.classList.toggle('text-tertiary', !urgent);
-  circleEl.classList.toggle('text-red-500',  urgent);
-}
-
+// ── Game start ──────────────────────────────────────────────────────────────
 function startGame() {
-  phase    = 'playing';
-  timeLeft = TIMER_MAX;
+  phase = 'playing';
   rounds++;
   document.getElementById('rounds-played').textContent = rounds;
-
-  const vBtn = document.getElementById('btn-vowel');
-  const cBtn = document.getElementById('btn-consonant');
-  const aBtn = document.getElementById('btn-auto-pick');
-  vBtn.disabled = true; cBtn.disabled = true; aBtn.disabled = true;
-  vBtn.classList.add('opacity-40', 'cursor-not-allowed');
-  cBtn.classList.add('opacity-40', 'cursor-not-allowed');
-  aBtn.classList.add('opacity-40', 'cursor-not-allowed');
-
+  setPickingDisabled(true);
   const input = document.getElementById('word-input');
-  input.disabled = false;
-  input.value = '';
-  input.focus();
-
+  input.disabled = false; input.value = ''; input.focus();
   document.getElementById('game-result').classList.add('hidden');
-  updateTimerUI();
-  playCountdownMusic();
-
-  timerID = setInterval(() => {
-    timeLeft--;
-    updateTimerUI();
-    if (timeLeft <= 0) {
-      clearInterval(timerID);
-      showResult('timeout', document.getElementById('word-input').value.trim());
-    }
-  }, 1000);
+  timer.start();
+  music.play(timer.timeLeft);
 }
 
 // ── Word validation ─────────────────────────────────────────────────────────
@@ -424,194 +286,119 @@ function canMakeWord(word) {
   return true;
 }
 
-function isValidWord(word) {
-  return WORD_LIST.has(sanitize(word));
-}
+function isValidWord(word) { return WORD_LIST.has(sanitize(word)); }
 
 function findBestPossibleWords() {
-  let bestLength = 0;
-  let bestWords = [];
-
+  let bestLength = 0, bestWords = [];
   for (const candidate of WORD_LIST) {
     if (candidate.length < bestLength || !canMakeWord(candidate)) continue;
-
-    if (candidate.length > bestLength) {
-      bestLength = candidate.length;
-      bestWords = [];
-    }
+    if (candidate.length > bestLength) { bestLength = candidate.length; bestWords = []; }
     bestWords.push(candidate);
   }
-
   return bestWords.sort((a, b) => a.localeCompare(b));
 }
 
-function formatBestPossibleWords(words) {
-  if (words.length === 0) return 'No valid words found from this rack.';
-
-  const length = words[0].length;
-  const wordLabel = words.length === 1 ? 'word' : 'words';
-  return `Best possible ${length}-letter ${wordLabel}`;
+function buildBestWordsNode(bestWords) {
+  const div = document.createElement('div');
+  div.className = 'mt-4 pt-4 border-t border-outline-variant/40';
+  const label = document.createElement('p');
+  label.className = 'text-sm font-bold text-primary mb-3';
+  const len = bestWords[0]?.length ?? 0;
+  label.textContent = bestWords.length === 0
+    ? 'No valid words found from this rack.'
+    : `Best possible ${len}-letter ${bestWords.length === 1 ? 'word' : 'words'}`;
+  div.appendChild(label);
+  if (bestWords.length > 0) {
+    const list = document.createElement('div');
+    list.className = 'flex flex-wrap gap-2';
+    for (const word of bestWords) {
+      const chip = document.createElement('span');
+      chip.className = 'px-3 py-1 rounded-full bg-surface-container-lowest text-primary text-xs font-bold tracking-wide';
+      chip.textContent = word;
+      list.appendChild(chip);
+    }
+    div.appendChild(list);
+  }
+  return div;
 }
 
 // ── Result display ──────────────────────────────────────────────────────────
-function setResult(bgBorderClasses, titleText, subtitleText, bestWords = null) {
-  const el = document.getElementById('game-result');
-  el.className = 'mt-4 p-6 rounded-xl border-l-4 ' + bgBorderClasses;
-  el.classList.remove('hidden');
-  while (el.firstChild) el.removeChild(el.firstChild);
-
-  const title = document.createElement('p');
-  title.className = 'font-headline font-bold text-xl';
-  title.textContent = titleText;
-  el.appendChild(title);
-
-  if (subtitleText) {
-    const sub = document.createElement('p');
-    sub.className = 'text-sm text-on-surface-variant mt-1';
-    sub.textContent = subtitleText;
-    el.appendChild(sub);
-  }
-
-  if (bestWords) {
-    const best = document.createElement('div');
-    best.className = 'mt-4 pt-4 border-t border-outline-variant/40';
-
-    const label = document.createElement('p');
-    label.className = 'text-sm font-bold text-primary mb-3';
-    label.textContent = formatBestPossibleWords(bestWords);
-    best.appendChild(label);
-
-    if (bestWords.length > 0) {
-      const wordList = document.createElement('div');
-      wordList.className = 'flex flex-wrap gap-2';
-      for (const word of bestWords) {
-        const chip = document.createElement('span');
-        chip.className = 'px-3 py-1 rounded-full bg-surface-container-lowest text-primary text-xs font-bold tracking-wide';
-        chip.textContent = word;
-        wordList.appendChild(chip);
-      }
-      best.appendChild(wordList);
-    }
-
-    el.appendChild(best);
-  }
-}
-
 function showResult(outcome, rawWord) {
-  clearInterval(timerID);
-  stopCountdownMusic();
+  timer.stop(); music.stop();
   phase = 'result';
   document.getElementById('word-input').disabled = true;
   document.getElementById('btn-submit').disabled = false;
 
   const word = sanitize(rawWord || '');
-  const bestWords = findBestPossibleWords();
+  const extra = buildBestWordsNode(findBestPossibleWords());
 
   if (outcome === 'timeout') {
     streak = 0;
     document.getElementById('session-streak').textContent = streak;
-    setResult('bg-surface-container-low border-outline-variant',
-      word ? `Time's up! "${word}" was not submitted.` : "Time's up! No word submitted.",
-      'Streak reset. Hit ↺ to play again.',
-      bestWords);
+    setResultCard('game-result', {
+      theme: 'neutral',
+      title: word ? `Time's up! "${word}" was not submitted.` : "Time's up! No word submitted.",
+      subtitle: 'Streak reset. Hit ↺ to play again.', extra,
+    });
     return;
   }
   if (outcome === 'invalid_letters') {
     streak = 0;
     document.getElementById('session-streak').textContent = streak;
-    setResult('bg-error-container border-error',
-      `"${word}" uses letters you don't have.`,
-      'Streak reset.',
-      bestWords);
+    setResultCard('game-result', { theme: 'error', title: `"${word}" uses letters you don't have.`, subtitle: 'Streak reset.', extra });
     return;
   }
   if (outcome === 'invalid_word') {
     streak = 0;
     document.getElementById('session-streak').textContent = streak;
-    setResult('bg-error-container border-error',
-      `"${word}" is not a recognised word.`,
-      'Streak reset.',
-      bestWords);
+    setResultCard('game-result', { theme: 'error', title: `"${word}" is not a recognised word.`, subtitle: 'Streak reset.', extra });
     return;
   }
-
   // valid
-  const score = word.length;
+  const pts = word.length;
   streak++;
-  if (score > bestScore) {
-    bestScore = score;
-    bestWord  = word;
+  if (pts > bestScore) {
+    bestScore = pts; bestWord = word;
     document.getElementById('best-word').textContent  = bestWord;
     document.getElementById('best-score').textContent = bestScore;
   }
   document.getElementById('session-streak').textContent = streak;
-  setResult('bg-secondary-container border-secondary',
-    `${word}  +${score} pts`,
-    `${score}-letter word · Streak: ${streak}`,
-    bestWords);
+  setResultCard('game-result', { theme: 'success', title: `${word}  +${pts} pts`, subtitle: `${pts}-letter word · Streak: ${streak}`, extra });
 }
 
 function handleSubmit() {
   if (phase !== 'playing') return;
   const raw = document.getElementById('word-input').value.trim();
   if (!raw) return;
-
   phase = 'checking';
-  clearInterval(timerID);
-  stopCountdownMusic();
+  timer.stop(); music.stop();
   document.getElementById('word-input').disabled = true;
   document.getElementById('btn-submit').disabled = true;
-
   if (!canMakeWord(raw)) { showResult('invalid_letters', raw); return; }
-
-  setResult('bg-surface-container-low border-outline-variant',
-    `Checking "${sanitize(raw)}"…`, null);
-
+  setResultCard('game-result', { theme: 'neutral', title: `Checking "${sanitize(raw)}"…` });
   if (!isValidWord(raw)) { showResult('invalid_word', raw); return; }
   showResult('valid', raw);
 }
 
 document.getElementById('btn-submit').addEventListener('click', handleSubmit);
-document.getElementById('word-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') handleSubmit();
-});
+document.getElementById('word-input').addEventListener('keydown', e => { if (e.key === 'Enter') handleSubmit(); });
 
 // ── Reset ───────────────────────────────────────────────────────────────────
 function resetGame() {
-  clearInterval(timerID);
-  stopCountdownMusic();
-  letters  = [];
-  vowelBag = [...VOWEL_POOL];
-  consonantBag = [...CONSONANT_POOL];
-  phase    = 'picking';
-  timeLeft = TIMER_MAX;
-
-  const vBtn = document.getElementById('btn-vowel');
-  const cBtn = document.getElementById('btn-consonant');
-  const aBtn = document.getElementById('btn-auto-pick');
-  vBtn.disabled = false; cBtn.disabled = false; aBtn.disabled = false;
-  vBtn.classList.remove('opacity-40', 'cursor-not-allowed');
-  cBtn.classList.remove('opacity-40', 'cursor-not-allowed');
-  aBtn.classList.remove('opacity-40', 'cursor-not-allowed');
-
+  timer.reset(); music.stop();
+  letters = []; vowelBag = [...VOWEL_POOL]; consonantBag = [...CONSONANT_POOL];
+  phase = 'picking';
+  setPickingDisabled(false);
   const input = document.getElementById('word-input');
   input.value = ''; input.disabled = true;
   document.getElementById('btn-submit').disabled = false;
-
-  const countEl  = document.getElementById('timer-count');
-  const circleEl = document.getElementById('timer-circle');
-  countEl.textContent = TIMER_MAX;
-  countEl.classList.remove('text-red-500'); countEl.classList.add('text-primary');
-  circleEl.style.strokeDashoffset = 0;
-  circleEl.classList.remove('text-red-500'); circleEl.classList.add('text-tertiary');
-
   document.getElementById('game-result').classList.add('hidden');
-  renderTiles();
+  renderTiles('tiles-container', letters, 9);
 }
 
 document.getElementById('btn-reset').addEventListener('click', resetGame);
 
-// Initialise on load
-renderTiles();
+// Initialise
+renderTiles('tiles-container', letters, 9);
 </script>
 </body></html>

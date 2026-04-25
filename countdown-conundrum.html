@@ -1,83 +1,17 @@
 <!DOCTYPE html>
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
+<meta name="nav-section" content="Games">
+<meta name="nav-label" content="Countdown Conundrum">
+<meta name="nav-section-order" content="3">
+<meta name="nav-item-order" content="2">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Countdown Conundrum | ucandoit.ca</title>
 <meta name="description" content="Solve a scrambled nine-letter Countdown-style conundrum before the 30-second timer expires.">
 <meta name="ai-token-count" content="163">
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="canadian-words.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "tertiary-fixed": "#ffdad8",
-                    "secondary-fixed-dim": "#b6d088",
-                    "secondary-fixed": "#d2eca2",
-                    "surface-dim": "#d8dad9",
-                    "inverse-primary": "#a5d0b9",
-                    "on-primary": "#ffffff",
-                    "primary-fixed": "#c1ecd4",
-                    "on-secondary": "#ffffff",
-                    "secondary": "#50652a",
-                    "tertiary-fixed-dim": "#ffb3b0",
-                    "on-surface-variant": "#414844",
-                    "on-secondary-fixed-variant": "#394d14",
-                    "on-secondary-container": "#546a2e",
-                    "on-background": "#191c1b",
-                    "on-secondary-fixed": "#131f00",
-                    "secondary-container": "#cfe99f",
-                    "on-error": "#ffffff",
-                    "on-tertiary-fixed": "#410007",
-                    "on-tertiary-container": "#ff807f",
-                    "tertiary-container": "#77131c",
-                    "primary": "#012d1d",
-                    "on-tertiary": "#ffffff",
-                    "on-surface": "#191c1b",
-                    "surface-container-lowest": "#ffffff",
-                    "outline-variant": "#c1c8c2",
-                    "background": "#f8faf8",
-                    "outline": "#717973",
-                    "on-primary-container": "#86af99",
-                    "surface-container-high": "#e6e9e7",
-                    "primary-container": "#1b4332",
-                    "surface": "#f8faf8",
-                    "surface-tint": "#3f6653",
-                    "on-primary-fixed-variant": "#274e3d",
-                    "primary-fixed-dim": "#a5d0b9",
-                    "surface-container-highest": "#e1e3e1",
-                    "error": "#ba1a1a",
-                    "surface-container-low": "#f2f4f2",
-                    "inverse-on-surface": "#eff1ef",
-                    "error-container": "#ffdad6",
-                    "on-primary-fixed": "#002114",
-                    "inverse-surface": "#2e3130",
-                    "surface-variant": "#e1e3e1",
-                    "tertiary": "#55000b",
-                    "surface-container": "#eceeec",
-                    "surface-bright": "#f8faf8",
-                    "on-error-container": "#93000a",
-                    "on-tertiary-fixed-variant": "#861f25"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.5rem",
-                    "lg": "1rem",
-                    "xl": "1.5rem",
-                    "full": "9999px"
-            },
-            "fontFamily": {
-                    "headline": ["Manrope"],
-                    "body": ["Inter"],
-                    "label": ["Inter"]
-            }
-          },
-        },
-      }
-    </script>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -97,6 +31,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<script src="https://cdn.tailwindcss.com/3.4.16?plugins=forms,container-queries"></script>
+<script src="tailwind-config.js"></script>
+<script src="game-engine.js"></script>
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim selection:text-primary">
 <!-- Shared site navigation -->
@@ -240,56 +177,32 @@ Countdown music
 </div>
 </footer>
 <script>
+// ── Engine instances ────────────────────────────────────────────────────────
+const timer = new CountdownTimer({
+  max:      30,
+  onExpire: () => showResult('timeout'),
+});
+const music = new CountdownMusic({ timerMax: 30 });
+
 // ── Constants ──────────────────────────────────────────────────────────────
-const TIMER_MAX = 30;
-const CIRCUMFERENCE = 263.89;
 const CONUNDRUM_SCORE = 10;
 
 // ── Session state ───────────────────────────────────────────────────────────
-let phase = 'ready'; // 'ready' | 'playing' | 'result'
-let timerID = null;
-let timeLeft = TIMER_MAX;
-let answer = '';
-let scrambled = '';
+let phase      = 'ready';
+let answer     = '';
+let scrambled  = '';
 let lastAnswer = '';
-let score = 0;
-let streak = 0;
+let score      = 0;
+let streak     = 0;
 let bestStreak = 0;
-let rounds = 0;
+let rounds     = 0;
 let CONUNDRUM_WORDS = buildConundrumWords();
 
-function sanitize(str) {
-  return str.toUpperCase().replace(/[^A-Z]/g, '');
-}
+function sanitize(str) { return str.toUpperCase().replace(/[^A-Z]/g, ''); }
 
 function buildConundrumWords() {
   const siteWords = Array.isArray(window.CANADIAN_WORDS) ? window.CANADIAN_WORDS : [];
-  return [...new Set(siteWords.map(sanitize).filter(word => /^[A-Z]{9}$/.test(word)))];
-}
-
-function stopCountdownMusic() {
-  const music = document.getElementById('countdown-music');
-  music.pause();
-  music.currentTime = 0;
-}
-
-function playCountdownMusic() {
-  const soundToggle = document.getElementById('sound-toggle');
-  if (!soundToggle.checked) return;
-
-  const music = document.getElementById('countdown-music');
-  music.currentTime = Math.min(TIMER_MAX - timeLeft, TIMER_MAX);
-  music.play().catch(() => {
-    soundToggle.checked = false;
-  });
-}
-
-function handleSoundToggle() {
-  if (document.getElementById('sound-toggle').checked && phase === 'playing') {
-    playCountdownMusic();
-  } else {
-    stopCountdownMusic();
-  }
+  return [...new Set(siteWords.map(sanitize).filter(w => /^[A-Z]{9}$/.test(w)))];
 }
 
 function shuffleWord(word) {
@@ -310,124 +223,55 @@ function chooseConundrum() {
   return CONUNDRUM_WORDS[Math.floor(Math.random() * CONUNDRUM_WORDS.length)];
 }
 
-function renderTiles() {
-  const container = document.getElementById('tiles-container');
-  while (container.firstChild) container.removeChild(container.firstChild);
-
-  for (let i = 0; i < 9; i++) {
-    const el = document.createElement('div');
-    if (scrambled[i]) {
-      el.className = 'aspect-[4/5] min-w-0 bg-surface-container-lowest rounded-lg flex items-center justify-center border-b-4 border-outline-variant tile-shadow';
-      const span = document.createElement('span');
-      span.className = 'text-2xl sm:text-3xl md:text-4xl font-black font-headline text-primary';
-      span.textContent = scrambled[i];
-      el.appendChild(span);
-    } else {
-      el.className = 'aspect-[4/5] min-w-0 bg-surface-container-highest/30 rounded-lg flex items-center justify-center border-2 border-dashed border-outline-variant/50';
-      const icon = document.createElement('span');
-      icon.className = 'material-symbols-outlined text-outline-variant text-xl sm:text-2xl';
-      icon.textContent = 'question_mark';
-      el.appendChild(icon);
-    }
-    container.appendChild(el);
-  }
-}
-
-function updateTimerUI() {
-  const countEl = document.getElementById('timer-count');
-  const circleEl = document.getElementById('timer-circle');
-  countEl.textContent = timeLeft;
-  circleEl.style.strokeDashoffset = CIRCUMFERENCE * (1 - timeLeft / TIMER_MAX);
-  const urgent = timeLeft <= 10;
-  countEl.classList.toggle('text-primary', !urgent);
-  countEl.classList.toggle('text-red-500', urgent);
-  circleEl.classList.toggle('text-tertiary', !urgent);
-  circleEl.classList.toggle('text-red-500', urgent);
-}
-
-function setResult(bgBorderClasses, titleText, subtitleText) {
-  const el = document.getElementById('game-result');
-  el.className = 'mt-4 p-6 rounded-xl border-l-4 ' + bgBorderClasses;
-  el.classList.remove('hidden');
-  while (el.firstChild) el.removeChild(el.firstChild);
-
-  const title = document.createElement('p');
-  title.className = 'font-headline font-bold text-xl';
-  title.textContent = titleText;
-  el.appendChild(title);
-
-  if (subtitleText) {
-    const sub = document.createElement('p');
-    sub.className = 'text-sm text-on-surface-variant mt-1';
-    sub.textContent = subtitleText;
-    el.appendChild(sub);
-  }
-}
-
 function updateStats() {
   document.getElementById('session-streak').textContent = score;
-  document.getElementById('best-word').textContent = lastAnswer || '—';
-  document.getElementById('best-score').textContent = bestStreak;
-  document.getElementById('rounds-played').textContent = rounds;
+  document.getElementById('best-word').textContent      = lastAnswer || '—';
+  document.getElementById('best-score').textContent     = bestStreak;
+  document.getElementById('rounds-played').textContent  = rounds;
+}
+
+function setStartDisabled(disabled) {
+  const btn = document.getElementById('btn-start');
+  btn.disabled = disabled;
+  btn.classList.toggle('opacity-40', disabled);
+  btn.classList.toggle('cursor-not-allowed', disabled);
 }
 
 function startGame() {
-  clearInterval(timerID);
-  stopCountdownMusic();
-  phase = 'playing';
-  timeLeft = TIMER_MAX;
-  answer = chooseConundrum();
+  timer.stop(); music.stop();
+  phase     = 'playing';
+  answer    = chooseConundrum();
   scrambled = shuffleWord(answer);
   rounds++;
-
-  document.getElementById('btn-start').disabled = true;
-  document.getElementById('btn-start').classList.add('opacity-40', 'cursor-not-allowed');
+  setStartDisabled(true);
   document.getElementById('game-result').classList.add('hidden');
-
   const input = document.getElementById('word-input');
-  input.disabled = false;
-  input.value = '';
-  input.focus();
-
-  renderTiles();
+  input.disabled = false; input.value = ''; input.focus();
+  renderTiles('tiles-container', scrambled.split(''), 9);
   updateStats();
-  updateTimerUI();
-  playCountdownMusic();
-
-  timerID = setInterval(() => {
-    timeLeft--;
-    updateTimerUI();
-    if (timeLeft <= 0) {
-      showResult('timeout');
-    }
-  }, 1000);
+  timer.start();
+  music.play(timer.timeLeft);
 }
 
 function showResult(outcome, rawGuess = '') {
-  clearInterval(timerID);
-  stopCountdownMusic();
+  timer.stop(); music.stop();
   phase = 'result';
   document.getElementById('word-input').disabled = true;
   document.getElementById('btn-submit').disabled = false;
-  document.getElementById('btn-start').disabled = false;
-  document.getElementById('btn-start').classList.remove('opacity-40', 'cursor-not-allowed');
-
-  const guess = sanitize(rawGuess);
+  setStartDisabled(false);
   lastAnswer = answer;
 
   if (outcome === 'correct') {
-    score += CONUNDRUM_SCORE;
-    streak++;
-    bestStreak = Math.max(bestStreak, streak);
-    setResult('bg-secondary-container border-secondary', 'Correct! +10 points', `The answer was ${answer}.`);
+    score += CONUNDRUM_SCORE; streak++; bestStreak = Math.max(bestStreak, streak);
+    setResultCard('game-result', { theme: 'success', title: 'Correct! +10 points', subtitle: `The answer was ${answer}.` });
   } else if (outcome === 'wrong') {
     streak = 0;
-    setResult('bg-error-container border-error', `${guess || 'That'} is not it.`, `The answer was ${answer}.`);
+    const guess = sanitize(rawGuess);
+    setResultCard('game-result', { theme: 'error', title: `${guess || 'That'} is not it.`, subtitle: `The answer was ${answer}.` });
   } else {
     streak = 0;
-    setResult('bg-surface-container-low border-outline-variant', "Time's up!", `The answer was ${answer}.`);
+    setResultCard('game-result', { theme: 'neutral', title: "Time's up!", subtitle: `The answer was ${answer}.` });
   }
-
   updateStats();
 }
 
@@ -439,48 +283,31 @@ function handleSubmit() {
 }
 
 function resetGame() {
-  clearInterval(timerID);
-  stopCountdownMusic();
-  phase = 'ready';
-  timeLeft = TIMER_MAX;
-  answer = '';
-  scrambled = '';
-  lastAnswer = '';
-  score = 0;
-  streak = 0;
-  bestStreak = 0;
-  rounds = 0;
-
+  timer.reset(); music.stop();
+  phase = 'ready'; answer = ''; scrambled = ''; lastAnswer = '';
+  score = 0; streak = 0; bestStreak = 0; rounds = 0;
   const input = document.getElementById('word-input');
-  input.value = '';
-  input.disabled = true;
+  input.value = ''; input.disabled = true;
   document.getElementById('btn-submit').disabled = false;
-  document.getElementById('btn-start').disabled = false;
-  document.getElementById('btn-start').classList.remove('opacity-40', 'cursor-not-allowed');
-
-  const countEl = document.getElementById('timer-count');
-  const circleEl = document.getElementById('timer-circle');
-  countEl.textContent = TIMER_MAX;
-  countEl.classList.remove('text-red-500');
-  countEl.classList.add('text-primary');
-  circleEl.style.strokeDashoffset = 0;
-  circleEl.classList.remove('text-red-500');
-  circleEl.classList.add('text-tertiary');
-
+  setStartDisabled(false);
   document.getElementById('game-result').classList.add('hidden');
   updateStats();
-  renderTiles();
+  renderTiles('tiles-container', [], 9);
 }
 
 document.getElementById('btn-start').addEventListener('click', startGame);
 document.getElementById('btn-reset').addEventListener('click', resetGame);
 document.getElementById('btn-submit').addEventListener('click', handleSubmit);
-document.getElementById('sound-toggle').addEventListener('change', handleSoundToggle);
-document.getElementById('word-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') handleSubmit();
+document.getElementById('sound-toggle').addEventListener('change', () => {
+  if (document.getElementById('sound-toggle').checked && phase === 'playing') {
+    music.play(timer.timeLeft);
+  } else {
+    music.stop();
+  }
 });
+document.getElementById('word-input').addEventListener('keydown', e => { if (e.key === 'Enter') handleSubmit(); });
 
-renderTiles();
+renderTiles('tiles-container', [], 9);
 updateStats();
 </script>
 </body></html>
