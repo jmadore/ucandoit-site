@@ -35,9 +35,7 @@ tailwind.config = {
 <style>
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 .salary-panel {
-  background:
-    linear-gradient(135deg, rgba(1,45,29,0.82), rgba(74,0,10,0.75)),
-    url('assets/loonie.jpeg') center/cover no-repeat;
+  background: linear-gradient(135deg, #012d1d 0%, #1b4332 60%, #2d6a4f 100%);
 }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777"
@@ -126,7 +124,7 @@ Salary Inputs
 </div>
 <aside class="lg:col-span-5 space-y-8">
 <div class="salary-panel rounded-xl p-8 text-white shadow-2xl relative overflow-hidden">
-<div class="absolute -right-20 -top-20 w-64 h-64 bg-white/10 rounded-full"></div>
+<img src="assets/loonie.jpeg" alt="" style="position:absolute;top:-24px;right:-24px;width:170px;height:170px;border-radius:50%;object-fit:cover;opacity:0.9;box-shadow:0 4px 24px rgba(0,0,0,0.4);pointer-events:none;"/>
 <h2 class="font-headline text-sm font-bold uppercase tracking-widest mb-8 opacity-80">Estimated Salary</h2>
 <div class="mb-10">
 <span id="yearly-salary" class="text-5xl md:text-6xl font-black tracking-tighter">$0.00</span>
