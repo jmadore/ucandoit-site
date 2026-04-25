@@ -211,14 +211,24 @@
 
                 <button class="sym-card" id="sym-hockey" onclick="setSymbolSet('hockey')">
                     <div class="flex items-center justify-center gap-2 mb-2">
-                        <!-- crossed sticks preview -->
-                        <span style="position:relative;display:inline-block;width:1.9rem;height:1.9rem;vertical-align:middle">
-                            <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transform:rotate(0deg)">🏒</span>
-                            <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transform:rotate(90deg) scaleX(-1)">🏒</span>
-                        </span>
+                        <!-- crossed sticks preview (bird's-eye SVG) -->
+                        <svg viewBox="0 0 100 100" width="28" height="28" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                            <g transform="rotate(-45, 50, 50)">
+                                <rect x="47" y="15" width="6" height="70" rx="3" fill="#C8882A"/>
+                                <rect x="50" y="80" width="18" height="5" rx="2" fill="#222"/>
+                            </g>
+                            <g transform="rotate(45, 50, 50)">
+                                <rect x="47" y="15" width="6" height="70" rx="3" fill="#C8882A"/>
+                                <rect x="32" y="80" width="18" height="5" rx="2" fill="#222"/>
+                            </g>
+                        </svg>
                         <span class="text-on-surface-variant text-xs font-semibold">vs</span>
-                        <!-- puck preview -->
-                        <span style="display:inline-block;width:1.7rem;height:0.68rem;background:#1a1a1a;border-radius:9999px;vertical-align:middle"></span>
+                        <!-- puck preview (bird's-eye SVG) -->
+                        <svg viewBox="0 0 100 100" width="28" height="28" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                            <circle cx="50" cy="50" r="43" fill="#1a1a1a"/>
+                            <circle cx="50" cy="50" r="43" fill="none" stroke="#555" stroke-width="2"/>
+                            <circle cx="50" cy="50" r="35" fill="none" stroke="#333" stroke-width="1" opacity="0.5"/>
+                        </svg>
                     </div>
                     <div class="text-xs font-bold font-headline text-on-surface-variant">Sticks &amp; Puck</div>
                 </button>
@@ -296,6 +306,27 @@
     </div>
 </div>
 
+<!-- SVG templates for hockey symbols (bird's-eye view) -->
+<template id="tpl-sticks">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g transform="rotate(-45, 50, 50)">
+            <rect x="47" y="15" width="6" height="70" rx="3" fill="#C8882A"/>
+            <rect x="50" y="80" width="18" height="5" rx="2" fill="#222"/>
+        </g>
+        <g transform="rotate(45, 50, 50)">
+            <rect x="47" y="15" width="6" height="70" rx="3" fill="#C8882A"/>
+            <rect x="32" y="80" width="18" height="5" rx="2" fill="#222"/>
+        </g>
+    </svg>
+</template>
+<template id="tpl-puck">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="43" fill="#1a1a1a"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="#555" stroke-width="2"/>
+        <circle cx="50" cy="50" r="35" fill="none" stroke="#333" stroke-width="1" opacity="0.5"/>
+    </svg>
+</template>
+
 <script>
 /* ─── DOM helper: create element with inline styles and optional text ─── */
 function mk(tag, css, txt) {
@@ -307,17 +338,20 @@ function mk(tag, css, txt) {
 
 /* ─── Symbol factories — all DOM, no innerHTML ─── */
 function sticksCrossed(size) {
-    const wrap = mk('div', 'position:relative;flex-shrink:0;width:' + size + 'px;height:' + size + 'px');
-    const fs = Math.round(size * 0.58) + 'px';
-    const base = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:' + fs;
-    const s1 = mk('span', base + ';transform:rotate(0deg)', '🏒');
-    const s2 = mk('span', base + ';transform:rotate(90deg) scaleX(-1)', '🏒');
-    wrap.appendChild(s1);
-    wrap.appendChild(s2);
-    return wrap;
+    const svg = document.getElementById('tpl-sticks').content.querySelector('svg').cloneNode(true);
+    svg.setAttribute('width', size);
+    svg.setAttribute('height', size);
+    svg.style.display = 'block';
+    svg.style.flexShrink = '0';
+    return svg;
 }
-function puck(w, h) {
-    return mk('div', 'width:' + w + 'px;height:' + h + 'px;background:#1a1a1a;border-radius:9999px;box-shadow:0 3px 10px rgba(0,0,0,0.45)');
+function puck(size) {
+    const svg = document.getElementById('tpl-puck').content.querySelector('svg').cloneNode(true);
+    svg.setAttribute('width', size);
+    svg.setAttribute('height', size);
+    svg.style.display = 'block';
+    svg.style.flexShrink = '0';
+    return svg;
 }
 
 const SYM = {
@@ -362,12 +396,12 @@ const SYM = {
         name: 'Sticks & Puck',
         p1: { label: 'Sticks',
             cell: () => sticksCrossed(64),
-            icon: () => mk('span', 'font-size:1.2rem;line-height:1', '🏒'),
+            icon: () => sticksCrossed(28),
             big:  () => sticksCrossed(88) },
         p2: { label: 'Puck',
-            cell: () => puck(58, 23),
-            icon: () => puck(26, 10),
-            big:  () => puck(80, 32) },
+            cell: () => puck(58),
+            icon: () => puck(28),
+            big:  () => puck(80) },
     },
 };
 
