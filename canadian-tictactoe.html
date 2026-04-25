@@ -186,7 +186,7 @@
                     <div class="flex items-center justify-center gap-2 mb-2">
                         <span style="font-size:1.7rem;font-weight:900;color:#a61d24;line-height:1">✕</span>
                         <span class="text-on-surface-variant text-xs font-semibold">vs</span>
-                        <span style="font-size:1.7rem;font-weight:900;color:#1b4332;line-height:1">○</span>
+                        <span style="font-size:2.3rem;font-weight:900;color:#1b4332;line-height:1">○</span>
                     </div>
                     <div class="text-xs font-bold font-headline text-on-surface-variant">Classic X &amp; O</div>
                 </button>
@@ -202,7 +202,18 @@
 
                 <button class="sym-card" id="sym-goose" onclick="setSymbolSet('goose')">
                     <div class="flex items-center justify-center gap-2 mb-2">
-                        <span style="font-size:1.7rem;line-height:1">🪿</span>
+                        <!-- Canada goose preview (bird's-eye SVG) -->
+                        <svg viewBox="0 0 100 100" width="28" height="28" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                            <ellipse cx="60" cy="65" rx="29" ry="19" fill="#8B7355"/>
+                            <ellipse cx="62" cy="74" rx="21" ry="9" fill="#C9B890"/>
+                            <ellipse cx="86" cy="61" rx="9" ry="5" fill="#111" transform="rotate(-20,86,61)"/>
+                            <path d="M 40 56 Q 28 42 30 26" stroke="#111" stroke-width="12" fill="none" stroke-linecap="round"/>
+                            <circle cx="30" cy="22" r="13" fill="#111"/>
+                            <ellipse cx="27" cy="29" rx="9" ry="6" fill="#eee"/>
+                            <path d="M16 20 H30 V24 H16 Z" fill="#444"/>
+                            <circle cx="25" cy="18" r="2.5" fill="#fff"/>
+                            <circle cx="25" cy="18" r="1.2" fill="#111"/>
+                        </svg>
                         <span class="text-on-surface-variant text-xs font-semibold">vs</span>
                         <span style="font-size:1.7rem;line-height:1">🫎</span>
                     </div>
@@ -306,7 +317,28 @@
     </div>
 </div>
 
-<!-- SVG templates for hockey symbols (bird's-eye view) -->
+<!-- SVG templates for custom symbols -->
+<template id="tpl-goose">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- body (brown) -->
+        <ellipse cx="60" cy="65" rx="29" ry="19" fill="#8B7355"/>
+        <!-- lighter underside -->
+        <ellipse cx="62" cy="74" rx="21" ry="9" fill="#C9B890"/>
+        <!-- black tail -->
+        <ellipse cx="86" cy="61" rx="9" ry="5" fill="#111" transform="rotate(-20,86,61)"/>
+        <!-- neck (black curved stroke) -->
+        <path d="M 40 56 Q 28 42 30 26" stroke="#111" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <!-- head (black) -->
+        <circle cx="30" cy="22" r="13" fill="#111"/>
+        <!-- white chin/cheek patch -->
+        <ellipse cx="27" cy="29" rx="9" ry="6" fill="#eee"/>
+        <!-- beak (dark) -->
+        <path d="M16 20 H30 V24 H16 Z" fill="#444"/>
+        <!-- eye -->
+        <circle cx="25" cy="18" r="2.5" fill="#fff"/>
+        <circle cx="25" cy="18" r="1.2" fill="#111"/>
+    </svg>
+</template>
 <template id="tpl-sticks">
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <g transform="rotate(-45, 50, 50)">
@@ -337,6 +369,14 @@ function mk(tag, css, txt) {
 }
 
 /* ─── Symbol factories — all DOM, no innerHTML ─── */
+function gooseNode(size) {
+    const svg = document.getElementById('tpl-goose').content.querySelector('svg').cloneNode(true);
+    svg.setAttribute('width', size);
+    svg.setAttribute('height', size);
+    svg.style.display = 'block';
+    svg.style.flexShrink = '0';
+    return svg;
+}
 function sticksCrossed(size) {
     const svg = document.getElementById('tpl-sticks').content.querySelector('svg').cloneNode(true);
     svg.setAttribute('width', size);
@@ -365,9 +405,9 @@ const SYM = {
         },
         p2: {
             label: 'O',
-            cell:   () => mk('span', 'font-size:3.2rem;font-weight:900;color:#1b4332;line-height:1;font-family:Manrope,sans-serif', '○'),
-            icon:   () => mk('span', 'font-size:1.5rem;font-weight:900;color:#1b4332;line-height:1', '○'),
-            big:    () => mk('span', 'font-size:4.5rem;font-weight:900;color:#1b4332;line-height:1', '○'),
+            cell:   () => mk('span', 'font-size:4.2rem;font-weight:900;color:#1b4332;line-height:1;font-family:Manrope,sans-serif', '○'),
+            icon:   () => mk('span', 'font-size:2rem;font-weight:900;color:#1b4332;line-height:1', '○'),
+            big:    () => mk('span', 'font-size:6rem;font-weight:900;color:#1b4332;line-height:1', '○'),
         },
     },
     bears: {
@@ -384,9 +424,9 @@ const SYM = {
     goose: {
         name: 'Goose & Moose',
         p1: { label: 'Goose',
-            cell: () => mk('span', 'font-size:3.2rem;line-height:1', '🪿'),
-            icon: () => mk('span', 'font-size:1.5rem;line-height:1', '🪿'),
-            big:  () => mk('span', 'font-size:4.5rem;line-height:1', '🪿') },
+            cell: () => gooseNode(60),
+            icon: () => gooseNode(28),
+            big:  () => gooseNode(80) },
         p2: { label: 'Moose',
             cell: () => mk('span', 'font-size:3.2rem;line-height:1', '🫎'),
             icon: () => mk('span', 'font-size:1.5rem;line-height:1', '🫎'),
