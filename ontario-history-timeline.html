@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ontario History Timeline — ucandoit.ca</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "tertiary-fixed": "#ffdad8",
+                    "secondary-fixed-dim": "#b6d088",
+                    "secondary-fixed": "#d2eca2",
+                    "surface-dim": "#d8dad9",
+                    "inverse-primary": "#a5d0b9",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#c1ecd4",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#50652a",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "on-surface-variant": "#414844",
+                    "on-secondary-fixed-variant": "#394d14",
+                    "on-secondary-container": "#546a2e",
+                    "on-background": "#191c1b",
+                    "on-secondary-fixed": "#131f00",
+                    "secondary-container": "#cfe99f",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#410007",
+                    "on-tertiary-container": "#ff807f",
+                    "tertiary-container": "#77131c",
+                    "primary": "#012d1d",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1b",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c1c8c2",
+                    "background": "#f8faf8",
+                    "outline": "#717973",
+                    "on-primary-container": "#86af99",
+                    "surface-container-high": "#e6e9e7",
+                    "primary-container": "#1b4332",
+                    "surface": "#f8faf8",
+                    "surface-tint": "#3f6653",
+                    "on-primary-fixed-variant": "#274e3d",
+                    "primary-fixed-dim": "#a5d0b9",
+                    "surface-container-highest": "#e1e3e1",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f2f4f2",
+                    "inverse-on-surface": "#eff1ef",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#002114",
+                    "inverse-surface": "#2e3130",
+                    "surface-variant": "#e1e3e1",
+                    "tertiary": "#a61d24",
+                    "surface-container": "#eceeec",
+                    "surface-bright": "#f8faf8",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#861f25"
+                },
+                "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+                },
+                "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+                }
+            },
+        },
+    }
+</script>
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .timeline-item {
+        opacity: 0;
+        transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .timeline-item.from-left  { transform: translateX(-36px); }
+    .timeline-item.from-right { transform: translateX(36px); }
+    .timeline-item.visible    { opacity: 1; transform: translate(0); }
+
+    .years-ago-pill {
+        opacity: 0;
+        transform: translateY(-4px);
+        transition: opacity 0.18s ease, transform 0.18s ease;
+        pointer-events: none;
+    }
+    .timeline-card:hover .years-ago-pill {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (max-width: 767px) {
+        .timeline-item.from-left,
+        .timeline-item.from-right {
+            transform: translateY(24px);
+        }
+    }
+</style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777"
+         crossorigin="anonymous"></script>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+<!-- Nav -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl border-b border-surface-container">
+    <nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+        <a class="text-2xl font-black text-emerald-950 dark:text-emerald-50 tracking-tighter font-headline" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+        <div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Word Tools <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-48 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="anagram-finder.html">Anagram Finder</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="word-unscrambler.html">Word Unscrambler</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Calculators <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="yearly-to-hourly-salary.html">Yearly to Hourly Salary</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="loan-calculator.html">Mortgage Calculator</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="board-foot-calculator.html">Board Foot Calculator</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="hourly-to-yearly-salary.html">Hourly to Yearly Salary</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Games <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-letters-game.html">Countdown Letters</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-conundrum.html">Countdown Conundrum</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-numbers-game.html">Countdown Numbers</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-tertiary hover:text-tertiary/70 transition-all duration-300 flex items-center gap-1" type="button">History <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="canada-history-timeline.html">Canada History</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="ontario-history-timeline.html">Ontario History</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero -->
+<section class="pt-32 pb-16 text-center px-6 bg-gradient-to-b from-surface-container-low to-surface">
+    <div class="inline-flex items-center gap-2 bg-tertiary/10 text-tertiary text-sm font-semibold px-4 py-1.5 rounded-full mb-6 font-headline">
+        <span class="material-symbols-outlined text-base">location_on</span> Ontario
+    </div>
+    <h1 class="font-headline text-4xl md:text-6xl font-black text-primary tracking-tight mb-4">Ontario History Timeline</h1>
+    <p class="text-on-surface-variant text-lg max-w-xl mx-auto">From the first peoples to the present day. Hover over any event to see how long ago it happened.</p>
+</section>
+
+<!-- Timeline -->
+<main class="max-w-5xl mx-auto px-4 pb-32" id="timeline-root">
+    <div class="relative" id="timeline-spine">
+        <div class="absolute left-1/2 top-0 bottom-0 w-px bg-emerald-200 -translate-x-1/2 hidden md:block" aria-hidden="true"></div>
+    </div>
+</main>
+
+<footer class="border-t border-surface-container py-10 text-center text-sm text-on-surface-variant">
+    <a class="font-headline font-black text-primary tracking-tighter text-lg" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+    <p class="mt-2">Source: <a class="underline hover:text-primary transition-colors" href="https://en.wikipedia.org/wiki/Timeline_of_Ontario_history" rel="noopener" target="_blank">Wikipedia — Timeline of Ontario history</a></p>
+</footer>
+
+<script>
+const EVENTS = [
+    { year: -10000, label: "10,000 BCE",      desc: "Early Paleolithic peoples inhabited spruce woodlands of Southwestern Ontario alongside mastodons and mammoths, creating stone tools." },
+    { year: -8500,  label: "8,500 BCE",       desc: "Late Paleolithic peoples hunted caribou, Arctic fox, and rabbits in boreal pine forests using darts and spear-throwers." },
+    { year: -8000,  label: "8,000–800 BCE",   desc: "During the Archaic Period, woodland animals were hunted; deer and fish became vital to survival. Trade networks extended to the Gulf of Mexico and the Atlantic seaboard." },
+    { year: -900,   label: "900 BCE–1610 CE", desc: "The Woodland Era saw pottery creation; Princess Point and Rivière au Vase emerged as distinct cultural groups." },
+    { year: 600,    label: "600–800 CE",      desc: "Ontario Haudenosaunee (Iroquoian) communities focused on horticulture, particularly the \"Three Sisters\" crops, forming matrilineal societies." },
+    { year: 1610,   label: "1610",            desc: "Samuel de Champlain dispatched interpreters to live among Huron and western Algonquin peoples to promote French colonization." },
+    { year: 1610,   label: "1610–1612",       desc: "Étienne Brûlé, an interpreter for Champlain, explored southern Ontario." },
+    { year: 1611,   label: "1611",            desc: "Henry Hudson visited Hudson Bay and claimed the region for Great Britain." },
+    { year: 1615,   label: "1615",            desc: "Samuel de Champlain visited Lake Huron; French missionaries subsequently established outposts in the region." },
+    { year: 1639,   label: "1639",            desc: "Construction began on Sainte-Marie among the Hurons as a central headquarters for the French Jesuit mission. The first French mission to the Petun was established on November 1." },
+    { year: 1642,   label: "June 1642",       desc: "A major Iroquois attack destroyed the Huron Rock Clan settlement of Contarea." },
+    { year: 1648,   label: "1648",            desc: "Iroquois destroyed a Jesuit mission near present-day Midland." },
+    { year: 1649,   label: "March 1649",      desc: "Iroquois captured the Huron settlements of St. Ignace and St. Louis on March 16. By May, Huron refugees departed with Jesuit priests to Christian Island. By December, the Iroquois destroyed the Petun settlement of Etharita." },
+    { year: 1650,   label: "c. 1649–1654",    desc: "Iroquois drove Hurons, Petun, and the Neutral Nation from their territories; Mississaugas moved to the Kawartha Lakes and Credit River areas." },
+    { year: 1668,   label: "1668",            desc: "Father Marquette founded Sault Ste. Marie, the oldest surviving permanent European settlement in Ontario." },
+    { year: 1670,   label: "1670",            desc: "The Hudson's Bay Company received a British royal charter to trade with First Nations over a 3.9 million square kilometre territory, including much of Northern Ontario." },
+    { year: 1673,   label: "1673",            desc: "Cataraqui (modern Kingston) was established as a French fur-trading post and fort." },
+    { year: 1763,   label: "1763",            desc: "Britain won the Seven Years' War and took full control of the territory that would become Ontario." },
+    { year: 1775,   label: "1775–1783",       desc: "The U.S. War of Independence occurred; no invaders entered present-day Ontario, though the threat influenced colonial defence planning." },
+    { year: 1783,   label: "1783",            desc: "The Treaty of Paris ended the American Revolutionary War; the Canada–U.S. boundary was set along the St. Lawrence River and Great Lakes." },
+    { year: 1784,   label: "1784",            desc: "Approximately 9,000 United Empire Loyalists settled in southern Ontario, particularly in Niagara, the Bay of Quinte, and along the St. Lawrence. The Haldimand Proclamation granted Iroquois loyalists reserve lands west of Lake Ontario." },
+    { year: 1788,   label: "1788",            desc: "The British purchased 250,000 acres to begin settling York (now Toronto). Governor Dorchester proclaimed the division of land into Lower Canada and Upper Canada." },
+    { year: 1791,   label: "1791",            desc: "The Constitutional Act of 1791 officially created Upper Canada. Newark (present-day Niagara-on-the-Lake) became its first capital; the population grew from 6,000 to 46,000 by 1806." },
+    { year: 1793,   label: "1793",            desc: "John Graves Simcoe was appointed the first governor of Upper Canada. The Act Against Slavery began the gradual abolition of slavery in the province — one of the first such laws in the British Empire." },
+    { year: 1797,   label: "1797",            desc: "Upper Canada's capital moved from Newark to York (Toronto)." },
+    { year: 1800,   label: "1800",            desc: "First European settlement was established on the site of present-day Ottawa." },
+    { year: 1803,   label: "1803",            desc: "The North West Company moved its mid-continent headquarters to Fort William (part of Thunder Bay). Thomas Talbot began settling his land grant in Western Ontario, eventually settling 65,000 acres." },
+    { year: 1812,   label: "1812–1814",       desc: "The War of 1812 with the United States saw Upper Canada as the chief American target. British forces captured Detroit in August 1812. Tecumseh's coalition and British forces won the Battle of Frenchtown (January 1813), killing 400 U.S. soldiers. The war ended with prewar boundaries restored in 1815." },
+    { year: 1813,   label: "October 5, 1813", desc: "At the Battle of the Thames (Moraviantown), U.S. General Harrison defeated British and First Nations forces; Tecumseh was killed and his coalition collapsed." },
+    { year: 1816,   label: "1816",            desc: "Waterloo adopted its current name in honour of the Battle of Waterloo." },
+    { year: 1821,   label: "1821",            desc: "The North West Company merged with the Hudson's Bay Company, ending decades of fierce fur-trade rivalry." },
+    { year: 1829,   label: "1829",            desc: "The first group of Black residents arrived from Ohio due to U.S. Fugitive Slave Laws, settling north of London, Ontario." },
+    { year: 1832,   label: "1832",            desc: "The Rideau Canal was completed after six years of construction, linking Kingston to Ottawa. A serious cholera outbreak spread from Lower Canada, killing thousands in the province." },
+    { year: 1833,   label: "1833",            desc: "The first Welland Canal was built under the direction of William Hamilton Merritt, connecting Lake Ontario to Lake Erie." },
+    { year: 1837,   label: "1837",            desc: "The Upper Canada Rebellion broke out in favour of responsible government; British forces crushed both the Upper and Lower Canada rebellions." },
+    { year: 1839,   label: "1839",            desc: "Lord Durham published his landmark report on the causes of the 1837 rebellions, calling for representation by population and an elected legislative assembly." },
+    { year: 1841,   label: "1841",            desc: "Upper and Lower Canada were united by the Act of Union to form the Province of Canada; Upper Canada became Canada West. Population stood at 455,000." },
+    { year: 1847,   label: "1847",            desc: "About 104,000 immigrants arrived — many suffering from typhus while fleeing the Irish Great Famine; 1,700 died of typhus in Ontario." },
+    { year: 1848,   label: "1848",            desc: "Lord Elgin asked Baldwin and Lafontaine to form the Province of Canada's first responsible government." },
+    { year: 1849,   label: "1849",            desc: "Responsible government was established. Elgin signed the Rebellion Losses Bill; a Tory mob burned down the parliament building in Montreal." },
+    { year: 1851,   label: "1851",            desc: "Canada West's population reached 952,000, exceeding Canada East's for the first time; demands for \"representation by population\" intensified." },
+    { year: 1855,   label: "1855",            desc: "A canal at Sault Ste. Marie opened the St. Marys River to navigation. The Great Western Railway linked Windsor with Hamilton and Toronto." },
+    { year: 1856,   label: "1856",            desc: "The Grand Trunk Railway opened between Sarnia and Montreal, easing the flow of goods and people across Southern Ontario." },
+    { year: 1857,   label: "1857",            desc: "Ottawa was chosen as the permanent capital of the Province of Canada." },
+    { year: 1864,   label: "1864",            desc: "A Great Coalition of Liberals and Conservatives was formed to pursue federal union. The Charlottetown and Quebec Conferences laid the groundwork for Confederation." },
+    { year: 1866,   label: "1866",            desc: "Fenians made an incursion into Ontario; after a skirmish at Ridgeway on the Niagara Peninsula, they withdrew to the United States." },
+    { year: 1867,   label: "1867",            desc: "The British North America Act created the Dominion of Canada. Upper Canada became the province of Ontario; York was renamed Toronto and became the provincial capital." },
+    { year: 1871,   label: "1871",            desc: "The first post-Confederation census put Ontario's population at 1,620,851. The Toronto Trades Assembly was formed as Canada's first central union body." },
+    { year: 1872,   label: "1872",            desc: "The Toronto Typographical Union struck against The Globe in March; 24 committee members were jailed for conspiracy. Macdonald's government passed the Trade Unions Act, legalizing trade unions." },
+    { year: 1879,   label: "1879",            desc: "The federal government instituted protective tariffs on manufactures and farm products as part of its National Policy." },
+    { year: 1883,   label: "1883",            desc: "Important mineral deposits were found near Sudbury, triggering a mining boom in Northern Ontario and drawing large numbers of French Canadians." },
+    { year: 1885,   label: "1885",            desc: "The Orange–Catholic divide deepened over Protestant support for Louis Riel's hanging following the North-West Rebellion." },
+    { year: 1906,   label: "1906",            desc: "The Hydro-Electric Power Commission of Ontario was established by Sir James P. Whitney at Adam Beck's urging, beginning Ontario's tradition of public power." },
+    { year: 1912,   label: "1912",            desc: "Ontario acquired its current territory by incorporating further sections of the North-West Territories. Regulation 17 banned French-language instruction after the first year of school, infuriating Francophones across Canada." },
+    { year: 1914,   label: "1914",            desc: "The Workmen's Compensation Act — the first social insurance legislation in Canadian history — was adopted in Ontario. Canada entered World War I." },
+    { year: 1916,   label: "1916",            desc: "The city of Berlin changed its name to Kitchener to demonstrate loyalty to the war effort. Ontario instituted prohibition, banning the sale of beer and spirits." },
+    { year: 1919,   label: "May–July 1919",   desc: "A general strike took place in Toronto as part of the Canadian Labour Revolt; over 34,000 Ontario workers went on strike for a total of 632,409 striker days." },
+    { year: 1927,   label: "1927",            desc: "Ontario ended prohibition and established the Liquor Control Board of Ontario (LCBO)." },
+    { year: 1929,   label: "1929",            desc: "The Great Depression hit Ontario hard; significant labour unrest followed through the 1930s." },
+    { year: 1933,   label: "1933",            desc: "The Stratford General Strike saw Workers' Unity League leadership and military units with machine guns facing off against picketers." },
+    { year: 1937,   label: "1937",            desc: "Premier Mitchell Hepburn used the Ontario Provincial Police to suppress a CIO strike at General Motors in Oshawa." },
+    { year: 1943,   label: "1943",            desc: "George Drew and the Progressive Conservative Party were elected, beginning 42 years of unbroken Conservative government in Ontario." },
+    { year: 1951,   label: "1951",            desc: "The Frost government passed Canada's first Fair Employment Practices Act, forbidding discrimination based on race, creed, colour, nationality, or ancestry. Ontario's first equal pay legislation for women also passed." },
+    { year: 1954,   label: "1954",            desc: "The Frost government introduced Canada's first Fair Accommodation Practices Act, prohibiting racial discrimination in public places." },
+    { year: 1961,   label: "1961",            desc: "The Ontario New Democratic Party was formed." },
+    { year: 1962,   label: "1962",            desc: "The Ontario Human Rights Code was passed, amalgamating and extending previous civil rights laws into a single statute." },
+    { year: 1966,   label: "1966",            desc: "John Robarts' government introduced universal health insurance (Medicare) within the province." },
+    { year: 1967,   label: "1967",            desc: "GO Transit commuter rail network began operation in the Toronto region. The Ontario Pavilion opened at Expo 67 in Montreal." },
+    { year: 1970,   label: "1970",            desc: "Provincially funded TVOntario went on the air." },
+    { year: 1976,   label: "1976",            desc: "The CN Tower in Toronto was completed and opened to the public, becoming the world's tallest free-standing structure at the time." },
+    { year: 1979,   label: "1979",            desc: "A train derailment in Mississauga caused the largest peacetime evacuation of a city in North American history — over 200,000 residents were displaced." },
+    { year: 1985,   label: "1985",            desc: "David Peterson's Liberals gained power, ending 42 years of Progressive Conservative government in Ontario." },
+    { year: 1989,   label: "1989",            desc: "The Canada–U.S. Free Trade Agreement went into effect; some Ontario industries faced increased competition. The Canadian Auto Workers became independent of the United Auto Workers." },
+    { year: 1990,   label: "1990",            desc: "Bob Rae's NDP won a majority in the provincial election — the only time the NDP formed government in Ontario." },
+    { year: 1993,   label: "1993",            desc: "Bob Rae's government introduced \"Rae Days,\" rolling back public-sector wages to address a major budget shortfall during the recession." },
+    { year: 1995,   label: "1995",            desc: "The Progressive Conservatives under Mike Harris won the election on a \"Common Sense Revolution\" platform. Dudley George, a First Nations man, was killed by the Ontario Provincial Police during a protest at Ipperwash Provincial Park." },
+    { year: 1997,   label: "1997",            desc: "The province passed Bill 103, dissolving Metro Toronto and merging six cities into the new City of Toronto — one of the largest municipal amalgamations in North American history." },
+    { year: 2000,   label: "2000",            desc: "Seven people died after contamination of Walkerton's water supply — a tragedy that reshaped Ontario's approach to environmental regulation and drinking water safety." },
+    { year: 2001,   label: "2001",            desc: "The City of Ottawa merged with the Regional Municipality of Ottawa–Carleton to form the new amalgamated City of Ottawa." },
+    { year: 2003,   label: "2003",            desc: "An SARS outbreak in Toronto killed 44 people and halved tourist revenue. A major electrical blackout plunged most of Ontario into darkness. The Liberal party returned to power under Dalton McGuinty." },
+    { year: 2010,   label: "2010",            desc: "Muskoka hosted the G8 summit; Toronto hosted the G20 summit. The Ontario debt surpassed $200 billion CAD. The HST replaced the provincial sales tax." },
+    { year: 2012,   label: "2012",            desc: "Premier Dalton McGuinty resigned amidst scandal; Kathleen Wynne became premier — the first female and openly gay premier in Canadian history." },
+    { year: 2020,   label: "2020",            desc: "Premier Doug Ford declared a state of emergency amid the COVID-19 pandemic, triggering lockdowns and economic disruption across Ontario." },
+    { year: 2021,   label: "2021",            desc: "Premier Doug Ford declared a second state of emergency as COVID-19 variants drove a third wave of infections across Ontario." },
+];
+
+const currentYear = new Date().getFullYear();
+const spine = document.getElementById('timeline-spine');
+
+function yearsAgoText(year) {
+    const diff = year < 0 ? currentYear + Math.abs(year) : currentYear - year;
+    return diff.toLocaleString('en-CA') + ' years ago';
+}
+
+EVENTS.forEach((ev, i) => {
+    const isLeft = i % 2 === 0;
+    const ago = yearsAgoText(ev.year);
+
+    const card = `
+        <div class="timeline-card group/card relative bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-5 border border-surface-container hover:border-emerald-200 cursor-default">
+            <span class="years-ago-pill absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-primary text-on-primary text-xs font-semibold font-headline px-3 py-1 rounded-full shadow-md">${ago}</span>
+            <div class="flex items-start gap-3 mb-2">
+                <span class="inline-block bg-tertiary text-on-tertiary text-xs font-bold font-headline px-2.5 py-0.5 rounded-full shrink-0 mt-0.5">${ev.label}</span>
+            </div>
+            <p class="text-sm text-on-surface-variant leading-relaxed">${ev.desc}</p>
+        </div>`;
+
+    const dot = `<div class="flex flex-col items-center shrink-0"><div class="w-4 h-4 rounded-full bg-emerald-600 ring-4 ring-surface border-2 border-white shadow-sm z-10"></div></div>`;
+
+    const fromClass = isLeft ? 'from-left' : 'from-right';
+
+    let row;
+    if (isLeft) {
+        row = `
+        <div class="timeline-item ${fromClass} mb-10 md:mb-14 md:grid md:grid-cols-[1fr_2rem_1fr] md:gap-6 md:items-center">
+            <div class="md:text-right relative pb-2 md:pb-0">${card}</div>
+            <div class="hidden md:flex justify-center">${dot}</div>
+            <div class="hidden md:block"></div>
+        </div>`;
+    } else {
+        row = `
+        <div class="timeline-item ${fromClass} mb-10 md:mb-14 md:grid md:grid-cols-[1fr_2rem_1fr] md:gap-6 md:items-center">
+            <div class="hidden md:block"></div>
+            <div class="hidden md:flex justify-center">${dot}</div>
+            <div class="relative pb-2 md:pb-0">${card}</div>
+        </div>`;
+    }
+
+    spine.insertAdjacentHTML('beforeend', row);
+});
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
