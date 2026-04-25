@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Canadian Goose Game | ucandoit.ca</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "tertiary-fixed": "#ffdad8","secondary-fixed-dim": "#b6d088",
+          "secondary-fixed": "#d2eca2","surface-dim": "#d8dad9",
+          "inverse-primary": "#a5d0b9","on-primary": "#ffffff",
+          "primary-fixed": "#c1ecd4","on-secondary": "#ffffff",
+          "secondary": "#50652a","tertiary-fixed-dim": "#ffb3b0",
+          "on-surface-variant": "#414844","on-secondary-fixed-variant": "#394d14",
+          "on-secondary-container": "#546a2e","on-background": "#191c1b",
+          "on-secondary-fixed": "#131f00","secondary-container": "#cfe99f",
+          "on-error": "#ffffff","on-tertiary-fixed": "#410007",
+          "on-tertiary-container": "#ff807f","tertiary-container": "#77131c",
+          "primary": "#012d1d","on-tertiary": "#ffffff",
+          "on-surface": "#191c1b","surface-container-lowest": "#ffffff",
+          "outline-variant": "#c1c8c2","background": "#f8faf8",
+          "outline": "#717973","on-primary-container": "#86af99",
+          "surface-container-high": "#e6e9e7","primary-container": "#1b4332",
+          "surface": "#f8faf8","surface-tint": "#3f6653",
+          "on-primary-fixed-variant": "#274e3d","primary-fixed-dim": "#a5d0b9",
+          "surface-container-highest": "#e1e3e1","error": "#ba1a1a",
+          "surface-container-low": "#f2f4f2","inverse-on-surface": "#eff1ef",
+          "error-container": "#ffdad6","on-primary-fixed": "#002114",
+          "inverse-surface": "#2e3130","surface-variant": "#e1e3e1",
+          "tertiary": "#55000b","surface-container": "#eceeec",
+          "surface-bright": "#f8faf8","on-error-container": "#93000a",
+          "on-tertiary-fixed-variant": "#861f25"
+        },
+        borderRadius: { DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px" },
+        fontFamily: { headline: ["Manrope"], body: ["Inter"], label: ["Inter"] }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  #gameCanvas { max-width: 100%; cursor: pointer; }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1W7WL78VTT"></script>
+<script src="analytics.js"></script>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim selection:text-primary">
+<!-- Shared site navigation -->
+<div id="site-nav"></div>
+<script src="nav.js"></script>
+
+<main class="pt-24 pb-16 px-6 max-w-4xl mx-auto min-h-screen flex flex-col items-center">
+  <div class="inline-block px-4 py-1.5 bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest rounded-full mb-4">
+    CANADIAN GOOSE GAME
+  </div>
+  <h1 class="text-4xl md:text-6xl font-black font-headline text-primary mb-2 text-center">Dodge the Rocks!</h1>
+  <p class="text-on-surface-variant max-w-xl text-center mb-6">Help your Canadian goose dodge rocks and collect loonies.<br><b>Space / &uarr; / tap</b> to jump &mdash; double-jump available!</p>
+
+  <div class="flex gap-8 items-center mb-3">
+    <div class="text-2xl font-black font-headline text-secondary" id="scoreDisplay">Score: 0</div>
+    <div class="text-2xl font-black font-headline text-tertiary" id="highScoreDisplay">Best: 0</div>
+    <div class="text-lg font-bold font-headline text-yellow-700" id="looniesDisplay">&#x1FA99; 0</div>
+  </div>
+
+  <canvas id="gameCanvas" width="760" height="220" class="rounded-xl border-2 border-secondary-container shadow-lg w-full max-w-3xl"></canvas>
+  <div class="mt-3 h-5 text-sm text-on-surface-variant font-semibold" id="speedDisplay"></div>
+</main>
+
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const scoreEl = document.getElementById('scoreDisplay');
+const highScoreEl = document.getElementById('highScoreDisplay');
+const looniesEl = document.getElementById('looniesDisplay');
+const speedEl = document.getElementById('speedDisplay');
+
+// Assets
+const IMG = {};
+let imgsLoaded = 0;
+const IMG_SRCS = { goose: 'assets/goose.png', rock: 'assets/rock.png', loonie: 'assets/loonie.jpeg', bg: 'assets/background.jpg' };
+function loadImages(cb) {
+  const keys = Object.keys(IMG_SRCS);
+  keys.forEach(k => {
+    IMG[k] = new Image();
+    IMG[k].onload = IMG[k].onerror = () => { if (++imgsLoaded === keys.length) cb(); };
+    IMG[k].src = IMG_SRCS[k];
+  });
+}
+
+// Constants
+const GROUND_Y = 185;
+const GRAVITY = 0.72;
+const JUMP_VY = -13;
+const DBL_VY = -10.5;
+const GOOSE_W = 94, GOOSE_H = 62;
+const ROCK_W = 50, ROCK_H = 48;
+const LOONIE_R = 17;
+const HIT_SHR = 10;
+const BG_TW = Math.ceil((1000 / 780) * 220);
+const MILESTONES = { 100: 'EH? 100!', 250: 'BEAUTY! 250!', 500: 'DOUBLE DOUBLE! 500!', 750: 'GREAT WHITE NORTH!', 1000: '1000! BLESS!', 1500: 'TIMBIEBS! 1500!', 2000: 'LEGEND! 2000!' };
+
+// State
+let state = 'start';
+let frame = 0, score = 0, looniesC = 0, speed = 5;
+let bgX = 0, nextRockIn = 90, nextLoonieIn = 350;
+let goose = {}, rocks = [], loonies = [], particles = [], flashes = [];
+let highScore = parseInt(localStorage.getItem('gooseHS') || '0');
+
+function initGoose() {
+  goose = { x: 80, y: GROUND_Y - GOOSE_H, vy: 0, jumps: 0, bob: 0 };
+}
+
+function resetGame() {
+  frame = 0; score = 0; looniesC = 0; speed = 5;
+  bgX = 0; nextRockIn = 90; nextLoonieIn = 350 + Math.random() * 180;
+  rocks = []; loonies = []; particles = []; flashes = [];
+  initGoose();
+  state = 'playing';
+  updateHUD();
+}
+
+function addFlash(text, x, y, life, center, big) {
+  flashes.push({ text, x, y, life, ml: life, center: !!center, big: !!big });
+}
+
+function doJump() {
+  if (state !== 'playing') { resetGame(); return; }
+  if (goose.jumps < 2) {
+    goose.vy = goose.jumps === 0 ? JUMP_VY : DBL_VY;
+    goose.jumps++;
+    addFlash('HONK!', goose.x + GOOSE_W + 6, goose.y, 28, false, false);
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space' || e.code === 'ArrowUp') { e.preventDefault(); doJump(); }
+});
+canvas.addEventListener('pointerdown', e => { e.preventDefault(); doJump(); });
+
+function spawnRock() {
+  const scale = 0.85 + Math.random() * 0.65;
+  const w = Math.round(ROCK_W * scale), h = Math.round(ROCK_H * scale);
+  rocks.push({ x: canvas.width + 10, y: GROUND_Y - h, w, h });
+  const mn = Math.max(50, 92 - score * 0.04);
+  nextRockIn = Math.round(mn + Math.random() * 65);
+}
+
+function spawnLoonie() {
+  const hi = Math.random() < 0.35;
+  loonies.push({ x: canvas.width + 10, y: GROUND_Y - (hi ? 115 + Math.random() * 30 : 65 + Math.random() * 45), bo: Math.random() * Math.PI * 2 });
+  nextLoonieIn = 290 + Math.random() * 250;
+}
+
+function update() {
+  frame++;
+
+  bgX -= speed * 0.2;
+  if (bgX <= -BG_TW) bgX += BG_TW;
+
+  const tSpeed = Math.min(12, 5 + Math.floor(score / 200) * 0.5);
+  if (tSpeed > speed) { speed = tSpeed; addFlash('FASTER!', canvas.width / 2, 65, 70, true, true); }
+
+  if (frame % 6 === 0) {
+    score++;
+    updateHUD();
+    if (MILESTONES[score]) addFlash(MILESTONES[score], canvas.width / 2, 75, 90, true, true);
+  }
+
+  goose.vy += GRAVITY;
+  goose.y += goose.vy;
+  if (goose.y >= GROUND_Y - GOOSE_H) { goose.y = GROUND_Y - GOOSE_H; goose.vy = 0; goose.jumps = 0; }
+  goose.bob += 0.28;
+
+  nextRockIn--;
+  if (nextRockIn <= 0) spawnRock();
+  for (let i = rocks.length - 1; i >= 0; i--) {
+    rocks[i].x -= speed;
+    if (rocks[i].x + rocks[i].w < 0) { rocks.splice(i, 1); continue; }
+    const r = rocks[i];
+    if (goose.x + HIT_SHR < r.x + r.w && goose.x + GOOSE_W - HIT_SHR > r.x &&
+        goose.y + HIT_SHR < r.y + r.h && goose.y + GOOSE_H - HIT_SHR > r.y) {
+      state = 'dead';
+      if (score > highScore) { highScore = score; localStorage.setItem('gooseHS', highScore); }
+      updateHUD();
+      return;
+    }
+  }
+
+  nextLoonieIn--;
+  if (nextLoonieIn <= 0) spawnLoonie();
+  for (let i = loonies.length - 1; i >= 0; i--) {
+    const l = loonies[i];
+    l.x -= speed;
+    if (l.x + LOONIE_R * 2 < 0) { loonies.splice(i, 1); continue; }
+    const cy = l.y + LOONIE_R + Math.sin(frame * 0.08 + l.bo) * 5;
+    const cx = l.x + LOONIE_R;
+    if (goose.x + HIT_SHR < cx + LOONIE_R && goose.x + GOOSE_W - HIT_SHR > cx - LOONIE_R &&
+        goose.y + HIT_SHR < cy + LOONIE_R && goose.y + GOOSE_H - HIT_SHR > cy - LOONIE_R) {
+      looniesC++; score += 25;
+      addFlash('+25', cx, cy - 14, 45, false, false);
+      for (let p = 0; p < 7; p++) {
+        particles.push({ x: cx, y: cy, vx: (Math.random() - 0.5) * 5, vy: -2 - Math.random() * 2.5, life: 22, ml: 22 });
+      }
+      loonies.splice(i, 1);
+      updateHUD();
+    }
+  }
+
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    p.x += p.vx; p.y += p.vy; p.vy += 0.25; p.life--;
+    if (p.life <= 0) particles.splice(i, 1);
+  }
+  for (let i = flashes.length - 1; i >= 0; i--) {
+    flashes[i].life--; flashes[i].y -= 0.55;
+    if (flashes[i].life <= 0) flashes.splice(i, 1);
+  }
+}
+
+function drawBg() {
+  if (IMG.bg && IMG.bg.naturalWidth > 0) {
+    for (let x = bgX; x < canvas.width + BG_TW; x += BG_TW)
+      ctx.drawImage(IMG.bg, x, 0, BG_TW, canvas.height);
+  } else {
+    ctx.fillStyle = '#b8d9b0'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+}
+
+function drawGround() {
+  ctx.fillStyle = '#3a6230'; ctx.fillRect(0, GROUND_Y, canvas.width, canvas.height - GROUND_Y);
+  ctx.fillStyle = '#4e8040'; ctx.fillRect(0, GROUND_Y, canvas.width, 4);
+}
+
+function drawGoose() {
+  const bob = goose.jumps === 0 ? Math.sin(goose.bob) * 1.8 : 0;
+  if (IMG.goose && IMG.goose.naturalWidth > 0)
+    ctx.drawImage(IMG.goose, goose.x, Math.round(goose.y + bob), GOOSE_W, GOOSE_H);
+  else { ctx.fillStyle = '#777'; ctx.fillRect(goose.x, goose.y + bob, GOOSE_W, GOOSE_H); }
+}
+
+function drawRocks() {
+  rocks.forEach(r => {
+    if (IMG.rock && IMG.rock.naturalWidth > 0) ctx.drawImage(IMG.rock, r.x, r.y, r.w, r.h);
+    else { ctx.fillStyle = '#6b6b6b'; ctx.fillRect(r.x, r.y, r.w, r.h); }
+  });
+}
+
+function drawLoonies() {
+  loonies.forEach(l => {
+    const cy = l.y + LOONIE_R + Math.sin(frame * 0.08 + l.bo) * 5;
+    const cx = l.x + LOONIE_R;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx, cy, LOONIE_R, 0, Math.PI * 2); ctx.clip();
+    if (IMG.loonie && IMG.loonie.naturalWidth > 0) ctx.drawImage(IMG.loonie, cx - LOONIE_R, cy - LOONIE_R, LOONIE_R * 2, LOONIE_R * 2);
+    else { ctx.fillStyle = '#d4a017'; ctx.fill(); }
+    ctx.restore();
+    ctx.save();
+    ctx.strokeStyle = 'rgba(220,170,20,0.75)'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(cx, cy, LOONIE_R + 2, 0, Math.PI * 2); ctx.stroke();
+    ctx.restore();
+  });
+}
+
+function drawParticles() {
+  particles.forEach(p => {
+    ctx.save(); ctx.globalAlpha = p.life / p.ml;
+    ctx.fillStyle = '#d4a017';
+    ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  });
+}
+
+function drawFlashes() {
+  flashes.forEach(f => {
+    ctx.save();
+    ctx.globalAlpha = Math.min(1, (f.life / f.ml) * 1.4);
+    ctx.font = f.big ? 'bold 1.4rem Manrope,sans-serif' : 'bold 0.95rem Manrope,sans-serif';
+    ctx.textAlign = f.center ? 'center' : 'left';
+    ctx.lineWidth = 3.5; ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+    ctx.strokeText(f.text, f.x, f.y);
+    ctx.fillStyle = f.big ? '#a61d24' : '#1b4332';
+    ctx.fillText(f.text, f.x, f.y);
+    ctx.restore();
+  });
+}
+
+function drawStartScreen() {
+  ctx.save();
+  ctx.fillStyle = 'rgba(1,45,29,0.55)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.textAlign = 'center';
+  ctx.font = 'bold 1.8rem Manrope,sans-serif'; ctx.fillStyle = '#fff';
+  ctx.fillText('Press Space or Tap to Start!', canvas.width / 2, 95);
+  ctx.font = '1rem Inter,sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.78)';
+  ctx.fillText('Dodge rocks  ·  Collect loonies  ·  Double jump!', canvas.width / 2, 130);
+  ctx.restore();
+}
+
+function drawDeadScreen() {
+  ctx.save();
+  ctx.fillStyle = 'rgba(85,0,11,0.72)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.textAlign = 'center';
+  ctx.font = 'bold 2.2rem Manrope,sans-serif'; ctx.fillStyle = '#fff';
+  ctx.fillText('HONK! Game Over', canvas.width / 2, 80);
+  ctx.font = 'bold 1.1rem Manrope,sans-serif'; ctx.fillStyle = '#fde68a';
+  ctx.fillText('Score: ' + score + '   ·   Loonies: ' + looniesC, canvas.width / 2, 118);
+  if (score > 0 && score >= highScore) {
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 1rem Manrope,sans-serif';
+    ctx.fillText('New High Score!', canvas.width / 2, 148);
+  }
+  ctx.fillStyle = 'rgba(255,255,255,0.65)'; ctx.font = '0.95rem Inter,sans-serif';
+  ctx.fillText('Press Space or tap to play again', canvas.width / 2, 188);
+  ctx.restore();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBg(); drawGround(); drawLoonies(); drawRocks(); drawGoose();
+  drawParticles(); drawFlashes();
+  if (state === 'start') drawStartScreen();
+  if (state === 'dead') drawDeadScreen();
+}
+
+function updateHUD() {
+  scoreEl.textContent = 'Score: ' + score;
+  highScoreEl.textContent = 'Best: ' + Math.max(score, highScore);
+  looniesEl.textContent = '\u{1FA99} ' + looniesC;
+  speedEl.textContent = speed > 5 ? 'Speed x' + speed.toFixed(1) : '';
+}
+
+function gameLoop() {
+  if (state === 'playing') update();
+  draw();
+  requestAnimationFrame(gameLoop);
+}
+
+highScoreEl.textContent = 'Best: ' + highScore;
+initGoose();
+loadImages(() => { gameLoop(); });
+</script>
+</body>
+</html>
