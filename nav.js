@@ -66,7 +66,9 @@
     const navHtml = `
         <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl border-b border-surface-container">
             <nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-                <a class="text-2xl font-black text-emerald-950 dark:text-emerald-50 tracking-tighter font-headline" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+                <a class="flex items-center" href="index.html" aria-label="ucandoit.ca home">
+                    <img class="h-10 w-auto" src="assets/logo.png" alt="ucandoit.ca"/>
+                </a>
                 <div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
                     ${navSections.map(renderSection).join("")}
                 </div>
