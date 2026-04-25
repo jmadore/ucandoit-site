@@ -6,7 +6,8 @@
                 label: "Word Tools",
                 items: [
                         [ "anagram-finder.html", "Anagram Finder"],
-                        [ "word-unscrambler.html", "Word Unscrambler"]
+                        [ "word-unscrambler.html", "Word Unscrambler"],
+                        [ "word-counter.html", "Word Counter"]
                 ]
         },
         {

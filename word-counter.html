@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="nav-section" content="Word Tools">
+<meta name="nav-label" content="Word Counter">
+<meta name="nav-section-order" content="1">
+<meta name="nav-item-order" content="3">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Word Counter | ucandoit.ca</title>
+<meta name="description" content="Free word and character counter. Paste any text to see live word count, character count, sentences, paragraphs, reading time, and top keywords.">
+<meta name="ai-token-count" content="100">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #012d1d 0%, #1b4332 100%);
+        }
+        .stat-card {
+            transition: transform 120ms ease, box-shadow 120ms ease;
+        }
+        .stat-card.flash {
+            transform: scale(1.02);
+        }
+        .limit-bar {
+            transition: width 200ms ease, background-color 200ms ease;
+        }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777"
+         crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1W7WL78VTT"></script>
+<script src="analytics.js"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<script src="https://cdn.tailwindcss.com/3.4.16?plugins=forms,container-queries"></script>
+<script src="tailwind-config.js"></script>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Shared site navigation -->
+<div id="site-nav"></div>
+<script src="nav.js?v=20260425"></script>
+<main class="pt-20 pb-20 px-8 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<div class="lg:col-span-12">
+<!-- Hero -->
+<section class="mb-8">
+<h1 class="font-headline font-extrabold text-5xl md:text-7xl text-primary tracking-tighter mb-4 leading-[0.9] max-w-3xl">
+                        Word <br/><span class="text-secondary italic">Counter</span>
+</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl font-medium leading-relaxed italic border-l-4 border-secondary-fixed pl-6">
+                        Paste, type, or drop in a draft. Word count, characters, paragraphs, reading time, and top keywords — counted live, no fluff.
+                    </p>
+</section>
+
+<!-- Editor + Stats -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Editor -->
+<div class="lg:col-span-8">
+<div class="bg-surface-container-low rounded-xl p-6">
+<div class="flex items-center justify-between mb-3">
+<label for="counter-input" class="text-xs font-bold uppercase tracking-[0.2em] text-outline">Your text</label>
+<div class="flex gap-2">
+<button id="paste-btn" class="text-sm font-medium text-on-surface-variant hover:text-primary flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-base">content_paste</span> Paste
+</button>
+<button id="copy-btn" class="text-sm font-medium text-on-surface-variant hover:text-primary flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-base">content_copy</span> Copy
+</button>
+<button id="clear-btn" class="text-sm font-medium text-on-surface-variant hover:text-error flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-base">delete</span> Clear
+</button>
+</div>
+</div>
+<textarea id="counter-input" rows="16"
+                                class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary text-lg p-5 rounded-lg font-body leading-relaxed resize-y"
+                                placeholder="Start typing or paste your text here…"></textarea>
+</div>
+
+<!-- Top keywords -->
+<div class="bg-surface-container-low rounded-xl p-6 mt-6">
+<h2 class="text-xs font-bold uppercase tracking-[0.2em] text-outline mb-4">Top keywords</h2>
+<div id="keywords-list" class="flex flex-wrap gap-2 min-h-[2.5rem]">
+<span class="text-sm text-outline-variant italic">Add some text to see your most-used words.</span>
+</div>
+</div>
+</div>
+
+<!-- Stats -->
+<div class="lg:col-span-4 space-y-4">
+<div class="grid grid-cols-2 gap-3">
+<div id="stat-words" class="stat-card bg-primary-fixed text-primary p-5 rounded-xl">
+<div class="text-xs font-bold uppercase tracking-wider opacity-70">Words</div>
+<div class="font-headline font-extrabold text-4xl mt-1" data-value>0</div>
+</div>
+<div id="stat-characters" class="stat-card bg-secondary-fixed text-secondary p-5 rounded-xl">
+<div class="text-xs font-bold uppercase tracking-wider opacity-70">Characters</div>
+<div class="font-headline font-extrabold text-4xl mt-1" data-value>0</div>
+</div>
+</div>
+
+<div class="bg-surface-container-low rounded-xl p-5 space-y-3">
+<div class="flex justify-between items-baseline">
+<span class="text-sm font-medium text-on-surface-variant">Characters (no spaces)</span>
+<span id="stat-no-spaces" class="font-headline font-bold text-xl" data-value>0</span>
+</div>
+<div class="flex justify-between items-baseline">
+<span class="text-sm font-medium text-on-surface-variant">Sentences</span>
+<span id="stat-sentences" class="font-headline font-bold text-xl" data-value>0</span>
+</div>
+<div class="flex justify-between items-baseline">
+<span class="text-sm font-medium text-on-surface-variant">Paragraphs</span>
+<span id="stat-paragraphs" class="font-headline font-bold text-xl" data-value>0</span>
+</div>
+<div class="flex justify-between items-baseline">
+<span class="text-sm font-medium text-on-surface-variant">Reading time</span>
+<span id="stat-reading" class="font-headline font-bold text-xl" data-value>0 sec</span>
+</div>
+<div class="flex justify-between items-baseline">
+<span class="text-sm font-medium text-on-surface-variant">Speaking time</span>
+<span id="stat-speaking" class="font-headline font-bold text-xl" data-value>0 sec</span>
+</div>
+</div>
+
+<!-- Limit gauges -->
+<div class="bg-surface-container-low rounded-xl p-5 space-y-4">
+<h2 class="text-xs font-bold uppercase tracking-[0.2em] text-outline">Platform limits</h2>
+<div data-limit="280">
+<div class="flex justify-between text-sm font-medium mb-1">
+<span class="text-on-surface-variant">X / Twitter</span>
+<span class="text-on-surface-variant"><span data-limit-current>0</span> / 280</span>
+</div>
+<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="limit-bar h-full bg-primary" style="width: 0%"></div>
+</div>
+</div>
+<div data-limit="160">
+<div class="flex justify-between text-sm font-medium mb-1">
+<span class="text-on-surface-variant">SMS</span>
+<span class="text-on-surface-variant"><span data-limit-current>0</span> / 160</span>
+</div>
+<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="limit-bar h-full bg-primary" style="width: 0%"></div>
+</div>
+</div>
+<div data-limit="3000">
+<div class="flex justify-between text-sm font-medium mb-1">
+<span class="text-on-surface-variant">LinkedIn post</span>
+<span class="text-on-surface-variant"><span data-limit-current>0</span> / 3000</span>
+</div>
+<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="limit-bar h-full bg-primary" style="width: 0%"></div>
+</div>
+</div>
+<div data-limit="2200">
+<div class="flex justify-between text-sm font-medium mb-1">
+<span class="text-on-surface-variant">Instagram caption</span>
+<span class="text-on-surface-variant"><span data-limit-current>0</span> / 2200</span>
+</div>
+<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="limit-bar h-full bg-primary" style="width: 0%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const STOP_WORDS = new Set([
+        'a','an','the','and','or','but','of','in','on','at','to','for','with','is','are','was','were',
+        'be','been','being','am','has','have','had','do','does','did','this','that','these','those',
+        'it','its','as','by','from','if','then','so','up','out','over','into','about','just','not',
+        'no','yes','i','you','he','she','we','they','them','us','my','your','our','their','his','her',
+        'me','him','will','would','can','could','should','may','might','must','shall','than','also',
+        'too','there','here','where','when','what','which','who','whom','whose','why','how'
+    ]);
+
+    const input = document.getElementById('counter-input');
+    const wordsEl = document.querySelector('#stat-words [data-value]');
+    const charsEl = document.querySelector('#stat-characters [data-value]');
+    const noSpacesEl = document.getElementById('stat-no-spaces');
+    const sentencesEl = document.getElementById('stat-sentences');
+    const paragraphsEl = document.getElementById('stat-paragraphs');
+    const readingEl = document.getElementById('stat-reading');
+    const speakingEl = document.getElementById('stat-speaking');
+    const keywordsEl = document.getElementById('keywords-list');
+    const limitGroups = document.querySelectorAll('[data-limit]');
+
+    function formatTime(seconds) {
+        if (seconds < 60) return `${seconds} sec`;
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return s ? `${m} min ${s} sec` : `${m} min`;
+    }
+
+    function countWords(text) {
+        const matches = text.match(/\S+/g);
+        return matches ? matches.length : 0;
+    }
+
+    function countSentences(text) {
+        const trimmed = text.trim();
+        if (!trimmed) return 0;
+        const matches = trimmed.match(/[^.!?\n]+[.!?]+|[^.!?\n]+$/g);
+        return matches ? matches.filter(s => s.trim().length > 0).length : 0;
+    }
+
+    function countParagraphs(text) {
+        const trimmed = text.trim();
+        if (!trimmed) return 0;
+        return trimmed.split(/\n\s*\n+/).filter(p => p.trim().length > 0).length;
+    }
+
+    function topKeywords(text, limit = 8) {
+        const tokens = text.toLowerCase().match(/[a-z][a-z'-]*/g) || [];
+        const counts = new Map();
+        for (const tok of tokens) {
+            if (tok.length < 3 || STOP_WORDS.has(tok)) continue;
+            counts.set(tok, (counts.get(tok) || 0) + 1);
+        }
+        const totalContent = Array.from(counts.values()).reduce((a, b) => a + b, 0);
+        return Array.from(counts.entries())
+            .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+            .slice(0, limit)
+            .map(([word, count]) => ({
+                word,
+                count,
+                percent: totalContent ? Math.round((count / totalContent) * 1000) / 10 : 0,
+            }));
+    }
+
+    function setText(el, value) {
+        if (el.textContent !== String(value)) el.textContent = value;
+    }
+
+    function flash(card) {
+        card.classList.remove('flash');
+        // Force reflow so the animation restarts cleanly when typing fast.
+        void card.offsetWidth;
+        card.classList.add('flash');
+        setTimeout(() => card.classList.remove('flash'), 150);
+    }
+
+    function renderKeywords(keywords) {
+        keywordsEl.textContent = '';
+        if (!keywords.length) {
+            const empty = document.createElement('span');
+            empty.className = 'text-sm text-outline-variant italic';
+            empty.textContent = 'Add some text to see your most-used words.';
+            keywordsEl.appendChild(empty);
+            return;
+        }
+        for (const { word, count, percent } of keywords) {
+            const chip = document.createElement('span');
+            chip.className = 'inline-flex items-center gap-2 bg-surface-container-highest text-on-surface px-3 py-1.5 rounded-full text-sm font-medium';
+            const w = document.createElement('span');
+            w.className = 'font-bold text-primary';
+            w.textContent = word;
+            const meta = document.createElement('span');
+            meta.className = 'text-xs text-on-surface-variant';
+            meta.textContent = `${count} · ${percent}%`;
+            chip.appendChild(w);
+            chip.appendChild(meta);
+            keywordsEl.appendChild(chip);
+        }
+    }
+
+    function update() {
+        const text = input.value;
+        const words = countWords(text);
+        const chars = text.length;
+        const noSpaces = text.replace(/\s/g, '').length;
+        const sentences = countSentences(text);
+        const paragraphs = countParagraphs(text);
+        const readingSec = Math.ceil((words / 225) * 60);
+        const speakingSec = Math.ceil((words / 130) * 60);
+
+        const prevWords = wordsEl.textContent;
+        const prevChars = charsEl.textContent;
+        setText(wordsEl, words);
+        setText(charsEl, chars);
+        setText(noSpacesEl, noSpaces);
+        setText(sentencesEl, sentences);
+        setText(paragraphsEl, paragraphs);
+        setText(readingEl, formatTime(readingSec));
+        setText(speakingEl, formatTime(speakingSec));
+
+        if (prevWords !== String(words)) flash(document.getElementById('stat-words'));
+        if (prevChars !== String(chars)) flash(document.getElementById('stat-characters'));
+
+        for (const group of limitGroups) {
+            const limit = parseInt(group.dataset.limit, 10);
+            const current = chars;
+            const pct = Math.min(100, Math.round((current / limit) * 100));
+            const bar = group.querySelector('.limit-bar');
+            const currentLabel = group.querySelector('[data-limit-current]');
+            currentLabel.textContent = current;
+            bar.style.width = pct + '%';
+            bar.classList.remove('bg-primary', 'bg-secondary', 'bg-error');
+            if (current > limit) bar.classList.add('bg-error');
+            else if (current > limit * 0.85) bar.classList.add('bg-secondary');
+            else bar.classList.add('bg-primary');
+        }
+
+        renderKeywords(topKeywords(text));
+    }
+
+    document.getElementById('clear-btn').addEventListener('click', function () {
+        input.value = '';
+        update();
+        input.focus();
+    });
+
+    document.getElementById('copy-btn').addEventListener('click', async function () {
+        if (!input.value) return;
+        try {
+            await navigator.clipboard.writeText(input.value);
+        } catch {
+            input.select();
+            document.execCommand('copy');
+        }
+    });
+
+    document.getElementById('paste-btn').addEventListener('click', async function () {
+        try {
+            const text = await navigator.clipboard.readText();
+            if (text) {
+                input.value = input.value + text;
+                update();
+            }
+        } catch {
+            input.focus();
+        }
+    });
+
+    input.addEventListener('input', update);
+    update();
+});
+</script>
+
+<!-- Footer -->
+<footer class="w-full py-12 mt-20 bg-emerald-50 dark:bg-emerald-950">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-headline font-bold text-emerald-950 dark:text-emerald-50">ucandoit.ca</span>
+<p class="font-body text-sm tracking-wide leading-relaxed text-emerald-700 dark:text-emerald-400">© 2024 ucandoit.ca</p>
+</div>
+</div>
+</footer>
+</body></html>
