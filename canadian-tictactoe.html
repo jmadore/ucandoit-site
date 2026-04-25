@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Canadian Tic Tac Toe — ucandoit.ca</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "tertiary-fixed": "#ffdad8", "secondary-fixed-dim": "#b6d088",
+                    "secondary-fixed": "#d2eca2", "surface-dim": "#d8dad9",
+                    "inverse-primary": "#a5d0b9", "on-primary": "#ffffff",
+                    "primary-fixed": "#c1ecd4", "on-secondary": "#ffffff",
+                    "secondary": "#50652a", "tertiary-fixed-dim": "#ffb3b0",
+                    "on-surface-variant": "#414844", "on-secondary-fixed-variant": "#394d14",
+                    "on-secondary-container": "#546a2e", "on-background": "#191c1b",
+                    "on-secondary-fixed": "#131f00", "secondary-container": "#cfe99f",
+                    "on-error": "#ffffff", "on-tertiary-fixed": "#410007",
+                    "on-tertiary-container": "#ff807f", "tertiary-container": "#77131c",
+                    "primary": "#012d1d", "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1b", "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c1c8c2", "background": "#f8faf8",
+                    "outline": "#717973", "on-primary-container": "#86af99",
+                    "surface-container-high": "#e6e9e7", "primary-container": "#1b4332",
+                    "surface": "#f8faf8", "surface-tint": "#3f6653",
+                    "on-primary-fixed-variant": "#274e3d", "primary-fixed-dim": "#a5d0b9",
+                    "surface-container-highest": "#e1e3e1", "error": "#ba1a1a",
+                    "surface-container-low": "#f2f4f2", "inverse-on-surface": "#eff1ef",
+                    "error-container": "#ffdad6", "on-primary-fixed": "#002114",
+                    "inverse-surface": "#2e3130", "surface-variant": "#e1e3e1",
+                    "tertiary": "#a61d24", "surface-container": "#eceeec",
+                    "surface-bright": "#f8faf8", "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#861f25"
+                },
+                "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                "fontFamily": { "headline": ["Manrope"], "body": ["Inter"], "label": ["Inter"] }
+            },
+        },
+    }
+</script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+    .cell {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border-radius: 1rem;
+        border: 2px solid #eceeec;
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s, transform 0.12s, box-shadow 0.15s;
+        user-select: none;
+    }
+    .cell:hover:not(.taken) {
+        background: #f2f4f2;
+        border-color: #a5d0b9;
+        transform: scale(1.04);
+        box-shadow: 0 4px 16px rgba(1,45,29,0.1);
+    }
+    .cell.taken  { cursor: default; }
+    .cell.winning {
+        background: #ffdad8;
+        border-color: #a61d24;
+        box-shadow: 0 0 0 3px rgba(166,29,36,0.2);
+    }
+    @keyframes pop {
+        from { transform: scale(0.35); opacity: 0; }
+        to   { transform: scale(1);    opacity: 1; }
+    }
+    .pop { animation: pop 0.22s cubic-bezier(0.34,1.56,0.64,1) both; }
+
+    .mode-btn {
+        padding: 0.75rem 0.5rem;
+        border-radius: 0.75rem;
+        border: 2px solid #eceeec;
+        background: #fff;
+        font-family: Manrope, sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: #414844;
+        cursor: pointer;
+        transition: all 0.15s;
+        text-align: center;
+        width: 100%;
+    }
+    .mode-btn.active          { background: #012d1d; color: #fff; border-color: #012d1d; }
+    .mode-btn:not(.active):hover { border-color: #a5d0b9; background: #f2f4f2; }
+
+    .sym-card {
+        padding: 1rem 0.75rem;
+        border-radius: 0.75rem;
+        border: 2px solid #eceeec;
+        background: #fff;
+        cursor: pointer;
+        transition: all 0.15s;
+        text-align: center;
+    }
+    .sym-card.selected        { border-color: #a61d24; background: #ffdad8; }
+    .sym-card:not(.selected):hover { border-color: #a5d0b9; background: #f2f4f2; }
+
+    .score-num { font-size: 2.4rem; font-weight: 800; line-height: 1; font-family: Manrope, sans-serif; }
+
+    #result-modal { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+</style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777"
+         crossorigin="anonymous"></script>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+<!-- Nav -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-surface-container">
+    <nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+        <a class="text-2xl font-black text-emerald-950 tracking-tighter font-headline" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+        <div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
+            <div class="relative group">
+                <button class="text-emerald-800/70 hover:text-emerald-600 transition-all duration-300 flex items-center gap-1" type="button">Word Tools <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-48 rounded-lg bg-white shadow-xl border border-emerald-100 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="anagram-finder.html">Anagram Finder</a>
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="word-unscrambler.html">Word Unscrambler</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-emerald-800/70 hover:text-emerald-600 transition-all duration-300 flex items-center gap-1" type="button">Calculators <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white shadow-xl border border-emerald-100 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="yearly-to-hourly-salary.html">Yearly to Hourly Salary</a>
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="loan-calculator.html">Mortgage Calculator</a>
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="board-foot-calculator.html">Board Foot Calculator</a>
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="hourly-to-yearly-salary.html">Hourly to Yearly Salary</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-emerald-800/70 hover:text-emerald-600 transition-all duration-300 flex items-center gap-1" type="button">Games <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white shadow-xl border border-emerald-100 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="countdown-letters-game.html">Countdown Letters</a>
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="countdown-conundrum.html">Countdown Conundrum</a>
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="countdown-numbers-game.html">Countdown Numbers</a>
+                    <a class="px-4 py-2 text-tertiary font-semibold hover:bg-emerald-50 transition-colors" href="canadian-tictactoe.html">Canadian Tic Tac Toe</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-tertiary hover:text-tertiary/70 transition-all duration-300 flex items-center gap-1" type="button">History <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white shadow-xl border border-emerald-100 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="canada-history-timeline.html">Canada History</a>
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="ontario-history-timeline.html">Ontario History</a>
+                    <a class="px-4 py-2 text-emerald-800/70 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" href="quebec-history-timeline.html">Quebec History</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- ════════════════════ SETUP SCREEN ════════════════════ -->
+<div id="screen-setup" class="pt-28 pb-20 px-4">
+    <section class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 bg-tertiary/10 text-tertiary text-sm font-semibold px-4 py-1.5 rounded-full mb-5 font-headline">
+            🍁 Made in Canada
+        </div>
+        <h1 class="font-headline text-4xl md:text-5xl font-black text-primary tracking-tight mb-3">Canadian Tic Tac Toe</h1>
+        <p class="text-on-surface-variant text-lg">Two symbols. One winner. Very polite.</p>
+    </section>
+
+    <div class="max-w-md mx-auto space-y-6">
+
+        <!-- Mode -->
+        <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container">
+            <h2 class="font-headline font-bold text-primary mb-4 text-lg">Game Mode</h2>
+            <div class="grid grid-cols-2 gap-3">
+                <button id="btn-1p" class="mode-btn active" onclick="setMode(1)">🧍 vs Computer</button>
+                <button id="btn-2p" class="mode-btn" onclick="setMode(2)">👥 2 Players</button>
+            </div>
+        </div>
+
+        <!-- Symbol sets -->
+        <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container">
+            <h2 class="font-headline font-bold text-primary mb-4 text-lg">Choose Your Symbols</h2>
+            <div class="grid grid-cols-2 gap-3">
+
+                <button class="sym-card selected" id="sym-classic" onclick="setSymbolSet('classic')">
+                    <div class="flex items-center justify-center gap-2 mb-2">
+                        <span style="font-size:1.7rem;font-weight:900;color:#a61d24;line-height:1">✕</span>
+                        <span class="text-on-surface-variant text-xs font-semibold">vs</span>
+                        <span style="font-size:1.7rem;font-weight:900;color:#1b4332;line-height:1">○</span>
+                    </div>
+                    <div class="text-xs font-bold font-headline text-on-surface-variant">Classic X &amp; O</div>
+                </button>
+
+                <button class="sym-card" id="sym-bears" onclick="setSymbolSet('bears')">
+                    <div class="flex items-center justify-center gap-2 mb-2">
+                        <span style="font-size:1.7rem;line-height:1">🐻</span>
+                        <span class="text-on-surface-variant text-xs font-semibold">vs</span>
+                        <span style="font-size:1.7rem;line-height:1">🦫</span>
+                    </div>
+                    <div class="text-xs font-bold font-headline text-on-surface-variant">Bears &amp; Beavers</div>
+                </button>
+
+                <button class="sym-card" id="sym-goose" onclick="setSymbolSet('goose')">
+                    <div class="flex items-center justify-center gap-2 mb-2">
+                        <span style="font-size:1.7rem;line-height:1">🪿</span>
+                        <span class="text-on-surface-variant text-xs font-semibold">vs</span>
+                        <span style="font-size:1.7rem;line-height:1">🫎</span>
+                    </div>
+                    <div class="text-xs font-bold font-headline text-on-surface-variant">Goose &amp; Moose</div>
+                </button>
+
+                <button class="sym-card" id="sym-hockey" onclick="setSymbolSet('hockey')">
+                    <div class="flex items-center justify-center gap-2 mb-2">
+                        <!-- crossed sticks preview -->
+                        <span style="position:relative;display:inline-block;width:1.9rem;height:1.9rem;vertical-align:middle">
+                            <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transform:rotate(0deg)">🏒</span>
+                            <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transform:rotate(90deg) scaleX(-1)">🏒</span>
+                        </span>
+                        <span class="text-on-surface-variant text-xs font-semibold">vs</span>
+                        <!-- puck preview -->
+                        <span style="display:inline-block;width:1.7rem;height:0.68rem;background:#1a1a1a;border-radius:9999px;vertical-align:middle"></span>
+                    </div>
+                    <div class="text-xs font-bold font-headline text-on-surface-variant">Sticks &amp; Puck</div>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- Start -->
+        <button onclick="startGame()"
+            class="w-full bg-primary text-on-primary font-headline font-bold text-lg py-4 rounded-2xl hover:opacity-90 transition-opacity shadow-md">
+            🍁 Let's Play!
+        </button>
+    </div>
+</div>
+
+<!-- ════════════════════ GAME SCREEN ════════════════════ -->
+<div id="screen-game" class="hidden pt-28 pb-20 px-4">
+
+    <!-- Scoreboard -->
+    <div class="max-w-sm mx-auto mb-5 flex items-center gap-2">
+        <div class="flex-1 text-center">
+            <div id="p1-score-icon" class="flex justify-center mb-1 h-8 items-center"></div>
+            <div id="p1-label" class="text-xs font-semibold text-on-surface-variant font-headline mb-1">Player 1</div>
+            <div id="score-p1" class="score-num text-tertiary">0</div>
+        </div>
+        <div class="flex-1 text-center">
+            <div class="text-xs font-semibold text-on-surface-variant font-headline mb-1 mt-9">DRAWS</div>
+            <div id="score-draws" class="score-num text-on-surface-variant/50">0</div>
+        </div>
+        <div class="flex-1 text-center">
+            <div id="p2-score-icon" class="flex justify-center mb-1 h-8 items-center"></div>
+            <div id="p2-label" class="text-xs font-semibold text-on-surface-variant font-headline mb-1">Player 2</div>
+            <div id="score-p2" class="score-num text-primary">0</div>
+        </div>
+    </div>
+
+    <!-- Turn bar -->
+    <div id="turn-bar" class="max-w-sm mx-auto mb-5 rounded-2xl px-4 py-3 flex items-center gap-3 bg-surface-container transition-colors duration-300">
+        <div id="turn-icon" class="flex-shrink-0 flex items-center justify-center" style="width:2rem;height:2rem"></div>
+        <span id="turn-text" class="font-headline font-bold text-primary text-sm"></span>
+    </div>
+
+    <!-- Board -->
+    <div id="board" class="grid grid-cols-3 gap-3 mx-auto mb-8" style="max-width:320px"></div>
+
+    <!-- Controls -->
+    <div class="flex gap-3 justify-center mx-auto" style="max-width:320px">
+        <button onclick="resetBoard()"
+            class="flex-1 bg-surface-container-lowest border border-surface-container text-primary font-headline font-bold py-3 rounded-xl hover:border-emerald-300 transition-colors">
+            Rematch 🏒
+        </button>
+        <button onclick="newGame()"
+            class="flex-1 bg-primary text-on-primary font-headline font-bold py-3 rounded-xl hover:opacity-90 transition-opacity">
+            New Game 🍁
+        </button>
+    </div>
+</div>
+
+<!-- ════════════════════ RESULT MODAL ════════════════════ -->
+<div id="result-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+    <div class="bg-surface-container-lowest rounded-3xl shadow-2xl p-8 max-w-xs w-full text-center border border-surface-container">
+        <div id="result-icon" class="flex items-center justify-center mb-4" style="min-height:5rem"></div>
+        <h2 id="result-title" class="font-headline text-2xl font-black text-primary mb-2"></h2>
+        <p id="result-msg" class="text-on-surface-variant text-sm mb-7 leading-relaxed"></p>
+        <div class="flex gap-3">
+            <button onclick="rematch()"
+                class="flex-1 bg-surface-container border border-surface-container text-primary font-headline font-bold py-3 rounded-xl hover:border-emerald-300 transition-colors">
+                Rematch 🏒
+            </button>
+            <button onclick="newGame()"
+                class="flex-1 bg-primary text-on-primary font-headline font-bold py-3 rounded-xl hover:opacity-90 transition-opacity">
+                New Game 🍁
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ─── DOM helper: create element with inline styles and optional text ─── */
+function mk(tag, css, txt) {
+    const e = document.createElement(tag);
+    if (css) e.style.cssText = css;
+    if (txt !== undefined) e.textContent = txt;
+    return e;
+}
+
+/* ─── Symbol factories — all DOM, no innerHTML ─── */
+function sticksCrossed(size) {
+    const wrap = mk('div', 'position:relative;flex-shrink:0;width:' + size + 'px;height:' + size + 'px');
+    const fs = Math.round(size * 0.58) + 'px';
+    const base = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:' + fs;
+    const s1 = mk('span', base + ';transform:rotate(0deg)', '🏒');
+    const s2 = mk('span', base + ';transform:rotate(90deg) scaleX(-1)', '🏒');
+    wrap.appendChild(s1);
+    wrap.appendChild(s2);
+    return wrap;
+}
+function puck(w, h) {
+    return mk('div', 'width:' + w + 'px;height:' + h + 'px;background:#1a1a1a;border-radius:9999px;box-shadow:0 3px 10px rgba(0,0,0,0.45)');
+}
+
+const SYM = {
+    classic: {
+        name: 'Classic X & O',
+        p1: {
+            label: 'X',
+            cell:   () => mk('span', 'font-size:3.2rem;font-weight:900;color:#a61d24;line-height:1;font-family:Manrope,sans-serif', '✕'),
+            icon:   () => mk('span', 'font-size:1.5rem;font-weight:900;color:#a61d24;line-height:1', '✕'),
+            big:    () => mk('span', 'font-size:4.5rem;font-weight:900;color:#a61d24;line-height:1', '✕'),
+        },
+        p2: {
+            label: 'O',
+            cell:   () => mk('span', 'font-size:3.2rem;font-weight:900;color:#1b4332;line-height:1;font-family:Manrope,sans-serif', '○'),
+            icon:   () => mk('span', 'font-size:1.5rem;font-weight:900;color:#1b4332;line-height:1', '○'),
+            big:    () => mk('span', 'font-size:4.5rem;font-weight:900;color:#1b4332;line-height:1', '○'),
+        },
+    },
+    bears: {
+        name: 'Bears & Beavers',
+        p1: { label: 'Bear',
+            cell: () => mk('span', 'font-size:3.2rem;line-height:1', '🐻'),
+            icon: () => mk('span', 'font-size:1.5rem;line-height:1', '🐻'),
+            big:  () => mk('span', 'font-size:4.5rem;line-height:1', '🐻') },
+        p2: { label: 'Beaver',
+            cell: () => mk('span', 'font-size:3.2rem;line-height:1', '🦫'),
+            icon: () => mk('span', 'font-size:1.5rem;line-height:1', '🦫'),
+            big:  () => mk('span', 'font-size:4.5rem;line-height:1', '🦫') },
+    },
+    goose: {
+        name: 'Goose & Moose',
+        p1: { label: 'Goose',
+            cell: () => mk('span', 'font-size:3.2rem;line-height:1', '🪿'),
+            icon: () => mk('span', 'font-size:1.5rem;line-height:1', '🪿'),
+            big:  () => mk('span', 'font-size:4.5rem;line-height:1', '🪿') },
+        p2: { label: 'Moose',
+            cell: () => mk('span', 'font-size:3.2rem;line-height:1', '🫎'),
+            icon: () => mk('span', 'font-size:1.5rem;line-height:1', '🫎'),
+            big:  () => mk('span', 'font-size:4.5rem;line-height:1', '🫎') },
+    },
+    hockey: {
+        name: 'Sticks & Puck',
+        p1: { label: 'Sticks',
+            cell: () => sticksCrossed(64),
+            icon: () => mk('span', 'font-size:1.2rem;line-height:1', '🏒'),
+            big:  () => sticksCrossed(88) },
+        p2: { label: 'Puck',
+            cell: () => puck(58, 23),
+            icon: () => puck(26, 10),
+            big:  () => puck(80, 32) },
+    },
+};
+
+/* ─── Win messages ─── */
+const WIN_MSGS  = ["What a beauty, eh? 🍁","That's a hat trick! 🏒","Double-double victory! ☕","Beauty play, bud! 🇨🇦","Toque off to you! 🧢","Sweet as maple syrup! 🍯"];
+const DRAW_MSGS = ["It's a draw, buddy! Settle it over a double-double ☕","Too polite to win, eh? 🍁","Tie game — grab a Tim's and go again ☕"];
+const CPU_MSGS  = ["The computer wins! Better luck next time, eh? 🤖","Looks like the robot knows hockey too 🏒","Sorry not sorry! — The CPU 🇨🇦"];
+
+const LINES = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+/* ─── State ─── */
+let mode   = 1;
+let symKey = 'classic';
+let board  = Array(9).fill(null);
+let cur    = 1;
+let scores = { 1: 0, 2: 0, draws: 0 };
+let active = false;
+
+/* ─── Setup actions ─── */
+function setMode(m) {
+    mode = m;
+    document.getElementById('btn-1p').classList.toggle('active', m === 1);
+    document.getElementById('btn-2p').classList.toggle('active', m === 2);
+}
+
+function setSymbolSet(key) {
+    symKey = key;
+    ['classic','bears','goose','hockey'].forEach(k =>
+        document.getElementById('sym-' + k).classList.toggle('selected', k === key)
+    );
+}
+
+function startGame() {
+    document.getElementById('p1-label').textContent = mode === 1 ? 'You' : 'Player 1';
+    document.getElementById('p2-label').textContent = mode === 1 ? 'Computer' : 'Player 2';
+    scores = { 1: 0, 2: 0, draws: 0 };
+    refreshScoreIcons();
+    updateScoreNums();
+    showScreen('game');
+    resetBoard();
+}
+
+/* ─── Board ─── */
+function buildBoard() {
+    const el = document.getElementById('board');
+    while (el.firstChild) el.removeChild(el.firstChild);
+    for (let i = 0; i < 9; i++) {
+        const c = document.createElement('div');
+        c.className = 'cell';
+        c.id = 'cell-' + i;
+        c.addEventListener('click', () => handleClick(i));
+        el.appendChild(c);
+    }
+}
+
+function clearCell(el) {
+    while (el.firstChild) el.removeChild(el.firstChild);
+}
+
+function placeSymbol(idx, player) {
+    const cell = document.getElementById('cell-' + idx);
+    clearCell(cell);
+    const pKey = player === 1 ? 'p1' : 'p2';
+    const node = SYM[symKey][pKey].cell();
+    node.classList.add('pop');
+    cell.appendChild(node);
+    cell.classList.add('taken');
+}
+
+function resetBoard() {
+    board  = Array(9).fill(null);
+    cur    = 1;
+    active = true;
+    document.getElementById('result-modal').classList.add('hidden');
+    buildBoard();
+    refreshTurnBar();
+}
+
+/* ─── Gameplay ─── */
+function handleClick(i) {
+    if (!active || board[i]) return;
+    if (mode === 1 && cur === 2) return;
+    place(i, cur);
+}
+
+function place(i, player) {
+    board[i] = player;
+    placeSymbol(i, player);
+
+    const winner = getWinner();
+    if (winner) { endGame(winner); return; }
+    if (board.every(Boolean)) { endGame(null); return; }
+
+    cur = cur === 1 ? 2 : 1;
+    refreshTurnBar();
+
+    if (mode === 1 && cur === 2 && active) {
+        active = false;
+        setTimeout(() => {
+            active = true;
+            place(bestMove(), 2);
+        }, 480);
+    }
+}
+
+/* ─── AI: minimax ─── */
+function bestMove() {
+    let best = -Infinity, move = -1;
+    for (let i = 0; i < 9; i++) {
+        if (!board[i]) {
+            board[i] = 2;
+            const s = minimax(board, 0, false);
+            board[i] = null;
+            if (s > best) { best = s; move = i; }
+        }
+    }
+    return move;
+}
+
+function minimax(b, depth, isMax) {
+    const w = winnerOf(b);
+    if (w === 2) return 10 - depth;
+    if (w === 1) return depth - 10;
+    if (b.every(Boolean)) return 0;
+    let best = isMax ? -Infinity : Infinity;
+    const p  = isMax ? 2 : 1;
+    for (let i = 0; i < 9; i++) {
+        if (!b[i]) {
+            b[i] = p;
+            const s = minimax(b, depth + 1, !isMax);
+            b[i] = null;
+            best = isMax ? Math.max(best, s) : Math.min(best, s);
+        }
+    }
+    return best;
+}
+
+/* ─── Win detection ─── */
+function getWinner()    { return winnerOf(board); }
+function winnerOf(b)    { for (const [a,x,c] of LINES) if (b[a] && b[a]===b[x] && b[a]===b[c]) return b[a]; return null; }
+function winningLine()  { for (const ln of LINES) { const [a,x,c]=ln; if (board[a] && board[a]===board[x] && board[a]===board[c]) return ln; } return null; }
+
+/* ─── End game ─── */
+function endGame(winner) {
+    active = false;
+    if (winner) {
+        scores[winner]++;
+        const ln = winningLine();
+        if (ln) ln.forEach(i => document.getElementById('cell-' + i).classList.add('winning'));
+    } else {
+        scores.draws++;
+    }
+    updateScoreNums();
+    setTimeout(() => showResult(winner), 680);
+}
+
+function showResult(winner) {
+    const iconEl  = document.getElementById('result-icon');
+    const titleEl = document.getElementById('result-title');
+    const msgEl   = document.getElementById('result-msg');
+
+    clearCell(iconEl);
+
+    if (winner === null) {
+        iconEl.textContent   = '🤝';
+        titleEl.textContent  = "It's a Draw!";
+        msgEl.textContent    = DRAW_MSGS[Math.floor(Math.random() * DRAW_MSGS.length)];
+    } else if (mode === 1 && winner === 2) {
+        iconEl.textContent   = '🤖';
+        titleEl.textContent  = "Computer Wins!";
+        msgEl.textContent    = CPU_MSGS[Math.floor(Math.random() * CPU_MSGS.length)];
+    } else {
+        const pKey = winner === 1 ? 'p1' : 'p2';
+        iconEl.appendChild(SYM[symKey][pKey].big());
+        const label = winner === 1
+            ? (mode === 1 ? 'You win' : 'Player 1 wins')
+            : 'Player 2 wins';
+        titleEl.textContent = label + '!';
+        msgEl.textContent   = WIN_MSGS[Math.floor(Math.random() * WIN_MSGS.length)];
+    }
+
+    document.getElementById('result-modal').classList.remove('hidden');
+}
+
+/* ─── UI helpers ─── */
+function refreshTurnBar() {
+    const pKey   = cur === 1 ? 'p1' : 'p2';
+    const isCPU  = mode === 1 && cur === 2;
+    const iconEl = document.getElementById('turn-icon');
+    clearCell(iconEl);
+    iconEl.appendChild(SYM[symKey][pKey].icon());
+    document.getElementById('turn-text').textContent = isCPU
+        ? 'Computer is thinking…'
+        : (mode === 1 ? 'Your turn!' : 'Player ' + cur + '\'s turn!');
+    document.getElementById('turn-bar').style.background = cur === 1 ? '#ffdad8' : '#c1ecd4';
+}
+
+function refreshScoreIcons() {
+    const p1el = document.getElementById('p1-score-icon');
+    const p2el = document.getElementById('p2-score-icon');
+    clearCell(p1el); clearCell(p2el);
+    p1el.appendChild(SYM[symKey].p1.icon());
+    p2el.appendChild(SYM[symKey].p2.icon());
+}
+
+function updateScoreNums() {
+    document.getElementById('score-p1').textContent    = scores[1];
+    document.getElementById('score-p2').textContent    = scores[2];
+    document.getElementById('score-draws').textContent = scores.draws;
+}
+
+function showScreen(name) {
+    document.getElementById('screen-setup').classList.toggle('hidden', name !== 'setup');
+    document.getElementById('screen-game').classList.toggle('hidden',  name !== 'game');
+}
+
+function rematch() { resetBoard(); }
+function newGame()  { document.getElementById('result-modal').classList.add('hidden'); showScreen('setup'); }
+</script>
+</body>
+</html>
