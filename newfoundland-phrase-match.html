@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Newfoundland Phrase Match | ucandoit.ca</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "tertiary-fixed": "#ffdad8","secondary-fixed-dim": "#b6d088",
+          "secondary-fixed": "#d2eca2","surface-dim": "#d8dad9",
+          "inverse-primary": "#a5d0b9","on-primary": "#ffffff",
+          "primary-fixed": "#c1ecd4","on-secondary": "#ffffff",
+          "secondary": "#50652a","tertiary-fixed-dim": "#ffb3b0",
+          "on-surface-variant": "#414844","on-secondary-fixed-variant": "#394d14",
+          "on-secondary-container": "#546a2e","on-background": "#191c1b",
+          "on-secondary-fixed": "#131f00","secondary-container": "#cfe99f",
+          "on-error": "#ffffff","on-tertiary-fixed": "#410007",
+          "on-tertiary-container": "#ff807f","tertiary-container": "#77131c",
+          "primary": "#012d1d","on-tertiary": "#ffffff",
+          "on-surface": "#191c1b","surface-container-lowest": "#ffffff",
+          "outline-variant": "#c1c8c2","background": "#f8faf8",
+          "outline": "#717973","on-primary-container": "#86af99",
+          "surface-container-high": "#e6e9e7","primary-container": "#1b4332",
+          "surface": "#f8faf8","surface-tint": "#3f6653",
+          "on-primary-fixed-variant": "#274e3d","primary-fixed-dim": "#a5d0b9",
+          "surface-container-highest": "#e1e3e1","error": "#ba1a1a",
+          "surface-container-low": "#f2f4f2","inverse-on-surface": "#eff1ef",
+          "error-container": "#ffdad6","on-primary-fixed": "#002114",
+          "inverse-surface": "#2e3130","surface-variant": "#e1e3e1",
+          "tertiary": "#55000b","surface-container": "#eceeec",
+          "surface-bright": "#f8faf8","on-error-container": "#93000a",
+          "on-tertiary-fixed-variant": "#861f25"
+        },
+        borderRadius: { DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px" },
+        fontFamily: { headline: ["Manrope"], body: ["Inter"], label: ["Inter"] }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .match-board {
+    background:
+      radial-gradient(circle at 18% 10%, rgba(207, 233, 159, 0.55), transparent 28%),
+      radial-gradient(circle at 92% 4%, rgba(255, 218, 216, 0.82), transparent 28%),
+      linear-gradient(135deg, #f8faf8 0%, #eef2ec 54%, #f8eee9 100%);
+  }
+  .choice {
+    min-height: 76px;
+    transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+  }
+  .choice:not(:disabled):hover { transform: translateY(-2px); }
+  .choice.is-selected {
+    border-color: #55000b;
+    background: #ffdad8;
+    box-shadow: 0 10px 24px rgba(85, 0, 11, 0.12);
+  }
+  .choice.is-matched {
+    border-color: #50652a;
+    background: #d2eca2;
+    color: #131f00;
+  }
+  .choice.is-wrong { animation: shake 260ms ease; }
+  .choice.is-hint { animation: pulse 900ms ease 2; }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(85, 0, 11, 0); }
+    50% { box-shadow: 0 0 0 8px rgba(85, 0, 11, 0.16); }
+  }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1W7WL78VTT"></script>
+<script src="analytics.js"></script>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim selection:text-primary">
+<!-- Shared site navigation -->
+<div id="site-nav"></div>
+<script src="nav.js"></script>
+
+<main class="pt-24 pb-16 px-5 md:px-8 min-h-screen match-board">
+  <section class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 items-end mb-8">
+      <div>
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest rounded-full mb-4">
+          <span class="material-symbols-outlined text-base">travel_explore</span>
+          NEWFOUNDLAND PHRASE MATCH
+        </div>
+        <h1 class="font-headline text-4xl md:text-6xl font-black text-primary tracking-tighter leading-[0.94] max-w-4xl">
+          Match the saying to what it means.
+        </h1>
+        <p class="mt-4 text-lg text-on-surface-variant max-w-3xl font-medium leading-relaxed">
+          Pick a Newfoundland phrase on the left, then tap the matching translation on the right. Correct matches lock in; misses just nudge you back onto the trail.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-3 text-center">
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4">
+          <div class="text-xs font-bold tracking-widest text-on-surface-variant">MATCHED</div>
+          <div class="font-headline text-3xl font-black text-primary"><span id="matchedCount">0</span>/18</div>
+        </div>
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4">
+          <div class="text-xs font-bold tracking-widest text-on-surface-variant">MISSES</div>
+          <div class="font-headline text-3xl font-black text-tertiary" id="missCount">0</div>
+        </div>
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4">
+          <div class="text-xs font-bold tracking-widest text-on-surface-variant">STREAK</div>
+          <div class="font-headline text-3xl font-black text-secondary" id="streakCount">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-3 mb-5">
+      <button id="hintBtn" class="inline-flex items-center gap-2 rounded-lg bg-primary text-on-primary px-4 py-2.5 font-bold hover:bg-primary-container transition-colors" type="button">
+        <span class="material-symbols-outlined text-lg">lightbulb</span>
+        Hint
+      </button>
+      <button id="shuffleBtn" class="inline-flex items-center gap-2 rounded-lg bg-surface-container-lowest border border-outline-variant px-4 py-2.5 font-bold text-primary hover:bg-primary-fixed transition-colors" type="button">
+        <span class="material-symbols-outlined text-lg">shuffle</span>
+        Shuffle open cards
+      </button>
+      <button id="resetBtn" class="inline-flex items-center gap-2 rounded-lg bg-surface-container-lowest border border-outline-variant px-4 py-2.5 font-bold text-tertiary hover:bg-tertiary-fixed transition-colors" type="button">
+        <span class="material-symbols-outlined text-lg">restart_alt</span>
+        Reset
+      </button>
+      <div class="min-h-11 flex items-center text-sm font-semibold text-on-surface-variant" id="message" aria-live="polite">Start with any phrase card.</div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-7 items-start">
+      <section class="bg-surface-container-lowest/95 border border-outline-variant rounded-xl p-4 md:p-5">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-headline text-2xl font-black text-primary">Phrases</h2>
+          <span class="text-sm font-bold text-on-surface-variant">Choose first</span>
+        </div>
+        <div class="grid gap-3" id="phrasesList"></div>
+      </section>
+
+      <section class="bg-surface-container-lowest/95 border border-outline-variant rounded-xl p-4 md:p-5">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-headline text-2xl font-black text-primary">Translations</h2>
+          <span class="text-sm font-bold text-on-surface-variant">Match second</span>
+        </div>
+        <div class="grid gap-3" id="translationsList"></div>
+      </section>
+    </div>
+
+    <div class="mt-6 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-sm text-on-surface-variant">
+      <p>Source inspiration: <a class="font-bold text-tertiary hover:text-primary" href="https://www.exploremynation.ca/newfoundlandlabrador/newfie-quiz" rel="noopener" target="_blank">Explore My Nation's Newfie Quiz</a>.</p>
+      <p id="completionText" class="font-bold text-primary"></p>
+    </div>
+  </section>
+</main>
+
+<script>
+const pairs = [
+  { id: 1, phrase: "Long may your jib draw", meaning: "A warm wish for a good road ahead." },
+  { id: 2, phrase: "The older the crab, the tougher his claws", meaning: "A seasoned person is hard to fool." },
+  { id: 3, phrase: "You're a fish out of water", meaning: "You are outside your usual comfort zone." },
+  { id: 4, phrase: "Shag it", meaning: "Drop it, leave it, or do not worry about it." },
+  { id: 5, phrase: "The arse fell out of 'er", meaning: "The plan came apart in a hurry." },
+  { id: 6, phrase: "Proper 'ting", meaning: "That was exactly the right move." },
+  { id: 7, phrase: "Wait for a fair wind and you'll get one", meaning: "Patience can bring the right opening." },
+  { id: 8, phrase: "God love your cotton socks!", meaning: "A fond way to say thanks." },
+  { id: 9, phrase: "Luh!", meaning: "See? That is what I was saying." },
+  { id: 10, phrase: "I dies at you", meaning: "You are cracking me up." },
+  { id: 11, phrase: "Hot enough to poison ya", meaning: "It is wildly hot out." },
+  { id: 12, phrase: "'Ow she getting on?", meaning: "How are things going?" },
+  { id: 13, phrase: "Who knit ya?", meaning: "Who are your people?" },
+  { id: 14, phrase: "Crooked as sin", meaning: "In a sour mood." },
+  { id: 15, phrase: "Some day on clothes", meaning: "A fine day for getting laundry outside." },
+  { id: 16, phrase: "Who you longs to?", meaning: "Where are you from, or who is your family?" },
+  { id: 17, phrase: "Fair weather to you and snow to your heels", meaning: "Good luck as you head on your way." },
+  { id: 18, phrase: "Nar one here", meaning: "There is not a single one available here." }
+];
+
+const colors = ["#c1ecd4", "#ffdad8", "#d2eca2", "#f7d7aa", "#cfe2ff", "#ead8ff"];
+const translationsList = document.getElementById("translationsList");
+const phrasesList = document.getElementById("phrasesList");
+const matchedCountEl = document.getElementById("matchedCount");
+const missCountEl = document.getElementById("missCount");
+const streakCountEl = document.getElementById("streakCount");
+const messageEl = document.getElementById("message");
+const completionEl = document.getElementById("completionText");
+let selectedPhrase = null;
+let matched = new Set();
+let misses = 0;
+let streak = 0;
+let matchNumber = 0;
+let matchLabels = {};
+let phraseOrder = [];
+let translationOrder = [];
+
+function shuffle(items) {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function makeDerangedTranslations(baseOrder, leftOrder) {
+  let order = shuffle(baseOrder);
+  for (let attempt = 0; attempt < 80; attempt++) {
+    if (order.every((item, index) => !leftOrder[index] || item.id !== leftOrder[index].id)) return order;
+    order = shuffle(baseOrder);
+  }
+  return order.slice(1).concat(order[0]);
+}
+
+function render() {
+  translationsList.innerHTML = "";
+  phrasesList.innerHTML = "";
+  phraseOrder.forEach(pair => phrasesList.appendChild(makeCard(pair, "phrase")));
+  translationOrder.forEach(pair => translationsList.appendChild(makeCard(pair, "meaning")));
+  updateStats();
+}
+
+function makeCard(pair, type) {
+  const button = document.createElement("button");
+  const isMatched = matched.has(pair.id);
+  const isSelected = selectedPhrase === pair.id && type === "phrase";
+  button.type = "button";
+  button.dataset.id = pair.id;
+  button.dataset.type = type;
+  button.className = [
+    "choice w-full rounded-xl border-2 border-outline-variant bg-surface text-left px-4 py-3 font-semibold",
+    "focus:outline-none focus:ring-4 focus:ring-secondary-fixed",
+    isMatched ? "is-matched" : "",
+    isSelected ? "is-selected" : ""
+  ].join(" ");
+  button.disabled = isMatched;
+  button.innerHTML = `
+    <span class="block text-xs font-black tracking-widest text-on-surface-variant mb-1">${type === "meaning" ? "MEANING" : "PHRASE"}</span>
+    <span class="block text-base md:text-lg leading-snug">${type === "meaning" ? pair.meaning : pair.phrase}</span>
+    ${isMatched ? `<span class="mt-2 inline-flex items-center rounded-full px-2.5 py-1 text-xs font-black" style="background:${colors[pair.id % colors.length]}">Match ${matchLabels[pair.id]}</span>` : ""}
+  `;
+  button.addEventListener("click", () => handleChoice(pair.id, type));
+  return button;
+}
+
+function handleChoice(id, type) {
+  if (matched.has(id)) return;
+  if (type === "phrase") {
+    selectedPhrase = selectedPhrase === id ? null : id;
+    messageEl.textContent = selectedPhrase ? "Now choose the matching translation on the right." : "Start with any phrase card.";
+    render();
+    return;
+  }
+
+  if (!selectedPhrase) {
+    messageEl.textContent = "Pick a phrase on the left first.";
+    pulseCard(id, "meaning", "is-hint");
+    return;
+  }
+
+  if (selectedPhrase === id) {
+    matched.add(id);
+    matchNumber++;
+    matchLabels[id] = matchNumber;
+    streak++;
+    selectedPhrase = null;
+    messageEl.textContent = streak >= 3 ? "You're on a tear. Keep going." : "Yes b'y, that's a match.";
+    render();
+    return;
+  }
+
+  misses++;
+  streak = 0;
+  messageEl.textContent = "Not that one. Try the same phrase with another translation.";
+  pulseCard(selectedPhrase, "phrase", "is-wrong");
+  pulseCard(id, "meaning", "is-wrong");
+  updateStats();
+}
+
+function pulseCard(id, type, className) {
+  const card = document.querySelector(`[data-id="${id}"][data-type="${type}"]`);
+  if (!card) return;
+  card.classList.remove(className);
+  void card.offsetWidth;
+  card.classList.add(className);
+  setTimeout(() => card.classList.remove(className), 950);
+}
+
+function updateStats() {
+  matchedCountEl.textContent = matched.size;
+  missCountEl.textContent = misses;
+  streakCountEl.textContent = streak;
+  completionEl.textContent = matched.size === pairs.length
+    ? `Finished with ${misses} ${misses === 1 ? "miss" : "misses"}. Long may your jib draw.`
+    : "";
+}
+
+function hint() {
+  if (matched.size === pairs.length) return;
+  const targetId = selectedPhrase || pairs.find(pair => !matched.has(pair.id)).id;
+  if (!selectedPhrase) {
+    selectedPhrase = targetId;
+    render();
+  }
+  messageEl.textContent = "Hint: watch for the translation card that lights up.";
+  pulseCard(targetId, "meaning", "is-hint");
+}
+
+function shuffleOpenCards() {
+  const unmatchedPhrases = phraseOrder.filter(pair => !matched.has(pair.id));
+  const unmatchedTranslations = translationOrder.filter(pair => !matched.has(pair.id));
+  const lockedPhrases = phraseOrder.filter(pair => matched.has(pair.id));
+  const lockedTranslations = translationOrder.filter(pair => matched.has(pair.id));
+  phraseOrder = lockedPhrases.concat(shuffle(unmatchedPhrases));
+  translationOrder = lockedTranslations.concat(makeDerangedTranslations(unmatchedTranslations, phraseOrder.slice(lockedPhrases.length)));
+  selectedPhrase = null;
+  messageEl.textContent = "Open cards shuffled. Matches stay locked.";
+  render();
+}
+
+function resetGame() {
+  matched = new Set();
+  misses = 0;
+  streak = 0;
+  matchNumber = 0;
+  matchLabels = {};
+  selectedPhrase = null;
+  phraseOrder = shuffle(pairs);
+  translationOrder = makeDerangedTranslations(pairs, phraseOrder);
+  messageEl.textContent = "Start with any phrase card.";
+  render();
+}
+
+document.getElementById("hintBtn").addEventListener("click", hint);
+document.getElementById("shuffleBtn").addEventListener("click", shuffleOpenCards);
+document.getElementById("resetBtn").addEventListener("click", resetGame);
+resetGame();
+</script>
+</body>
+</html>

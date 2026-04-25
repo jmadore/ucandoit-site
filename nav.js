@@ -24,6 +24,7 @@
                 ["countdown-letters-game.html", "Countdown Letters"],
                 ["countdown-conundrum.html", "Countdown Conundrum"],
                 ["countdown-numbers-game.html", "Countdown Numbers"],
+                ["newfoundland-phrase-match.html", "Newfoundland Phrase Match"],
                 ["canadian-tictactoe.html", "Canadian Tic Tac Toe"],
                 ["canadian-goose-game.html", "Canadian Goose Game"],
             ],
