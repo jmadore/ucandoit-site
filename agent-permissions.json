@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "description": "Agent access permissions for ucandoit.ca, a static Canadian tools and games website.",
+  "site": "https://ucandoit.ca",
+  "discovery": {
+    "llms": "/llms.txt",
+    "skill": "/skill.md",
+    "robots": "/robots.txt"
+  },
+  "interactions": {
+    "read": {
+      "allowed": true,
+      "paths": [
+        "/*.html",
+        "/llms.txt",
+        "/skill.md",
+        "/robots.txt",
+        "/assets/*"
+      ]
+    },
+    "api": {
+      "allowed": false,
+      "endpoints": []
+    },
+    "authentication": {
+      "required": false
+    }
+  },
+  "rateLimits": {
+    "default": "reasonable crawling only"
+  },
+  "contact": "https://ucandoit.ca"
+}

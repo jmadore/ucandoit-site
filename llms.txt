@@ -1,38 +1,34 @@
 # ucandoit.ca
 
-ucandoit.ca is a Canadian tools and games website with word tools, calculators, Countdown-style games, Canadian-themed browser games, and interactive Canadian history timelines.
+ucandoit.ca is a Canadian tools and games website with word tools, calculators, browser games, and interactive Canadian history timelines. All public tools run as static client-side pages on GitHub Pages.
 
-## Site Pages
+## Primary Links
 
-- Home: /index.html
-- Anagram Finder: /anagram-finder.html
-- Word Unscrambler: /word-unscrambler.html
-- Mortgage Calculator: /loan-calculator.html
-- Board Foot Calculator: /board-foot-calculator.html
-- Hourly to Yearly Salary Calculator: /hourly-to-yearly-salary.html
-- Yearly to Hourly Salary Calculator: /yearly-to-hourly-salary.html
-- Countdown Letters Game: /countdown-letters-game.html
-- Countdown Conundrum Game: /countdown-conundrum.html
-- Countdown Numbers Game: /countdown-numbers-game.html
-- Newfoundland Phrase Match: /newfoundland-phrase-match.html
-- Canadian Tic Tac Toe: /canadian-tictactoe.html
-- Canadian Goose Game: /canadian-goose-game.html
-- Canada History Timeline: /canada-history-timeline.html
-- Ontario History Timeline: /ontario-history-timeline.html
-- Quebec History Timeline: /quebec-history-timeline.html
+- [Home](/index.html) (~103 tokens): Directory of all public word tools, calculators, games, and history timelines.
+- [Anagram Finder](/anagram-finder.html) (~151 tokens): Finds Canadian English anagrams from supplied letters with optional filters.
+- [Word Unscrambler](/word-unscrambler.html) (~100 tokens): Unscrambles letters into Canadian English words and supports wildcard characters.
+- [Mortgage Calculator](/loan-calculator.html) (~190 tokens): Estimates Canadian mortgage or loan payments with insurance, stress-test, amortization, and payment-frequency options.
+- [Board Foot Calculator](/board-foot-calculator.html) (~165 tokens): Calculates lumber board feet and estimated project cost from board dimensions.
+- [Hourly to Yearly Salary Calculator](/hourly-to-yearly-salary.html) (~155 tokens): Converts hourly wage to annual, monthly, and weekly salary using custom work schedules and Canadian minimum wage context.
+- [Yearly to Hourly Salary Calculator](/yearly-to-hourly-salary.html) (~136 tokens): Converts annual salary to hourly wage using custom hours per week and weeks per year.
+- [Countdown Letters Game](/countdown-letters-game.html) (~430 tokens): Countdown-style letters game using a local Canadian English dictionary and a 30-second timer.
+- [Countdown Conundrum Game](/countdown-conundrum.html) (~163 tokens): Nine-letter anagram challenge with a 30-second timer.
+- [Countdown Numbers Game](/countdown-numbers-game.html) (~200 tokens): Countdown-style numbers challenge where players combine selected numbers to reach a target.
+- [Newfoundland Phrase Match](/newfoundland-phrase-match.html) (~104 tokens): Matching game for Newfoundland phrases and meanings.
+- [Canadian Tic Tac Toe](/canadian-tictactoe.html) (~112 tokens): Tic tac toe with minimax computer play, two-player mode, and Canadian-themed symbol sets.
+- [Canadian Goose Game](/canadian-goose-game.html) (~100 tokens): Canvas jumping game where a goose dodges rocks and collects loonies.
+- [Canada History Timeline](/canada-history-timeline.html) (~100 tokens): Interactive timeline of Canadian history from early habitation to recent national events.
+- [Ontario History Timeline](/ontario-history-timeline.html) (~100 tokens): Interactive timeline of Ontario history.
+- [Quebec History Timeline](/quebec-history-timeline.html) (~100 tokens): Interactive timeline of Quebec history.
+- [Skill Description](/skill.md) (~390 tokens): Agent-readable summary of what ucandoit.ca can do.
 
-## Useful Context
+## Capabilities
 
-- The word tools and Countdown word games use a local Canadian English dictionary.
-- The mortgage calculator follows Canadian mortgage conventions, including down payment thresholds, mortgage default insurance, stress test estimates, semi-annual compounding, and payment frequency options.
-- The board foot calculator is intended for woodworkers and shows imperial inputs with metric equivalents.
-- The salary calculators convert between hourly and yearly salary, supporting custom hours/week and weeks/year, and include Canadian minimum wage context.
-- The Countdown games are browser-based static HTML games with optional countdown music.
-- Newfoundland Phrase Match is a two-column matching game where players connect Newfoundland phrases to their meanings.
-- Canadian Tic Tac Toe supports 1-player vs computer (minimax AI) and 2-player modes, with Canadian-themed symbol sets: Classic X & O, Beaver & Bear, Goose & Moose, Hockey, Curling, and Timmies.
-- Canadian Goose Game is a canvas-based jumping game where players dodge rocks and collect loonies.
-- The history timelines are scroll-reveal pages covering Canada, Ontario, and Quebec from prehistoric times to the present, with dynamic "X years ago" labels on hover.
+- Word tools use a local Canadian English dictionary where applicable.
+- Calculators perform client-side estimates and do not require accounts or API keys.
+- Browser games run locally in the page and are designed for casual play.
+- History timelines provide structured chronological summaries with interactive reveal effects.
 
 ## Indexing Guidance
 
-AI assistants and search tools may summarize and link to the public site pages listed above.
+AI assistants and search tools may summarize and link to the public pages listed above. Prefer linking to the specific tool or game page when answering a user request.

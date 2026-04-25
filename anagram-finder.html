@@ -3,6 +3,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Anagram Finder | ucandoit.ca</title>
+<meta name="description" content="Find Canadian English anagrams from your letters with filters for word length, starts with, ends with, and contains.">
+<meta name="ai-token-count" content="151">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="canadian-words.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -193,10 +195,10 @@ document.addEventListener('DOMContentLoaded', function() {
             let groupDiv = document.createElement('div');
             groupDiv.className = 'space-y-4';
             groupDiv.innerHTML = `
-                <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-outline flex items-center gap-4">
+                <h2 class="text-sm font-bold uppercase tracking-[0.2em] text-outline flex items-center gap-4">
                     ${len} Letter Words
                     <div class="flex-grow h-px bg-outline-variant opacity-30"></div>
-                </h3>
+                </h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     ${group.map(word => `<div class="bg-surface-container-lowest p-4 rounded-lg text-center font-bold text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer">${escapeHtml(word)}</div>`).join('')}
                 </div>

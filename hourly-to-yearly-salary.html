@@ -4,6 +4,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Hourly to Yearly Salary Calculator | ucandoit.ca</title>
+<meta name="description" content="Convert an hourly wage to yearly, monthly, and weekly salary using custom hours per week and weeks per year.">
+<meta name="ai-token-count" content="155">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script>
@@ -23,6 +25,9 @@ tailwind.config = {
         "on-surface": "#191c1b",
         "on-surface-variant": "#414844",
         "primary-fixed": "#c1ecd4",
+        "secondary-container": "#cfe99f",
+        "on-secondary-container": "#546a2e",
+        "secondary-fixed": "#d2eca2",
         "tertiary-fixed": "#ffdad8",
         "outline-variant": "#c1c8c2"
       },
@@ -35,7 +40,53 @@ tailwind.config = {
 <style>
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 .salary-panel {
-  background: linear-gradient(135deg, #012d1d 0%, #1b4332 60%, #2d6a4f 100%);
+  background:
+    radial-gradient(circle at 88% 14%, rgba(210, 236, 162, 0.18), transparent 28%),
+    linear-gradient(135deg, #012d1d 0%, #1b4332 62%, #2d6a4f 100%);
+}
+.salary-page {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(207, 233, 159, 0.42), transparent 26%),
+    radial-gradient(circle at 92% 0%, rgba(255, 218, 216, 0.72), transparent 24%),
+    linear-gradient(135deg, #f8faf8 0%, #eef2ec 58%, #f8eee9 100%);
+}
+.hero-copy {
+  max-width: 42rem;
+}
+.loonie-medallion {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: clamp(5.5rem, 15vw, 8.25rem);
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: #e5c95a;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+.loonie-medallion img {
+  width: 168%;
+  height: 118%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  transform: translate(-19%, -4%) scale(1.12);
+}
+.salary-result {
+  position: relative;
+  z-index: 1;
+  padding-right: clamp(0rem, 18vw, 8rem);
+}
+.salary-value {
+  display: block;
+  font-size: clamp(3rem, 7.5vw, 5.6rem);
+  line-height: 0.92;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 640px) {
+  .salary-result { padding-right: 0; padding-top: 5.5rem; }
+  .loonie-medallion { top: 1rem; right: 1rem; width: 5rem; }
 }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777"
@@ -51,15 +102,16 @@ tailwind.config = {
 <!-- Shared site navigation -->
 <div id="site-nav"></div>
 <script src="nav.js?v=20260425"></script>
-<main class="pt-20 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+<main class="salary-page pt-24 pb-16 px-5 md:px-8 min-h-screen">
+<div class="max-w-7xl mx-auto">
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 <div class="lg:col-span-7 space-y-8">
 <div>
-<span class="inline-block px-4 py-1.5 bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest rounded-full mb-4">Salary Calculator</span>
+<span class="inline-block px-4 py-1.5 bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest rounded-full mb-4">SALARY CALCULATOR</span>
 <h1 class="font-headline text-5xl md:text-7xl font-extrabold text-primary mb-4 tracking-tighter leading-[0.9] max-w-3xl">Hourly to Yearly <span class="text-tertiary">Salary</span></h1>
-<p class="text-lg text-on-surface-variant max-w-2xl font-medium leading-relaxed italic border-l-4 border-secondary-fixed pl-6">Convert your hourly wage to an annual salary, factoring in hours per week and weeks per year. Useful for job comparisons, budgeting, and negotiations.</p>
+<p class="hero-copy text-lg text-on-surface-variant font-medium leading-relaxed">Convert your hourly wage to an annual salary, factoring in hours per week and weeks per year. Useful for job comparisons, budgeting, and negotiations.</p>
 </div>
-<section class="bg-surface-container-low p-8 md:p-12 rounded-xl">
+<section class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 rounded-xl">
 <h2 class="font-headline text-2xl font-bold mb-10 flex items-center gap-3">
 <span class="material-symbols-outlined text-secondary">calculate</span>
 Salary Inputs
@@ -92,10 +144,10 @@ Salary Inputs
 </div>
 <aside class="lg:col-span-5 space-y-8">
 <div class="salary-panel rounded-xl p-8 text-white shadow-2xl relative overflow-hidden">
-<img src="assets/loonie.jpeg" alt="" style="position:absolute;top:-24px;right:-24px;width:170px;height:170px;border-radius:50%;object-fit:cover;opacity:0.9;box-shadow:0 4px 24px rgba(0,0,0,0.4);pointer-events:none;"/>
+<div class="loonie-medallion" aria-hidden="true"><img src="assets/loonie.jpeg" alt=""/></div>
 <h2 class="font-headline text-sm font-bold uppercase tracking-widest mb-8 opacity-80">Estimated Salary</h2>
-<div class="mb-10">
-<span id="yearly-salary" class="text-5xl md:text-6xl font-black tracking-tighter">$0.00</span>
+<div class="salary-result mb-10">
+<span id="yearly-salary" class="salary-value font-black tracking-tighter">$0.00</span>
 <p id="monthly-salary" class="mt-2 text-primary-fixed text-sm font-medium">$0.00 per month</p>
 <p id="weekly-salary" class="mt-1 text-primary-fixed text-sm font-medium">$0.00 per week</p>
 </div>
@@ -114,16 +166,17 @@ Salary Inputs
 </div>
 </div>
 </div>
-<div class="bg-surface-container-low p-8 rounded-xl">
+<div class="bg-surface-container-lowest border border-outline-variant p-8 rounded-xl">
 <h3 class="font-headline font-bold text-primary text-xl mb-4">Salary formula</h3>
 <p class="text-on-surface-variant leading-relaxed mb-4">Annual Salary = Hourly Wage × Hours/Week × Weeks/Year</p>
-<div class="bg-surface-container-lowest rounded-lg p-4 font-headline font-black text-primary text-center">$25 × 40 × 52 = $52,000</div>
+<div class="bg-surface-container-low rounded-lg p-4 font-headline font-black text-primary text-center">$25 × 40 × 52 = $52,000</div>
 <p class="text-on-surface-variant leading-relaxed mt-4 text-sm">Adjust hours or weeks for part-time, overtime, or unpaid leave.</p>
 </div>
 </aside>
 </section>
+</div>
 </main>
-<section class="max-w-3xl mx-auto mt-16 mb-24">
+<section class="max-w-4xl mx-auto px-5 md:px-8 mt-16 mb-24">
   <h2 class="font-headline text-2xl font-bold mb-6 flex items-center gap-2">
     <span class="material-symbols-outlined text-secondary">public</span>
     Canadian Minimum Wage: Yearly Salary by Province (2026)
@@ -146,7 +199,7 @@ Salary Inputs
 <footer class="bg-emerald-50 dark:bg-emerald-950 w-full py-12 mt-20">
 <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
 <div class="space-y-2">
-<div class="font-headline font-bold text-emerald-950 dark:text-emerald-50">ucandoit.ca</div>
+<a class="inline-flex items-center" href="index.html" aria-label="ucandoit.ca home"><img class="h-8 w-auto" src="assets/logo.png?v=20260425" alt="ucandoit.ca"/></a>
 <p class="font-body text-sm tracking-wide leading-relaxed text-emerald-700 dark:text-emerald-400 max-w-sm">© 2024 ucandoit.ca</p>
 </div>
 </div>
