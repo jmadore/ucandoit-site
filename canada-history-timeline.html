@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Canada History Timeline — ucandoit.ca</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "tertiary-fixed": "#ffdad8",
+                    "secondary-fixed-dim": "#b6d088",
+                    "secondary-fixed": "#d2eca2",
+                    "surface-dim": "#d8dad9",
+                    "inverse-primary": "#a5d0b9",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#c1ecd4",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#50652a",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "on-surface-variant": "#414844",
+                    "on-secondary-fixed-variant": "#394d14",
+                    "on-secondary-container": "#546a2e",
+                    "on-background": "#191c1b",
+                    "on-secondary-fixed": "#131f00",
+                    "secondary-container": "#cfe99f",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#410007",
+                    "on-tertiary-container": "#ff807f",
+                    "tertiary-container": "#77131c",
+                    "primary": "#012d1d",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1b",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c1c8c2",
+                    "background": "#f8faf8",
+                    "outline": "#717973",
+                    "on-primary-container": "#86af99",
+                    "surface-container-high": "#e6e9e7",
+                    "primary-container": "#1b4332",
+                    "surface": "#f8faf8",
+                    "surface-tint": "#3f6653",
+                    "on-primary-fixed-variant": "#274e3d",
+                    "primary-fixed-dim": "#a5d0b9",
+                    "surface-container-highest": "#e1e3e1",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f2f4f2",
+                    "inverse-on-surface": "#eff1ef",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#002114",
+                    "inverse-surface": "#2e3130",
+                    "surface-variant": "#e1e3e1",
+                    "tertiary": "#a61d24",
+                    "surface-container": "#eceeec",
+                    "surface-bright": "#f8faf8",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#861f25"
+                },
+                "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+                },
+                "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+                }
+            },
+        },
+    }
+</script>
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .timeline-item {
+        opacity: 0;
+        transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .timeline-item.from-left  { transform: translateX(-36px); }
+    .timeline-item.from-right { transform: translateX(36px); }
+    .timeline-item.from-below { transform: translateY(24px); }
+    .timeline-item.visible    { opacity: 1; transform: translate(0); }
+
+    .years-ago-pill {
+        opacity: 0;
+        transform: translateY(-4px);
+        transition: opacity 0.18s ease, transform 0.18s ease;
+        pointer-events: none;
+    }
+    .timeline-card:hover .years-ago-pill {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Mobile: force single-column layout */
+    @media (max-width: 767px) {
+        .timeline-item.from-left,
+        .timeline-item.from-right {
+            transform: translateY(24px);
+        }
+    }
+</style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777"
+         crossorigin="anonymous"></script>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+<!-- Nav -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl border-b border-surface-container">
+    <nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+        <a class="text-2xl font-black text-emerald-950 dark:text-emerald-50 tracking-tighter font-headline" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+        <div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Word Tools <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-48 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="anagram-finder.html">Anagram Finder</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="word-unscrambler.html">Word Unscrambler</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Calculators <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="yearly-to-hourly-salary.html">Yearly to Hourly Salary</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="loan-calculator.html">Mortgage Calculator</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="board-foot-calculator.html">Board Foot Calculator</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="hourly-to-yearly-salary.html">Hourly to Yearly Salary</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1" type="button">Games <span class="material-symbols-outlined text-base">expand_more</span></button>
+                <div class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col min-w-52 rounded-lg bg-white dark:bg-emerald-950 shadow-xl border border-emerald-100 dark:border-emerald-900 py-2 z-50">
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-letters-game.html">Countdown Letters</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-conundrum.html">Countdown Conundrum</a>
+                    <a class="px-4 py-2 text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors" href="countdown-numbers-game.html">Countdown Numbers</a>
+                </div>
+            </div>
+            <a class="text-tertiary hover:text-tertiary/70 transition-colors" href="canada-history-timeline.html">History</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero -->
+<section class="pt-32 pb-16 text-center px-6 bg-gradient-to-b from-surface-container-low to-surface">
+    <div class="inline-flex items-center gap-2 bg-tertiary/10 text-tertiary text-sm font-semibold px-4 py-1.5 rounded-full mb-6 font-headline">
+        <span class="material-symbols-outlined text-base">flag</span> Canada
+    </div>
+    <h1 class="font-headline text-4xl md:text-6xl font-black text-primary tracking-tight mb-4">Canada History Timeline</h1>
+    <p class="text-on-surface-variant text-lg max-w-xl mx-auto">From the first peoples to the present day. Hover over any event to see how long ago it happened.</p>
+</section>
+
+<!-- Timeline -->
+<main class="max-w-5xl mx-auto px-4 pb-32" id="timeline-root">
+
+    <!-- Spine wrapper -->
+    <div class="relative" id="timeline-spine">
+
+        <!-- Desktop centre line -->
+        <div class="absolute left-1/2 top-0 bottom-0 w-px bg-emerald-200 -translate-x-1/2 hidden md:block" aria-hidden="true"></div>
+
+        <!-- Events injected by JS -->
+    </div>
+</main>
+
+<footer class="border-t border-surface-container py-10 text-center text-sm text-on-surface-variant">
+    <a class="font-headline font-black text-primary tracking-tighter text-lg" href="index.html">u<span class="text-tertiary">can</span>doit.<span class="text-tertiary">ca</span></a>
+    <p class="mt-2">Source: <a class="underline hover:text-primary transition-colors" href="https://en.wikipedia.org/wiki/Timeline_of_Canadian_history" rel="noopener" target="_blank">Wikipedia — Timeline of Canadian history</a></p>
+</footer>
+
+<script>
+const EVENTS = [
+    { year: -14000, label: "14,000 BCE",    desc: "Glaciers covering Canada began melting, enabling Paleo-Indians to travel south and east into the continent." },
+    { year: -3000,  label: "3,000–2,000 BCE", desc: "Indigenous peoples of the Northeastern Woodlands began cultivating squash." },
+    { year: -3000,  label: "3,000 BCE",     desc: "Paleo-Eskimos began settling Arctic regions of North America from Siberia." },
+    { year: 796,    label: "796 CE",         desc: "The Council of Three Fires (Three Fires Confederacy) was established." },
+    { year: 900,    label: "900",            desc: "A Norse settlement was founded at L'Anse aux Meadows, possibly connected to Vinland." },
+    { year: 1000,   label: "c. 1000",        desc: "Norsemen arrived from Europe and established temporary settlements on Newfoundland's northern tip." },
+    { year: 1142,   label: "1142",           desc: "The Iroquois Confederacy (League of Peace and Power) was formed on August 31." },
+    { year: 1497,   label: "1497",           desc: "On June 24, Genoese navigator John Cabot landed on the northern Atlantic coast, claiming territory for England." },
+    { year: 1498,   label: "1498–1499",      desc: "Portuguese explorer João Fernandes Lavrador sighted and sailed along the Labrador Peninsula coasts." },
+    { year: 1534,   label: "1534",           desc: "On July 24, Jacques Cartier claimed the Gaspé Peninsula for France." },
+    { year: 1583,   label: "1583",           desc: "Humphrey Gilbert claimed Newfoundland for England, though he died at sea before establishing permanent settlement." },
+    { year: 1605,   label: "1605",           desc: "Samuel de Champlain's French colonists established the first permanent European settlement at Port-Royal, founding Acadia." },
+    { year: 1608,   label: "1608",           desc: "Quebec City was founded on July 3 by Samuel de Champlain, becoming the capital of New France." },
+    { year: 1634,   label: "1634",           desc: "Trois-Rivières was founded on July 4, becoming New France's second permanent settlement." },
+    { year: 1642,   label: "1642",           desc: "Fort Ville-Marie (Old Montreal) was founded on May 17 by Paul de Chomedey and Jeanne Mance." },
+    { year: 1666,   label: "1666",           desc: "The first North American census was conducted in New France." },
+    { year: 1670,   label: "1670",           desc: "The Hudson's Bay Company was formed on May 2 with exclusive trading rights in Rupert's Land." },
+    { year: 1690,   label: "1690",           desc: "The Battle of Québec occurred October 16–24 between New France and Massachusetts Bay colonies." },
+    { year: 1701,   label: "1701",           desc: "The Great Peace of Montreal was signed on August 4, between New France and 39 First Nations." },
+    { year: 1710,   label: "1710",           desc: "The Siege of Port Royal resulted in British capture of Acadia's capital." },
+    { year: 1713,   label: "1713",           desc: "The Treaty of Utrecht ended the War of Spanish Succession, ceding Acadia to Great Britain." },
+    { year: 1749,   label: "1749",           desc: "Halifax was founded on June 21, marking the first British colonial settlement using public capital." },
+    { year: 1755,   label: "1755",           desc: "Brigadier-General Charles Lawrence ordered the Expulsion of the Acadians on August 11." },
+    { year: 1758,   label: "1758",           desc: "The Siege of Louisbourg (June 8–July 26) saw British forces destroy the French fortress." },
+    { year: 1759,   label: "1759",           desc: "The Battle of the Plains of Abraham on September 13 resulted in British victory outside Quebec City." },
+    { year: 1763,   label: "1763",           desc: "The Treaty of Paris (February 10) ended the Seven Years' War, ceding New France to Great Britain. The Royal Proclamation followed in October, reorganizing British colonial territories." },
+    { year: 1774,   label: "1774",           desc: "The Quebec Act was passed, extending Quebec's territory and restoring French civil law." },
+    { year: 1775,   label: "1775–1776",      desc: "The American Revolutionary War reached Canada with the Invasion of Quebec and the Battle of Quebec." },
+    { year: 1780,   label: "1780s–1860s",    desc: "The Underground Railroad assisted thousands of enslaved people escaping U.S. slave states into Canada." },
+    { year: 1783,   label: "1783",           desc: "The Treaty of Paris officially ended the American Revolutionary War on September 3." },
+    { year: 1784,   label: "1784",           desc: "New Brunswick and Cape Breton Island were partitioned from Nova Scotia on June 18. The Haldimand Proclamation granted 550,000 acres to the Mohawks and Five Nations." },
+    { year: 1791,   label: "1791",           desc: "The Constitutional Act 1791 divided the Province of Quebec into Upper and Lower Canada on June 10." },
+    { year: 1793,   label: "1793",           desc: "Alexander Mackenzie became the first known person to cross the North American continent, reaching Bella Coola." },
+    { year: 1811,   label: "1811",           desc: "The Red River Colony settlement began, founded by Thomas Douglas with Hudson's Bay Company support." },
+    { year: 1813,   label: "1813",           desc: "The Battle of York on April 27 saw U.S. forces capture Upper Canada's capital. On June 21–22, Laura Secord made her famous walk to warn British forces of a surprise U.S. attack." },
+    { year: 1818,   label: "1818",           desc: "The London Convention set the boundary between British North America and the U.S. at the 49th parallel." },
+    { year: 1821,   label: "1821",           desc: "The Hudson's Bay Company and North West Company merged, ending the fur trade rivalry known as the Pemmican War." },
+    { year: 1829,   label: "1829",           desc: "Shanawdithit, the last known full-blooded Beothuk, died on June 6 at age 29." },
+    { year: 1837,   label: "1837–1838",      desc: "The Rebellions of 1837–1838 broke out in Upper and Lower Canada against government domination." },
+    { year: 1841,   label: "1841",           desc: "Lower Canada and Upper Canada merged into the Province of Canada on February 10." },
+    { year: 1846,   label: "1846",           desc: "The Oregon Treaty on June 15 extended the boundary between British North America and the U.S. to the Pacific Ocean." },
+    { year: 1862,   label: "1862",           desc: "The 1862 Pacific Northwest smallpox epidemic began March 18, killing an estimated 20,000 Indigenous people." },
+    { year: 1864,   label: "1864",           desc: "The Charlottetown Conference (September 1–9) discussed Maritime Union and laid the groundwork for Canadian Confederation." },
+    { year: 1867,   label: "July 1, 1867",   desc: "Confederation: the British North America Act created the Dominion of Canada, uniting Ontario, Quebec, Nova Scotia, and New Brunswick." },
+    { year: 1869,   label: "1869–1870",      desc: "The Red River Rebellion, led by Louis Riel, resisted Canadian government intrusion into the Métis homeland." },
+    { year: 1870,   label: "1870",           desc: "On July 15, Canada acquired Rupert's Land, forming the Northwest Territories. Manitoba entered Confederation." },
+    { year: 1871,   label: "1871",           desc: "British Columbia and Vancouver Island entered Confederation on July 20. Treaty 1 and Treaty 2 were signed with Cree and Chippewa First Nations." },
+    { year: 1873,   label: "1873",           desc: "The North-West Mounted Police was established on May 23. Prince Edward Island entered Confederation on July 1." },
+    { year: 1876,   label: "1876",           desc: "The Indian Act was passed on April 12, establishing official \"Indian status\" definitions that would govern Indigenous peoples for generations." },
+    { year: 1880,   label: "1880",           desc: "The British Arctic Territories were ceded to Canada on September 1." },
+    { year: 1885,   label: "1885",           desc: "The North-West Rebellion (March–June) was led by Louis Riel and Métis fighters. Riel was hanged for treason on November 16. On November 7, the transcontinental Canadian Pacific Railway was completed." },
+    { year: 1896,   label: "1896",           desc: "Gold was discovered in the Klondike region on August 16, sparking the Klondike Gold Rush and a wave of settlement in the Yukon." },
+    { year: 1903,   label: "1903",           desc: "The United Kingdom and United States settled the Alaska boundary dispute affecting British Columbia's panhandle border." },
+    { year: 1905,   label: "1905",           desc: "Alberta and Saskatchewan were partitioned from the North-West Territories on September 1, becoming Canada's eighth and ninth provinces." },
+    { year: 1909,   label: "1909",           desc: "On February 23, John Alexander Douglas McCurdy piloted the AEA Silver Dart — Canada's first powered airplane flight." },
+    { year: 1910,   label: "1910",           desc: "The Royal Canadian Navy was established on May 4." },
+    { year: 1914,   label: "August 4, 1914", desc: "Great Britain declared war on Germany, bringing Canada into World War I. The RMS Empress of Ireland had already sunk in May, killing at least 1,012 people." },
+    { year: 1917,   label: "1917",           desc: "The Canadian Expeditionary Force fought together for the first time at the Battle of Vimy Ridge (April 9–12), a defining moment of national identity. The Halifax Explosion on December 6 killed nearly 2,000 people." },
+    { year: 1918,   label: "1918",           desc: "On May 24, some women gained the right to vote in federal elections. The Canadian Air Force was established on September 19." },
+    { year: 1919,   label: "1919",           desc: "The Winnipeg General Strike (May 15–June 26) involved over 30,000 workers and became a landmark in Canadian labour history." },
+    { year: 1920,   label: "1920",           desc: "Canada was admitted as a full League of Nations member. The NWMP became the Royal Canadian Mounted Police." },
+    { year: 1926,   label: "1926",           desc: "The King–Byng affair (June–September) tested the limits of Canadian constitutional relations and responsible government." },
+    { year: 1929,   label: "1929",           desc: "The Great Depression began in Canada, causing widespread poverty, unemployment, and social upheaval through the 1930s." },
+    { year: 1931,   label: "1931",           desc: "The Statute of Westminster 1931 (December 11) recognized full Dominion legislative independence, giving Canada autonomy from Britain." },
+    { year: 1935,   label: "1935",           desc: "The On-to-Ottawa Trek (April–July) protested government relief work camp conditions during the Depression." },
+    { year: 1939,   label: "September 10, 1939", desc: "Canada entered World War II by declaring war on Germany, one week after Britain — asserting its independent foreign policy for the first time." },
+    { year: 1945,   label: "1945",           desc: "Canada joined the United Nations on November 9, seeking to play a constructive 'middle power' role in international affairs." },
+    { year: 1947,   label: "1947",           desc: "The Canadian Citizenship Act came into force on January 1, creating a distinct Canadian citizenship separate from British subject status." },
+    { year: 1949,   label: "March 31, 1949", desc: "Newfoundland entered Confederation as Canada's tenth province following a razor-thin referendum result." },
+    { year: 1959,   label: "1959",           desc: "The St. Lawrence Seaway, a joint Canada-U.S. project, officially opened on June 27, connecting the Great Lakes to the Atlantic Ocean." },
+    { year: 1960,   label: "1960",           desc: "First Nations people gained the right to vote in federal elections on July 1, ending decades of exclusion from the franchise." },
+    { year: 1965,   label: "February 15, 1965", desc: "Canada adopted the maple leaf as its national flag, replacing the Canadian Red Ensign after a passionate national debate." },
+    { year: 1967,   label: "1967",           desc: "Canada celebrated its centennial with Expo 67 in Montreal, drawing over 50 million visitors and showcasing Canada on the world stage." },
+    { year: 1970,   label: "1970",           desc: "The October Crisis: the government invoked the War Measures Act against the FLQ separatist group after kidnappings shook Quebec." },
+    { year: 1980,   label: "May 20, 1980",   desc: "A Quebec independence referendum resulted in 59.56% voting to remain in Canada." },
+    { year: 1982,   label: "April 17, 1982", desc: "The Constitution Act, 1982 was proclaimed, patriating the Constitution from Britain and enshrining the Canadian Charter of Rights and Freedoms." },
+    { year: 1987,   label: "1987",           desc: "The Meech Lake Accord was signed by provincial premiers and Prime Minister Mulroney, attempting to bring Quebec into the Constitution." },
+    { year: 1989,   label: "1989",           desc: "The Canada–United States Free Trade Agreement came into force on January 1." },
+    { year: 1990,   label: "1990",           desc: "The Oka Crisis (July 11–September 26): Mohawk activists protested a golf course expansion onto sacred burial grounds, triggering a 78-day standoff." },
+    { year: 1992,   label: "1992",           desc: "The Charlottetown Accord was defeated in a national referendum on October 26, ending another attempt to resolve constitutional tensions." },
+    { year: 1994,   label: "1994",           desc: "The North American Free Trade Agreement (NAFTA) came into force on January 1." },
+    { year: 1995,   label: "October 30, 1995", desc: "A second Quebec independence referendum resulted in 50.58% voting to remain in Canada — the narrowest margin in Canadian history." },
+    { year: 1999,   label: "April 1, 1999",  desc: "Nunavut was partitioned from the Northwest Territories, becoming Canada's third territory and a milestone for Inuit self-determination." },
+    { year: 2001,   label: "2001",           desc: "Canada joined the War in Afghanistan on October 7 following the September 11 attacks." },
+    { year: 2003,   label: "2003",           desc: "The Canadian Alliance and Progressive Conservative Party merged into the Conservative Party of Canada on December 7." },
+    { year: 2005,   label: "July 20, 2005",  desc: "The Civil Marriage Act legalized same-sex marriage throughout Canada, making it one of the first countries in the world to do so." },
+    { year: 2008,   label: "2008",           desc: "The Truth and Reconciliation Commission was established on June 1 to document the history of residential schools. Prime Minister Harper formally apologized for the system on June 11." },
+    { year: 2012,   label: "2012",           desc: "The Royal Canadian Mint struck the last Canadian penny on May 4, ending 154 years of penny production." },
+    { year: 2018,   label: "October 17, 2018", desc: "The Cannabis Act became law, legalizing recreational cannabis use nationwide — a first among G7 nations." },
+    { year: 2020,   label: "2020",           desc: "The first presumptive COVID-19 case was identified in Canada on January 25, beginning a pandemic that would reshape daily life for years." },
+    { year: 2022,   label: "2022",           desc: "Pope Francis visited Canada July 24–29 to apologize for the Catholic Church's role in the residential school system. Queen Elizabeth II died September 8 after 70 years as Canada's monarch; Charles III became King of Canada." },
+];
+
+const currentYear = new Date().getFullYear();
+const spine = document.getElementById('timeline-spine');
+
+function yearsAgoText(year) {
+    const diff = year < 0 ? currentYear + Math.abs(year) : currentYear - year;
+    return diff.toLocaleString('en-CA') + ' years ago';
+}
+
+EVENTS.forEach((ev, i) => {
+    const isLeft = i % 2 === 0;
+    const ago = yearsAgoText(ev.year);
+
+    // Card HTML
+    const card = `
+        <div class="timeline-card group/card relative bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-5 border border-surface-container hover:border-emerald-200 cursor-default">
+            <span class="years-ago-pill absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-primary text-on-primary text-xs font-semibold font-headline px-3 py-1 rounded-full shadow-md">${ago}</span>
+            <div class="flex items-start gap-3 mb-2">
+                <span class="inline-block bg-tertiary text-on-tertiary text-xs font-bold font-headline px-2.5 py-0.5 rounded-full shrink-0 mt-0.5">${ev.label}</span>
+            </div>
+            <p class="text-sm text-on-surface-variant leading-relaxed">${ev.desc}</p>
+        </div>`;
+
+    // Dot
+    const dot = `<div class="flex flex-col items-center shrink-0"><div class="w-4 h-4 rounded-full bg-emerald-600 ring-4 ring-surface border-2 border-white shadow-sm z-10"></div></div>`;
+
+    const fromClass = isLeft ? 'from-left' : 'from-right';
+
+    let row;
+    if (isLeft) {
+        // Desktop: card left, empty right
+        row = `
+        <div class="timeline-item ${fromClass} mb-10 md:mb-14 md:grid md:grid-cols-[1fr_2rem_1fr] md:gap-6 md:items-center">
+            <div class="md:text-right relative pb-2 md:pb-0">${card}</div>
+            <div class="hidden md:flex justify-center">${dot}</div>
+            <div class="hidden md:block"></div>
+            <!-- Mobile dot -->
+            <div class="flex md:hidden items-center gap-3 mb-2 mt-1">
+                <div class="w-3 h-3 rounded-full bg-emerald-600 ring-2 ring-emerald-100 shrink-0"></div>
+            </div>
+        </div>`;
+    } else {
+        // Desktop: empty left, card right
+        row = `
+        <div class="timeline-item ${fromClass} mb-10 md:mb-14 md:grid md:grid-cols-[1fr_2rem_1fr] md:gap-6 md:items-center">
+            <div class="hidden md:block"></div>
+            <div class="hidden md:flex justify-center">${dot}</div>
+            <div class="relative pb-2 md:pb-0">${card}</div>
+            <!-- Mobile dot -->
+            <div class="flex md:hidden items-center gap-3 mb-2 mt-1">
+                <div class="w-3 h-3 rounded-full bg-emerald-600 ring-2 ring-emerald-100 shrink-0"></div>
+            </div>
+        </div>`;
+    }
+
+    spine.insertAdjacentHTML('beforeend', row);
+});
+
+// Scroll-reveal
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
