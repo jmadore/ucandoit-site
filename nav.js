@@ -7,7 +7,8 @@
                 items: [
                         [ "anagram-finder.html", "Anagram Finder"],
                         [ "word-unscrambler.html", "Word Unscrambler"],
-                        [ "word-counter.html", "Word Counter"]
+                        [ "word-counter.html", "Word Counter"],
+                        [ "ai-text-humanizer.html", "AI Text Humanizer"]
                 ]
         },
         {

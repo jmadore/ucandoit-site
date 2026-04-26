@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="nav-section" content="Word Tools">
+<meta name="nav-label" content="AI Text Humanizer">
+<meta name="nav-section-order" content="1">
+<meta name="nav-item-order" content="4">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Text Humanizer | ucandoit.ca</title>
+<meta name="description" content="Make AI-generated text sound more natural. Free tool that adds contractions, simplifies AI vocabulary, and smooths out robotic phrasing — no account needed.">
+<meta name="ai-token-count" content="100">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #012d1d 0%, #1b4332 100%);
+        }
+        .editor-area {
+            min-height: 320px;
+        }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922871229996777"
+         crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1W7WL78VTT"></script>
+<script src="analytics.js"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<script src="https://cdn.tailwindcss.com/3.4.16?plugins=forms,container-queries"></script>
+<script src="tailwind-config.js"></script>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<div id="site-nav"></div>
+<script src="nav.js?v=20260425"></script>
+<main class="pt-20 pb-20 px-8 max-w-7xl mx-auto">
+
+<!-- Hero -->
+<section class="mb-10">
+    <h1 class="font-headline font-extrabold text-5xl md:text-7xl text-primary tracking-tighter mb-4 leading-[0.9] max-w-3xl">
+        AI Text <br/><span class="text-secondary italic">Humanizer</span>
+    </h1>
+    <p class="text-lg text-on-surface-variant max-w-2xl font-medium leading-relaxed italic border-l-4 border-secondary-fixed pl-6">
+        Paste AI-generated text on the left. Get a cleaned-up version on the right — shorter words, real contractions, fewer filler phrases. No account, no waiting.
+    </p>
+</section>
+
+<!-- Editor grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- Input -->
+    <div class="bg-surface-container-low rounded-xl p-6 flex flex-col gap-4">
+        <div class="flex items-center justify-between">
+            <label for="humanizer-input" class="text-xs font-bold uppercase tracking-[0.2em] text-outline">Original text</label>
+            <button id="clear-btn" class="text-sm font-medium text-on-surface-variant hover:text-error flex items-center gap-1 transition-colors">
+                <span class="material-symbols-outlined text-base">delete</span> Clear
+            </button>
+        </div>
+        <textarea id="humanizer-input" rows="14"
+            class="editor-area w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary text-base p-5 rounded-lg font-body leading-relaxed resize-y"
+            placeholder="Paste your AI-generated text here…"></textarea>
+        <div class="flex gap-3">
+            <button id="humanize-btn"
+                class="primary-gradient text-on-primary flex-1 py-4 px-6 rounded-xl font-headline font-extrabold text-lg flex items-center justify-center gap-2 scale-95 active:scale-90 transition-transform">
+                <span class="material-symbols-outlined">auto_fix_high</span> Humanize
+            </button>
+            <button id="retry-btn"
+                class="bg-secondary-fixed text-secondary py-4 px-5 rounded-xl font-headline font-bold text-base flex items-center gap-2 hover:bg-tertiary-fixed hover:text-tertiary transition-colors" title="Re-run with fresh word choices">
+                <span class="material-symbols-outlined">refresh</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Output -->
+    <div class="bg-surface-container-low rounded-xl p-6 flex flex-col gap-4">
+        <div class="flex items-center justify-between">
+            <label class="text-xs font-bold uppercase tracking-[0.2em] text-outline">Humanized text</label>
+            <button id="copy-btn" class="text-sm font-medium text-on-surface-variant hover:text-primary flex items-center gap-1 transition-colors">
+                <span class="material-symbols-outlined text-base">content_copy</span> Copy
+            </button>
+        </div>
+        <textarea id="humanizer-output" rows="14" readonly
+            class="editor-area w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary text-base p-5 rounded-lg font-body leading-relaxed resize-y"
+            placeholder="Your humanized text will appear here…"></textarea>
+
+        <!-- Changes summary -->
+        <div id="changes-summary" class="flex flex-wrap gap-2 min-h-[2rem]"></div>
+
+        <p class="text-xs text-outline-variant">Rule-based pass — always read the output before using it.</p>
+    </div>
+</div>
+
+<!-- How it works -->
+<section class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-surface-container-lowest rounded-2xl p-6">
+        <div class="w-10 h-10 bg-primary-fixed rounded-xl flex items-center justify-center text-primary mb-4">
+            <span class="material-symbols-outlined">compress</span>
+        </div>
+        <h3 class="font-headline font-bold text-lg text-primary mb-2">Contractions</h3>
+        <p class="text-sm text-on-surface-variant leading-relaxed">Replaces stiff formal pairs like "do not" and "I am" with natural contractions — "don't" and "I'm".</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-2xl p-6">
+        <div class="w-10 h-10 bg-secondary-fixed rounded-xl flex items-center justify-center text-secondary mb-4">
+            <span class="material-symbols-outlined">find_replace</span>
+        </div>
+        <h3 class="font-headline font-bold text-lg text-primary mb-2">Vocabulary swap</h3>
+        <p class="text-sm text-on-surface-variant leading-relaxed">Targets classic AI tells — "delve", "tapestry", "leverage", "robust", "multifaceted" — and swaps them for everyday words.</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-2xl p-6">
+        <div class="w-10 h-10 bg-tertiary-fixed rounded-xl flex items-center justify-center text-tertiary mb-4">
+            <span class="material-symbols-outlined">cleaning_services</span>
+        </div>
+        <h3 class="font-headline font-bold text-lg text-primary mb-2">Filler removal</h3>
+        <p class="text-sm text-on-surface-variant leading-relaxed">Strips phrases like "It is worth noting that" and "Furthermore," and trims em-dashes that AI overuses.</p>
+    </div>
+</section>
+
+</main>
+
+<script>
+(function () {
+    // ------------------------------------------------------------------
+    // Transformation tables
+    // ------------------------------------------------------------------
+
+    // Phrase → alternatives. Longer/more-specific phrases come first so they
+    // shadow shorter overlapping entries (e.g. "delve into" before "delve").
+    const SWAPS = [
+        { find: 'delve into',            alts: ['look into', 'explore', 'dig into'] },
+        { find: 'shed light on',         alts: ['explain', 'clarify', 'show'] },
+        { find: 'in light of',           alts: ['given', 'considering'] },
+        { find: 'in order to',           alts: ['to'] },
+        { find: 'due to the fact that',  alts: ['because'] },
+        { find: 'in the event that',     alts: ['if'] },
+        { find: 'at the present time',   alts: ['now', 'right now'] },
+        { find: 'for the purpose of',    alts: ['to', 'for'] },
+        { find: 'with regard to',        alts: ['about', 'on'] },
+        { find: 'with respect to',       alts: ['about', 'on'] },
+        { find: 'in terms of',           alts: ['for', 'when it comes to'] },
+        { find: 'in the context of',     alts: ['in', 'for'] },
+        { find: 'a wide range of',       alts: ['many', 'a range of'] },
+        { find: 'a wide variety of',     alts: ['many', 'a variety of'] },
+        { find: 'cutting-edge',          alts: ['new', 'modern', 'advanced'] },
+        { find: 'state-of-the-art',      alts: ['advanced', 'latest', 'modern'] },
+        { find: 'game-changing',         alts: ['significant', 'major', 'big'] },
+        { find: 'delve',                 alts: ['look', 'explore', 'examine'] },
+        { find: 'tapestry',              alts: ['mix', 'blend', 'combination'] },
+        { find: 'leverage',              alts: ['use', 'apply', 'tap'] },
+        { find: 'leveraging',            alts: ['using', 'applying', 'drawing on'] },
+        { find: 'leveraged',             alts: ['used', 'applied'] },
+        { find: 'robust',                alts: ['solid', 'strong', 'reliable'] },
+        { find: 'multifaceted',          alts: ['complex', 'layered', 'many-sided'] },
+        { find: 'nuanced',               alts: ['subtle', 'careful', 'detailed'] },
+        { find: 'paramount',             alts: ['key', 'critical', 'most important'] },
+        { find: 'utilize',               alts: ['use'] },
+        { find: 'utilizes',              alts: ['uses'] },
+        { find: 'utilized',              alts: ['used'] },
+        { find: 'utilizing',             alts: ['using'] },
+        { find: 'utilization',           alts: ['use'] },
+        { find: 'facilitate',            alts: ['help', 'support', 'enable'] },
+        { find: 'facilitates',           alts: ['helps', 'supports', 'enables'] },
+        { find: 'facilitated',           alts: ['helped', 'supported', 'enabled'] },
+        { find: 'facilitating',          alts: ['helping', 'supporting', 'enabling'] },
+        { find: 'endeavour',             alts: ['try', 'aim', 'work'] },
+        { find: 'endeavor',              alts: ['try', 'aim', 'work'] },
+        { find: 'endeavours',            alts: ['tries', 'aims', 'works'] },
+        { find: 'endeavors',             alts: ['tries', 'aims', 'works'] },
+        { find: 'navigate',              alts: ['handle', 'manage', 'work through'] },
+        { find: 'navigates',             alts: ['handles', 'manages'] },
+        { find: 'navigating',            alts: ['handling', 'managing'] },
+        { find: 'foster',                alts: ['build', 'grow', 'encourage'] },
+        { find: 'fosters',               alts: ['builds', 'grows', 'encourages'] },
+        { find: 'fostering',             alts: ['building', 'growing', 'encouraging'] },
+        { find: 'bolster',               alts: ['boost', 'strengthen', 'improve'] },
+        { find: 'bolsters',              alts: ['boosts', 'strengthens'] },
+        { find: 'bolstering',            alts: ['boosting', 'strengthening'] },
+        { find: 'underscore',            alts: ['highlight', 'show', 'point out'] },
+        { find: 'underscores',           alts: ['highlights', 'shows'] },
+        { find: 'underscoring',          alts: ['highlighting', 'showing'] },
+        { find: 'elucidate',             alts: ['explain', 'clarify'] },
+        { find: 'elucidates',            alts: ['explains', 'clarifies'] },
+        { find: 'elucidating',           alts: ['explaining', 'clarifying'] },
+        { find: 'pivotal',               alts: ['key', 'crucial', 'central'] },
+        { find: 'indispensable',         alts: ['essential', 'key', 'vital'] },
+        { find: 'seamlessly',            alts: ['smoothly', 'easily'] },
+        { find: 'proactively',           alts: ['ahead of time', 'in advance'] },
+        { find: 'proactive',             alts: ['forward-thinking'] },
+        { find: 'groundbreaking',        alts: ['major', 'significant', 'new'] },
+        { find: 'transformative',        alts: ['significant', 'major', 'impactful'] },
+        { find: 'synergy',               alts: ['teamwork', 'combination'] },
+        { find: 'synergies',             alts: ['benefits', 'combined effects'] },
+        { find: 'holistic',              alts: ['broad', 'overall', 'complete'] },
+        { find: 'optimal',               alts: ['best', 'ideal'] },
+        { find: 'optimize',              alts: ['improve', 'fine-tune'] },
+        { find: 'optimizes',             alts: ['improves', 'fine-tunes'] },
+        { find: 'optimizing',            alts: ['improving', 'fine-tuning'] },
+        { find: 'streamline',            alts: ['simplify', 'speed up'] },
+        { find: 'streamlines',           alts: ['simplifies', 'speeds up'] },
+        { find: 'streamlining',          alts: ['simplifying', 'speeding up'] },
+        { find: 'innovative',            alts: ['new', 'fresh', 'creative'] },
+        { find: 'innovation',            alts: ['creativity', 'improvement'] },
+        { find: 'innovations',           alts: ['improvements', 'advances'] },
+        { find: 'implement',             alts: ['apply', 'deploy', 'use'] },
+        { find: 'implements',            alts: ['applies', 'deploys', 'uses'] },
+        { find: 'implemented',           alts: ['applied', 'deployed', 'used'] },
+        { find: 'implementing',          alts: ['applying', 'deploying', 'using'] },
+        { find: 'commence',              alts: ['start', 'begin'] },
+        { find: 'commences',             alts: ['starts', 'begins'] },
+        { find: 'commencing',            alts: ['starting', 'beginning'] },
+    ];
+
+    const FILLERS = [
+        'It is worth noting that ',
+        "It's worth noting that ",
+        'It is important to note that ',
+        "It's important to note that ",
+        'It should be noted that ',
+        'It is clear that ',
+        "It's clear that ",
+        'It is evident that ',
+        'It is obvious that ',
+        'There is no doubt that ',
+        'Needless to say, ',
+        'As previously mentioned, ',
+        'As mentioned previously, ',
+        'As mentioned earlier, ',
+        'It goes without saying that ',
+        'It is fair to say that ',
+        'It is safe to say that ',
+    ];
+
+    const TRANSITIONS = [
+        { find: 'In conclusion,',  alts: ['To wrap up,', 'All in all,', 'In short,'] },
+        { find: 'To conclude,',    alts: ['To wrap up,', 'In the end,'] },
+        { find: 'In summary,',     alts: ['To sum up,', 'In short,'] },
+        { find: 'Furthermore,',    alts: ['Also,', 'Plus,', 'On top of that,'] },
+        { find: 'Moreover,',       alts: ['Plus,', 'Also,', 'On top of that,'] },
+        { find: 'Additionally,',   alts: ['Also,', 'Plus,'] },
+        { find: 'Nevertheless,',   alts: ['Still,', 'Even so,'] },
+        { find: 'Nonetheless,',    alts: ['Still,', 'Even so,'] },
+        { find: 'Consequently,',   alts: ['As a result,', 'So,'] },
+        { find: 'Subsequently,',   alts: ['Then,', 'After that,'] },
+        { find: 'Therefore,',      alts: ['So,'] },
+        { find: 'Thus,',           alts: ['So,'] },
+        { find: 'Henceforth,',     alts: ['From now on,'] },
+        { find: 'Ultimately,',     alts: ['In the end,', 'At the end of the day,'] },
+        { find: 'In essence,',     alts: ['Basically,', 'Simply put,'] },
+        { find: 'To summarize,',   alts: ['To sum up,', 'In short,'] },
+    ];
+
+    const CONTRACTIONS = [
+        ['do not',    "don't"],
+        ['does not',  "doesn't"],
+        ['did not',   "didn't"],
+        ['have not',  "haven't"],
+        ['has not',   "hasn't"],
+        ['had not',   "hadn't"],
+        ['will not',  "won't"],
+        ['would not', "wouldn't"],
+        ['could not', "couldn't"],
+        ['should not',"shouldn't"],
+        ['is not',    "isn't"],
+        ['are not',   "aren't"],
+        ['was not',   "wasn't"],
+        ['were not',  "weren't"],
+        ['need not',  "needn't"],
+        ['cannot',    "can't"],
+        ['can not',   "can't"],
+        ['I am',      "I'm"],
+        ['I have',    "I've"],
+        ['I will',    "I'll"],
+        ['I would',   "I'd"],
+        ['you are',   "you're"],
+        ['you have',  "you've"],
+        ['you will',  "you'll"],
+        ['you would', "you'd"],
+        ['we are',    "we're"],
+        ['we have',   "we've"],
+        ['we will',   "we'll"],
+        ['we would',  "we'd"],
+        ['they are',  "they're"],
+        ['they have', "they've"],
+        ['they will', "they'll"],
+        ['they would',"they'd"],
+        ['he is',     "he's"],
+        ['she is',    "she's"],
+        ['it is',     "it's"],
+        ['that is',   "that's"],
+        ['there is',  "there's"],
+        ['what is',   "what's"],
+        ['who is',    "who's"],
+        ['here is',   "here's"],
+        ['let us',    "let's"],
+    ];
+
+    // ------------------------------------------------------------------
+    // Helpers
+    // ------------------------------------------------------------------
+
+    function pick(alts) {
+        return alts[Math.floor(Math.random() * alts.length)];
+    }
+
+    function preserveCase(original, replacement) {
+        if (!original || !replacement) return replacement;
+        const first = original[0];
+        if (first === first.toUpperCase() && first !== first.toLowerCase()) {
+            return replacement[0].toUpperCase() + replacement.slice(1);
+        }
+        return replacement;
+    }
+
+    function escapeRegex(str) {
+        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // ------------------------------------------------------------------
+    // Pipeline
+    // ------------------------------------------------------------------
+
+    function humanize(text) {
+        let out = text;
+        const counts = { swaps: 0, fillers: 0, transitions: 0, contractions: 0 };
+
+        // 1. Filler removal.
+        // When the filler opens a sentence, capitalise the word that follows.
+        // Mid-sentence fillers (e.g. "Furthermore, it is worth noting that X")
+        // just get removed without changing the following word's case.
+        for (const filler of FILLERS) {
+            const sentenceStart = new RegExp(`(?:^|(?<=[.!?]\\s))${escapeRegex(filler)}([a-z])`, 'gi');
+            out = out.replace(sentenceStart, (_, firstLetter) => {
+                counts.fillers++;
+                return firstLetter.toUpperCase();
+            });
+            const anywhere = new RegExp(escapeRegex(filler), 'gi');
+            out = out.replace(anywhere, () => { counts.fillers++; return ''; });
+        }
+
+        // 2. Em-dash normalisation
+        out = out.replace(/ — /g, ', ').replace(/—/g, ', ');
+
+        // 3. Transition rewrites
+        for (const { find, alts } of TRANSITIONS) {
+            const re = new RegExp(`(?:^|(?<=[.!?]\\s))${escapeRegex(find)}`, 'gi');
+            out = out.replace(re, (match) => {
+                counts.transitions++;
+                return preserveCase(match, pick(alts));
+            });
+        }
+
+        // 4. Vocabulary swaps
+        for (const { find, alts } of SWAPS) {
+            const re = new RegExp(`\\b${escapeRegex(find)}\\b`, 'gi');
+            out = out.replace(re, (match) => {
+                counts.swaps++;
+                return preserveCase(match, pick(alts));
+            });
+        }
+
+        // 5. Contractions (last, so we don't contract within replaced phrases)
+        for (const [from, to] of CONTRACTIONS) {
+            const re = new RegExp(`\\b${escapeRegex(from)}\\b`, 'gi');
+            out = out.replace(re, (match) => {
+                counts.contractions++;
+                return preserveCase(match, to);
+            });
+        }
+
+        return { text: out, counts };
+    }
+
+    // ------------------------------------------------------------------
+    // UI
+    // ------------------------------------------------------------------
+
+    const inputEl   = document.getElementById('humanizer-input');
+    const outputEl  = document.getElementById('humanizer-output');
+    const summaryEl = document.getElementById('changes-summary');
+
+    function makeBadge(icon, count, label) {
+        const chip = document.createElement('span');
+        chip.className = 'inline-flex items-center gap-1.5 bg-surface-container-highest text-on-surface px-3 py-1.5 rounded-full text-sm font-medium';
+
+        const iconEl = document.createElement('span');
+        iconEl.className = 'material-symbols-outlined text-base text-primary';
+        iconEl.textContent = icon;
+
+        const countEl = document.createElement('strong');
+        countEl.textContent = count;
+
+        const labelEl = document.createTextNode(' ' + label);
+
+        chip.appendChild(iconEl);
+        chip.appendChild(countEl);
+        chip.appendChild(labelEl);
+        return chip;
+    }
+
+    function renderSummary(counts) {
+        summaryEl.textContent = '';
+        const total = counts.swaps + counts.fillers + counts.transitions + counts.contractions;
+        if (total === 0) {
+            const note = document.createElement('span');
+            note.className = 'text-sm text-outline-variant italic';
+            note.textContent = 'No changes made — text may already read naturally.';
+            summaryEl.appendChild(note);
+            return;
+        }
+        const items = [
+            { icon: 'compress',          count: counts.contractions, label: 'contractions' },
+            { icon: 'find_replace',      count: counts.swaps,        label: 'swaps' },
+            { icon: 'cleaning_services', count: counts.fillers,      label: 'fillers removed' },
+            { icon: 'swap_horiz',        count: counts.transitions,  label: 'transitions' },
+        ];
+        for (const { icon, count, label } of items) {
+            if (count) summaryEl.appendChild(makeBadge(icon, count, label));
+        }
+    }
+
+    function run() {
+        const text = inputEl.value.trim();
+        if (!text) {
+            outputEl.value = '';
+            summaryEl.textContent = '';
+            return;
+        }
+        const { text: humanized, counts } = humanize(text);
+        outputEl.value = humanized;
+        renderSummary(counts);
+    }
+
+    document.getElementById('humanize-btn').addEventListener('click', run);
+    document.getElementById('retry-btn').addEventListener('click', function () {
+        if (inputEl.value.trim()) run();
+    });
+
+    document.getElementById('clear-btn').addEventListener('click', function () {
+        inputEl.value = '';
+        outputEl.value = '';
+        summaryEl.textContent = '';
+        inputEl.focus();
+    });
+
+    document.getElementById('copy-btn').addEventListener('click', async function () {
+        const text = outputEl.value;
+        if (!text) return;
+        try {
+            await navigator.clipboard.writeText(text);
+            const btn = document.getElementById('copy-btn');
+            const icon = btn.querySelector('.material-symbols-outlined');
+            const orig = icon.textContent;
+            icon.textContent = 'check';
+            btn.lastChild.textContent = ' Copied!';
+            setTimeout(() => {
+                icon.textContent = orig;
+                btn.lastChild.textContent = ' Copy';
+            }, 1500);
+        } catch {
+            outputEl.select();
+            document.execCommand('copy');
+        }
+    });
+
+    inputEl.addEventListener('keydown', function (e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') run();
+    });
+}());
+</script>
+
+<!-- Footer -->
+<footer class="w-full py-12 mt-20 bg-emerald-50 dark:bg-emerald-950">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex flex-col items-center md:items-start gap-2">
+            <span class="font-headline font-bold text-emerald-950 dark:text-emerald-50">ucandoit.ca</span>
+            <p class="font-body text-sm tracking-wide leading-relaxed text-emerald-700 dark:text-emerald-400">© 2024 ucandoit.ca</p>
+        </div>
+    </div>
+</footer>
+</body></html>
