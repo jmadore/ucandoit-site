@@ -23,7 +23,7 @@
 <script src="https://cdn.tailwindcss.com/3.4.16?plugins=forms,container-queries"></script>
 <script src="tailwind-config.js"></script>
 </head>
-<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
 <!-- Shared site navigation -->
 <div id="site-nav"></div>
 <script src="nav.js?v=20260425"></script>
@@ -31,13 +31,13 @@
 <main class="pt-24 min-h-screen bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-8 py-16">
         <header class="mb-10 max-w-3xl">
-            <h1 class="font-headline text-4xl md:text-6xl font-black text-primary tracking-tighter leading-[0.95] mb-4">Canadian tools, games, and timelines.</h1>
+            <h1 class="font-headline text-4xl md:text-6xl font-black text-primary tracking-tighter leading-[0.95] mb-4 [text-wrap:balance]">Canadian tools, games, and timelines.</h1>
             <p class="text-lg text-on-surface-variant font-medium leading-relaxed">Quick calculators, word helpers, playful browser games, and history timelines built for curious Canadians.</p>
         </header>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
             <!-- Word Tools -->
-            <div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-[box-shadow,colors] duration-500">
                 <div>
                     <div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-tertiary-fixed group-hover:text-tertiary transition-colors">
                         <span class="material-symbols-outlined text-3xl">auto_stories</span>
@@ -72,7 +72,7 @@
             </div>
 
             <!-- Calculators -->
-            <div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-[box-shadow,colors] duration-500">
                 <div>
                     <div class="w-14 h-14 bg-secondary-fixed rounded-2xl flex items-center justify-center text-secondary mb-6 group-hover:bg-tertiary-fixed group-hover:text-tertiary transition-colors">
                         <span class="material-symbols-outlined text-3xl">calculate</span>
@@ -107,7 +107,7 @@
             </div>
 
             <!-- Games -->
-            <div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 relative overflow-hidden">
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-[box-shadow,colors] duration-500 relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 text-tertiary/10 scale-150 rotate-12">
                     <span class="material-symbols-outlined text-9xl">eco</span>
                 </div>
@@ -155,7 +155,7 @@
             </div>
 
             <!-- History -->
-            <div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group hover:shadow-2xl hover:shadow-primary/5 transition-[box-shadow,colors] duration-500">
                 <div>
                     <div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-tertiary-fixed group-hover:text-tertiary transition-colors">
                         <span class="material-symbols-outlined text-3xl">history_edu</span>
