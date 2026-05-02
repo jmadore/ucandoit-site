@@ -92,6 +92,7 @@
                 </a>
                 <div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
                     ${navSections.map(renderDesktopSection).join("")}
+                    <a href="about.html" class="${currentPage === 'about.html' ? activeButtonClass : inactiveButtonClass}">About</a>
                 </div>
                 <button id="nav-hamburger" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded-lg hover:bg-emerald-50 transition-colors" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-drawer">
                     <span class="block w-6 h-0.5 bg-emerald-900 transition-all duration-300" id="ham-top"></span>
@@ -116,6 +117,12 @@
             </div>
             <nav class="py-4">
                 ${navSections.map(renderMobileSection).join("")}
+                <div class="mb-2">
+                    <p class="px-4 py-2 text-xs font-bold tracking-widest uppercase text-emerald-500">Site</p>
+                    <div class="flex flex-col">
+                        <a href="about.html" class="${currentPage === 'about.html' ? 'block px-4 py-3 text-emerald-950 font-semibold border-l-2 border-emerald-800 bg-emerald-50' : 'block px-4 py-3 text-emerald-800 hover:bg-emerald-50 hover:text-emerald-900 transition-colors'}">About</a>
+                    </div>
+                </div>
             </nav>
             <div class="px-4 pb-6 mt-2 border-t border-emerald-100 pt-4">
                 <a href="index.html" class="block text-center py-3 px-4 bg-emerald-900 text-white font-headline font-bold rounded-lg hover:bg-emerald-800 transition-colors">
