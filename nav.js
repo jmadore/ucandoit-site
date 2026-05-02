@@ -41,6 +41,7 @@
 ];
 
     const navStandaloneLinks = [
+        ["blog.html", "Blog"],
         ["about.html", "About"]
     ];
 
