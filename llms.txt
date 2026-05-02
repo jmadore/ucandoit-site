@@ -5,21 +5,21 @@ ucandoit.ca is a Canadian tools and games website with word tools, calculators, 
 ## Primary Links
 
 - [Home](/index.html) (~103 tokens): Directory of all public word tools, calculators, games, and history timelines.
-- [Anagram Finder](/anagram-finder.html) (~151 tokens): Finds Canadian English anagrams from supplied letters with optional filters.
-- [Word Unscrambler](/word-unscrambler.html) (~100 tokens): Unscrambles letters into Canadian English words and supports wildcard characters.
-- [Mortgage Calculator](/loan-calculator.html) (~190 tokens): Estimates Canadian mortgage or loan payments with insurance, stress-test, amortization, and payment-frequency options.
-- [Board Foot Calculator](/board-foot-calculator.html) (~165 tokens): Calculates lumber board feet and estimated project cost from board dimensions.
-- [Hourly to Yearly Salary Calculator](/hourly-to-yearly-salary.html) (~155 tokens): Converts hourly wage to annual, monthly, and weekly salary using custom work schedules and Canadian minimum wage context.
-- [Yearly to Hourly Salary Calculator](/yearly-to-hourly-salary.html) (~136 tokens): Converts annual salary to hourly wage using custom hours per week and weeks per year.
-- [Countdown Letters Game](/countdown-letters-game.html) (~430 tokens): Countdown-style letters game using a local Canadian English dictionary and a 30-second timer.
-- [Countdown Conundrum Game](/countdown-conundrum.html) (~163 tokens): Nine-letter anagram challenge with a 30-second timer.
-- [Countdown Numbers Game](/countdown-numbers-game.html) (~200 tokens): Countdown-style numbers challenge where players combine selected numbers to reach a target.
-- [Newfoundland Phrase Match](/newfoundland-phrase-match.html) (~104 tokens): Matching game for Newfoundland phrases and meanings.
-- [Canadian Tic Tac Toe](/canadian-tictactoe.html) (~112 tokens): Tic tac toe with minimax computer play, two-player mode, and Canadian-themed symbol sets.
-- [Canadian Goose Game](/canadian-goose-game.html) (~100 tokens): Canvas jumping game where a goose dodges rocks and collects loonies.
-- [Canada History Timeline](/canada-history-timeline.html) (~100 tokens): Interactive timeline of Canadian history from early habitation to recent national events.
-- [Ontario History Timeline](/ontario-history-timeline.html) (~100 tokens): Interactive timeline of Ontario history.
-- [Quebec History Timeline](/quebec-history-timeline.html) (~100 tokens): Interactive timeline of Quebec history.
+- [Anagram Finder](/words/anagram-finder.html) (~151 tokens): Finds Canadian English anagrams from supplied letters with optional filters.
+- [Word Unscrambler](/words/word-unscrambler.html) (~100 tokens): Unscrambles letters into Canadian English words and supports wildcard characters.
+- [Mortgage Calculator](/calculators/loan-calculator.html) (~190 tokens): Estimates Canadian mortgage or loan payments with insurance, stress-test, amortization, and payment-frequency options.
+- [Board Foot Calculator](/calculators/board-foot-calculator.html) (~165 tokens): Calculates lumber board feet and estimated project cost from board dimensions.
+- [Hourly to Yearly Salary Calculator](/calculators/hourly-to-yearly-salary.html) (~155 tokens): Converts hourly wage to annual, monthly, and weekly salary using custom work schedules and Canadian minimum wage context.
+- [Yearly to Hourly Salary Calculator](/calculators/yearly-to-hourly-salary.html) (~136 tokens): Converts annual salary to hourly wage using custom hours per week and weeks per year.
+- [Countdown Letters Game](/games/countdown-letters-game.html) (~430 tokens): Countdown-style letters game using a local Canadian English dictionary and a 30-second timer.
+- [Countdown Conundrum Game](/games/countdown-conundrum.html) (~163 tokens): Nine-letter anagram challenge with a 30-second timer.
+- [Countdown Numbers Game](/games/countdown-numbers-game.html) (~200 tokens): Countdown-style numbers challenge where players combine selected numbers to reach a target.
+- [Newfoundland Phrase Match](/games/newfoundland-phrase-match.html) (~104 tokens): Matching game for Newfoundland phrases and meanings.
+- [Canadian Tic Tac Toe](/games/canadian-tictactoe.html) (~112 tokens): Tic tac toe with minimax computer play, two-player mode, and Canadian-themed symbol sets.
+- [Canadian Goose Game](/games/canadian-goose-game.html) (~100 tokens): Canvas jumping game where a goose dodges rocks and collects loonies.
+- [Canada History Timeline](/history/canada-history-timeline.html) (~100 tokens): Interactive timeline of Canadian history from early habitation to recent national events.
+- [Ontario History Timeline](/history/ontario-history-timeline.html) (~100 tokens): Interactive timeline of Ontario history.
+- [Quebec History Timeline](/history/quebec-history-timeline.html) (~100 tokens): Interactive timeline of Quebec history.
 - [Skill Description](/skill.md) (~390 tokens): Agent-readable summary of what ucandoit.ca can do.
 
 ## Capabilities

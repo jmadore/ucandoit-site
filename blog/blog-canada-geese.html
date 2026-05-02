@@ -15,16 +15,16 @@
      crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1W7WL78VTT"></script>
-<script src="analytics.js"></script>
-<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<script src="../analytics.js"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
 <script src="https://cdn.tailwindcss.com/3.4.16?plugins=forms,container-queries"></script>
-<script src="tailwind-config.js"></script>
-<link rel="canonical" href="https://ucandoit.ca/canada-geese.html"/>
+<script src="../tailwind-config.js"></script>
+<link rel="canonical" href="https://ucandoit.ca/blog/blog-canada-geese.html"/>
 <meta property="og:title" content="Why Canada Geese Matter More to Canadians Than We Admit"/>
 <meta property="og:description" content="For all the jokes about aggressive geese and sidewalk landmines, the Canada goose is deeply woven into Canadian identity in a way we rarely stop to think about."/>
-<meta property="og:url" content="https://ucandoit.ca/canada-geese.html"/>
+<meta property="og:url" content="https://ucandoit.ca/blog/blog-canada-geese.html"/>
 <meta property="og:type" content="article"/>
 <meta property="og:site_name" content="ucandoit.ca"/>
 <script type="application/ld+json">
@@ -32,7 +32,7 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "Why Canada Geese Matter More to Canadians Than We Admit",
-  "url": "https://ucandoit.ca/canada-geese.html",
+  "url": "https://ucandoit.ca/blog/blog-canada-geese.html",
   "datePublished": "2026-05-02",
   "description": "For all the jokes about aggressive geese and sidewalk landmines, the Canada goose is deeply woven into Canadian identity in a way we rarely stop to think about.",
   "author": {
@@ -51,7 +51,7 @@
 <body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
 <!-- Shared site navigation -->
 <div id="site-nav"></div>
-<script src="nav.js?v=20260502"></script>
+<script src="../nav.js?v=20260502"></script>
 
 <main class="pt-24 min-h-screen bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-8 py-16">
@@ -63,21 +63,26 @@
         </a>
 
         <!-- Article header -->
-        <header class="max-w-3xl mb-12">
-            <div class="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-5">
-                <span class="material-symbols-outlined text-base text-tertiary">eco</span>
-                Wildlife &amp; Nature
-                <span class="text-on-surface-variant/40">·</span>
-                <span>May 2026</span>
-                <span class="text-on-surface-variant/40">·</span>
-                <span>6 min read</span>
+        <header class="max-w-3xl mb-12 relative">
+            <!-- Decorative goose photo -->
+            <img src="../assets/geese.png" alt="" aria-hidden="true"
+                class="absolute right-0 top-0 w-[30rem] h-80 object-contain object-right-top opacity-20 pointer-events-none select-none hidden sm:block"/>
+            <!-- Metadata: pill + date + read time -->
+            <div class="flex flex-wrap items-center gap-3 mb-5">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold uppercase tracking-widest">
+                    <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">eco</span>
+                    Wildlife &amp; Nature
+                </span>
+                <span class="text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest">May 2026</span>
+                <span class="text-on-surface-variant/30">·</span>
+                <span class="text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest">6 min read</span>
             </div>
             <h1 class="font-headline text-4xl md:text-5xl font-black text-primary tracking-tighter leading-[0.95] mb-6 [text-wrap:balance]">Why Canada Geese Matter More to Canadians Than We Admit</h1>
             <p class="text-xl text-on-surface-variant font-medium leading-relaxed">They're loud, stubborn, resilient, and impossible to ignore. But for all the jokes, the Canada goose is deeply woven into Canadian identity in a way we rarely stop to think about.</p>
         </header>
 
         <!-- Article body -->
-        <article class="max-w-3xl space-y-8 text-on-surface-variant leading-relaxed">
+        <article class="max-w-3xl space-y-8 text-on-surface-variant leading-relaxed text-pretty">
 
             <p>If you're Canadian, you probably have a relationship with the Canada goose.</p>
             <p>Maybe you grew up watching them fly overhead in giant V-shaped formations every fall. Maybe you've spent a spring afternoon carefully steering around a family of goslings crossing a parking lot like they owned the place. Maybe you've also been hissed at in a park and briefly feared for your life.</p>
@@ -88,7 +93,7 @@
             <hr class="border-emerald-100 dark:border-emerald-900"/>
 
             <section>
-                <h2 class="font-headline text-2xl font-bold text-primary mb-4">A Bird That Became Part of the Landscape</h2>
+                <h2 class="font-headline text-2xl font-bold text-primary mb-4 [text-wrap:balance]">A Bird That Became Part of the Landscape</h2>
                 <p>The Canada goose has been part of life across North America for thousands of years, long before Canada existed as a country. Indigenous peoples hunted geese for food, used their feathers for warmth and tools, and tracked their migrations as part of the rhythm of the seasons.</p>
                 <p class="mt-4">For early settlers, geese were both a practical resource and a sign of changing weather. Seeing the first migrating flocks overhead meant winter was coming. Hearing them return in spring meant survival through another long season.</p>
                 <p class="mt-4">Even today, there's something oddly emotional about hearing geese overhead after months of snow and grey skies. You can be in the middle of a grocery store parking lot and suddenly hear that unmistakable honking echoing through the sky.</p>
@@ -98,7 +103,7 @@
             <hr class="border-emerald-100 dark:border-emerald-900"/>
 
             <section>
-                <h2 class="font-headline text-2xl font-bold text-primary mb-4">The Sound of Canadian Seasons</h2>
+                <h2 class="font-headline text-2xl font-bold text-primary mb-4 [text-wrap:balance]">The Sound of Canadian Seasons</h2>
                 <p>Canada geese are one of those things that quietly define the atmosphere of the country.</p>
                 <p class="mt-4">Autumn in Canada sounds like geese. Spring thaw sounds like geese. A misty lake at sunrise? Geese. A suburban soccer field? Also geese.</p>
                 <p class="mt-4">They somehow belong equally to untouched wilderness and aggressively average office parks.</p>
@@ -109,7 +114,7 @@
             <hr class="border-emerald-100 dark:border-emerald-900"/>
 
             <section>
-                <h2 class="font-headline text-2xl font-bold text-primary mb-4">Almost Gone — Then Brought Back</h2>
+                <h2 class="font-headline text-2xl font-bold text-primary mb-4 [text-wrap:balance]">Almost Gone — Then Brought Back</h2>
                 <p>One of the lesser-known parts of the Canada goose story is that populations nearly disappeared in parts of North America during the late 1800s and early 1900s.</p>
                 <p class="mt-4">Overhunting and habitat loss hit them hard. Some subspecies were even believed to be extinct for a time.</p>
                 <p class="mt-4">Conservation efforts throughout the 20th century changed that dramatically. Wildlife protections, hunting regulations, and habitat management helped goose populations recover across Canada and the United States.</p>
@@ -121,7 +126,7 @@
             <hr class="border-emerald-100 dark:border-emerald-900"/>
 
             <section>
-                <h2 class="font-headline text-2xl font-bold text-primary mb-4">Why Canadians Secretly Respect Them</h2>
+                <h2 class="font-headline text-2xl font-bold text-primary mb-4 [text-wrap:balance]">Why Canadians Secretly Respect Them</h2>
                 <p>Canadians complain about geese constantly, but there's also an undeniable admiration there.</p>
                 <p class="mt-4">Geese don't apologize for existing. They walk directly into traffic with absolute confidence. They defend their families with terrifying commitment. They survive brutal winters and migrations spanning thousands of kilometres. They adapt to almost any environment humans throw at them.</p>
                 <p class="mt-4">They're hardy birds. And Canadians tend to respect hardy things.</p>
@@ -132,7 +137,7 @@
             <hr class="border-emerald-100 dark:border-emerald-900"/>
 
             <section>
-                <h2 class="font-headline text-2xl font-bold text-primary mb-4">The Unofficial Canadian Mascot</h2>
+                <h2 class="font-headline text-2xl font-bold text-primary mb-4 [text-wrap:balance]">The Unofficial Canadian Mascot</h2>
                 <p>The funny part is that the Canada goose may actually represent modern Canada better than many official national symbols.</p>
                 <p class="mt-4">Beavers are hardworking, sure. Moose are majestic. Loons are iconic. But geese? Geese are <em>visible</em>.</p>
                 <p class="mt-4">You encounter them constantly. They exist in urban parks, tiny towns, cottage country, airports, industrial areas, and remote lakes. Rich or poor, rural or urban, almost every Canadian has a goose story.</p>
@@ -143,7 +148,7 @@
             <hr class="border-emerald-100 dark:border-emerald-900"/>
 
             <section>
-                <h2 class="font-headline text-2xl font-bold text-primary mb-4">A Strange Kind of Comfort</h2>
+                <h2 class="font-headline text-2xl font-bold text-primary mb-4 [text-wrap:balance]">A Strange Kind of Comfort</h2>
                 <p>There's a reason people stop and watch migrating geese even after seeing them hundreds of times.</p>
                 <p class="mt-4">The formations overhead create this strange feeling of continuity. No matter how much technology changes or how chaotic the world gets, the geese still arrive when the seasons change.</p>
                 <p class="mt-4">Kids still point at them. People still imitate the honking. Drivers still wait impatiently while one goose slowly decides whether to cross the road.</p>
@@ -153,7 +158,7 @@
             <hr class="border-emerald-100 dark:border-emerald-900"/>
 
             <section>
-                <h2 class="font-headline text-2xl font-bold text-primary mb-4">Final Thoughts</h2>
+                <h2 class="font-headline text-2xl font-bold text-primary mb-4 [text-wrap:balance]">Final Thoughts</h2>
                 <p>Canada geese are annoying sometimes. There's no need to pretend otherwise.</p>
                 <p class="mt-4">But they're also one of the most recognizable living symbols of the country — a reminder of wilderness, migration, resilience, and the changing seasons that shape Canadian life.</p>
                 <p class="mt-4">They connect cities to nature. They connect people to memory. And somehow, despite all the complaints, Canadians would probably feel strange if they disappeared.</p>
@@ -184,11 +189,11 @@
             </p>
         </div>
         <div class="flex items-center gap-4 text-sm">
-            <a href="privacy-policy.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">Privacy Policy</a>
+            <a href="../privacy-policy.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">Privacy Policy</a>
             <span class="text-emerald-300 dark:text-emerald-700">·</span>
-            <a href="terms.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">Terms</a>
+            <a href="../terms.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">Terms</a>
             <span class="text-emerald-300 dark:text-emerald-700">·</span>
-            <a href="about.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">About</a>
+            <a href="../about.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">About</a>
         </div>
     </div>
 </footer>

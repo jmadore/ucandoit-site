@@ -1,48 +1,11 @@
 (function () {
-    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+    const currentPage = window.location.pathname;
 
-    const navSections = [
-        {
-                label: "Word Tools",
-                items: [
-                        [ "anagram-finder.html", "Anagram Finder"],
-                        [ "word-unscrambler.html", "Word Unscrambler"],
-                        [ "word-counter.html", "Word Counter"],
-                        [ "ai-text-humanizer.html", "AI Text Humanizer"]
-                ]
-        },
-        {
-                label: "Calculators",
-                items: [
-                        [ "loan-calculator.html", "Mortgage Calculator"],
-                        [ "board-foot-calculator.html", "Board Foot Calculator"],
-                        [ "salary-calculator.html", "Salary Calculator"]
-                ]
-        },
-        {
-                label: "Games",
-                items: [
-                        [ "countdown-letters-game.html", "Countdown Letters"],
-                        [ "countdown-conundrum.html", "Countdown Conundrum"],
-                        [ "countdown-numbers-game.html", "Countdown Numbers"],
-                        [ "newfoundland-phrase-match.html", "Newfoundland Phrase Match"],
-                        [ "canadian-tictactoe.html", "Canadian Tic Tac Toe"],
-                        [ "canadian-goose-game.html", "Canadian Goose Game"]
-                ]
-        },
-        {
-                label: "History",
-                items: [
-                        [ "canada-history-timeline.html", "Canada History"],
-                        [ "ontario-history-timeline.html", "Ontario History"],
-                        [ "quebec-history-timeline.html", "Quebec History"]
-                ]
-        }
-];
+    const navSections = [];
 
     const navStandaloneLinks = [
-        ["blog.html", "Blog"],
-        ["about.html", "About"]
+        ["/blog/blog.html", "Blog"],
+        ["/about.html", "About"]
     ];
 
     // ── Desktop nav ────────────────────────────────────────────────────────────
@@ -92,8 +55,8 @@
     const navHtml = `
         <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl border-b border-surface-container">
             <nav class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
-                <a class="flex items-center" href="index.html" aria-label="ucandoit.ca home">
-                    <img class="h-10 w-auto" src="assets/logo.png?v=20260425" alt="ucandoit.ca"/>
+                <a class="flex items-center" href="/" aria-label="ucandoit.ca home">
+                    <img class="h-10 w-auto" src="/assets/logo.png?v=20260425" alt="ucandoit.ca"/>
                 </a>
                 <div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
                     ${navSections.map(renderDesktopSection).join("")}
@@ -113,8 +76,8 @@
         <!-- Mobile drawer -->
         <aside id="nav-drawer" class="fixed top-0 right-0 z-50 h-full w-72 max-w-[85vw] bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out md:hidden overflow-y-auto" aria-label="Navigation menu" aria-hidden="true">
             <div class="flex items-center justify-between px-5 py-4 border-b border-emerald-100">
-                <a href="index.html" class="flex items-center" aria-label="ucandoit.ca home">
-                    <img class="h-8 w-auto" src="assets/logo.png?v=20260425" alt="ucandoit.ca"/>
+                <a href="/" class="flex items-center" aria-label="ucandoit.ca home">
+                    <img class="h-8 w-auto" src="/assets/logo.png?v=20260425" alt="ucandoit.ca"/>
                 </a>
                 <button id="nav-drawer-close" class="flex items-center justify-center w-9 h-9 rounded-lg hover:bg-emerald-50 transition-colors" aria-label="Close navigation menu">
                     <span class="material-symbols-outlined text-emerald-800">close</span>
@@ -135,7 +98,7 @@
                 </div>
             </nav>
             <div class="px-4 pb-6 mt-2 border-t border-emerald-100 pt-4">
-                <a href="index.html" class="block text-center py-3 px-4 bg-emerald-900 text-white font-headline font-bold rounded-lg hover:bg-emerald-800 transition-colors">
+                <a href="/" class="block text-center py-3 px-4 bg-emerald-900 text-white font-headline font-bold rounded-lg hover:bg-emerald-800 transition-colors">
                     Home
                 </a>
             </div>

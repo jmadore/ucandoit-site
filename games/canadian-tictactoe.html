@@ -98,16 +98,16 @@
          crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1W7WL78VTT"></script>
-<script src="analytics.js"></script>
-<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<script src="../analytics.js"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
 <script src="https://cdn.tailwindcss.com/3.4.16?plugins=forms,container-queries"></script>
-<script src="tailwind-config.js"></script>
-<link rel="canonical" href="https://ucandoit.ca/canadian-tictactoe.html"/>
+<script src="../tailwind-config.js"></script>
+<link rel="canonical" href="https://ucandoit.ca/games/canadian-tictactoe.html"/>
 <meta property="og:title" content="Canadian Tic Tac Toe — ucandoit.ca"/>
 <meta property="og:description" content="Play Canadian-themed tic tac toe against a minimax computer opponent or a second local player."/>
-<meta property="og:url" content="https://ucandoit.ca/canadian-tictactoe.html"/>
+<meta property="og:url" content="https://ucandoit.ca/games/canadian-tictactoe.html"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="ucandoit.ca"/>
 <script type="application/ld+json">
@@ -115,7 +115,7 @@
   "@context": "https://schema.org",
   "@type": "VideoGame",
   "name": "Canadian Tic Tac Toe",
-  "url": "https://ucandoit.ca/canadian-tictactoe.html",
+  "url": "https://ucandoit.ca/games/canadian-tictactoe.html",
   "description": "Canadian-themed tic tac toe against a minimax computer opponent or a second local player.",
   "genre": "Browser Game",
   "playMode": "SinglePlayer",
@@ -130,7 +130,7 @@
 <body class="bg-surface text-on-surface font-body antialiased min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed">
 <!-- Shared site navigation -->
 <div id="site-nav"></div>
-<script src="nav.js?v=20260502"></script>
+<script src="../nav.js?v=20260502"></script>
 
 <main class="tic-page pt-24 pb-16 px-5 md:px-8 min-h-screen">
     <section id="screen-setup" class="max-w-7xl mx-auto">
@@ -227,45 +227,45 @@
 
                         <button class="sym-card" id="sym-bears" onclick="setSymbolSet('bears'); startGame();">
                             <div class="flex items-center justify-center gap-2 mb-2">
-                                <img class="symbol-img" src="assets/beaver.png" alt="" width="30" height="30">
+                                <img class="symbol-img" src="../assets/beaver.png" alt="" width="30" height="30">
                                 <span class="text-on-surface-variant text-xs font-semibold">vs</span>
-                                <img class="symbol-img" src="assets/bear.png" alt="" width="30" height="30">
+                                <img class="symbol-img" src="../assets/bear.png" alt="" width="30" height="30">
                             </div>
                             <div class="text-xs font-bold font-headline text-on-surface-variant">Beaver &amp; Bear</div>
                         </button>
 
                         <button class="sym-card" id="sym-goose" onclick="setSymbolSet('goose'); startGame();">
                             <div class="flex items-center justify-center gap-2 mb-2">
-                                <img class="symbol-img" src="assets/goose.png" alt="" width="30" height="30">
+                                <img class="symbol-img" src="../assets/goose.png" alt="" width="30" height="30">
                                 <span class="text-on-surface-variant text-xs font-semibold">vs</span>
-                                <img class="symbol-img" src="assets/moose.png" alt="" width="30" height="30">
+                                <img class="symbol-img" src="../assets/moose.png" alt="" width="30" height="30">
                             </div>
                             <div class="text-xs font-bold font-headline text-on-surface-variant">Goose &amp; Moose</div>
                         </button>
 
                         <button class="sym-card" id="sym-hockey" onclick="setSymbolSet('hockey'); startGame();">
                             <div class="flex items-center justify-center gap-2 mb-2">
-                                <img class="symbol-img" src="assets/hockey-sticks.png" alt="" width="30" height="30">
+                                <img class="symbol-img" src="../assets/hockey-sticks.png" alt="" width="30" height="30">
                                 <span class="text-on-surface-variant text-xs font-semibold">vs</span>
-                                <img class="symbol-img" src="assets/puck.png" alt="" width="30" height="30">
+                                <img class="symbol-img" src="../assets/puck.png" alt="" width="30" height="30">
                             </div>
                             <div class="text-xs font-bold font-headline text-on-surface-variant">Hockey</div>
                         </button>
 
                         <button class="sym-card" id="sym-curling" onclick="setSymbolSet('curling'); startGame();">
                             <div class="flex items-center justify-center gap-2 mb-2">
-                                <img class="symbol-img" src="assets/brooms.png" alt="" width="30" height="30">
+                                <img class="symbol-img" src="../assets/brooms.png" alt="" width="30" height="30">
                                 <span class="text-on-surface-variant text-xs font-semibold">vs</span>
-                                <img class="symbol-img" src="assets/stone.png" alt="" width="30" height="30">
+                                <img class="symbol-img" src="../assets/stone.png" alt="" width="30" height="30">
                             </div>
                             <div class="text-xs font-bold font-headline text-on-surface-variant">Curling</div>
                         </button>
 
                         <button class="sym-card" id="sym-timmies" onclick="setSymbolSet('timmies'); startGame();">
                             <div class="flex items-center justify-center gap-2 mb-2">
-                                <img class="symbol-img" src="assets/coffee.png" alt="" width="30" height="30">
+                                <img class="symbol-img" src="../assets/coffee.png" alt="" width="30" height="30">
                                 <span class="text-on-surface-variant text-xs font-semibold">vs</span>
-                                <img class="symbol-img" src="assets/bit.png" alt="" width="30" height="30">
+                                <img class="symbol-img" src="../assets/bit.png" alt="" width="30" height="30">
                             </div>
                             <div class="text-xs font-bold font-headline text-on-surface-variant">Timmies</div>
                         </button>
@@ -599,11 +599,11 @@ startGame();
             </p>
         </div>
         <div class="flex flex-wrap items-center justify-center md:justify-end gap-4 text-sm">
-            <a href="privacy-policy.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">Privacy Policy</a>
+            <a href="../privacy-policy.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">Privacy Policy</a>
             <span class="text-emerald-300 dark:text-emerald-700">·</span>
-            <a href="terms.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">Terms</a>
+            <a href="../terms.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">Terms</a>
             <span class="text-emerald-300 dark:text-emerald-700">·</span>
-            <a href="about.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">About</a>
+            <a href="../about.html" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-50 transition-colors">About</a>
         </div>
     </div>
 </footer>
