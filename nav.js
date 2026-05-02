@@ -40,6 +40,10 @@
         }
 ];
 
+    const navStandaloneLinks = [
+        ["about.html", "About"]
+    ];
+
     // ── Desktop nav ────────────────────────────────────────────────────────────
     const inactiveButtonClass = "text-emerald-800/70 dark:text-emerald-200/70 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1";
     const activeButtonClass   = "text-emerald-950 dark:text-emerald-50 border-b-2 border-emerald-900 dark:border-emerald-400 pb-1 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all duration-300 flex items-center gap-1";
@@ -92,7 +96,7 @@
                 </a>
                 <div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
                     ${navSections.map(renderDesktopSection).join("")}
-                    <a href="about.html" class="${currentPage === 'about.html' ? activeButtonClass : inactiveButtonClass}">About</a>
+                    ${navStandaloneLinks.map(([href, label]) => `<a href="${href}" class="${currentPage === href ? activeButtonClass : inactiveButtonClass}">${label}</a>`).join("")}
                 </div>
                 <button id="nav-hamburger" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded-lg hover:bg-emerald-50 transition-colors" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-drawer">
                     <span class="block w-6 h-0.5 bg-emerald-900 transition-all duration-300" id="ham-top"></span>
@@ -120,7 +124,12 @@
                 <div class="mb-2">
                     <p class="px-4 py-2 text-xs font-bold tracking-widest uppercase text-emerald-500">Site</p>
                     <div class="flex flex-col">
-                        <a href="about.html" class="${currentPage === 'about.html' ? 'block px-4 py-3 text-emerald-950 font-semibold border-l-2 border-emerald-800 bg-emerald-50' : 'block px-4 py-3 text-emerald-800 hover:bg-emerald-50 hover:text-emerald-900 transition-colors'}">About</a>
+                        ${navStandaloneLinks.map(([href, label]) => {
+                            const cls = href === currentPage
+                                ? "block px-4 py-3 text-emerald-950 font-semibold border-l-2 border-emerald-800 bg-emerald-50"
+                                : "block px-4 py-3 text-emerald-800 hover:bg-emerald-50 hover:text-emerald-900 transition-colors";
+                            return `<a class="${cls}" href="${href}">${label}</a>`;
+                        }).join("")}
                     </div>
                 </div>
             </nav>
