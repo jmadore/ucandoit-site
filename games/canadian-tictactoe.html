@@ -322,9 +322,9 @@ function imgSymbol(src, alt, size) {
 function assetSymbol(file, label, sizes) {
     return {
         label,
-        cell: () => imgSymbol('assets/' + file, label, sizes.cell),
-        icon: () => imgSymbol('assets/' + file, label, sizes.icon),
-        big:  () => imgSymbol('assets/' + file, label, sizes.big),
+        cell: () => imgSymbol('../assets/' + file, label, sizes.cell),
+        icon: () => imgSymbol('../assets/' + file, label, sizes.icon),
+        big:  () => imgSymbol('../assets/' + file, label, sizes.big),
     };
 }
 
