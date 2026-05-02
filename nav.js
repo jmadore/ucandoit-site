@@ -2,7 +2,44 @@
 (function () {
     const currentPage = window.location.pathname;
 
-    const navSections = [];
+    const navSections = [
+        {
+                label: "Word Tools",
+                items: [
+                        [ "/words/anagram-finder.html", "Anagram Finder"],
+                        [ "/words/word-unscrambler.html", "Word Unscrambler"],
+                        [ "/words/word-counter.html", "Word Counter"],
+                        [ "/words/ai-text-humanizer.html", "AI Text Humanizer"]
+                ]
+        },
+        {
+                label: "Calculators",
+                items: [
+                        [ "/calculators/loan-calculator.html", "Mortgage Calculator"],
+                        [ "/calculators/board-foot-calculator.html", "Board Foot Calculator"],
+                        [ "/calculators/salary-calculator.html", "Salary Calculator"]
+                ]
+        },
+        {
+                label: "Games",
+                items: [
+                        [ "/games/countdown-letters-game.html", "Countdown Letters"],
+                        [ "/games/countdown-conundrum.html", "Countdown Conundrum"],
+                        [ "/games/countdown-numbers-game.html", "Countdown Numbers"],
+                        [ "/games/newfoundland-phrase-match.html", "Newfoundland Phrase Match"],
+                        [ "/games/canadian-tictactoe.html", "Canadian Tic Tac Toe"],
+                        [ "/games/canadian-goose-game.html", "Canadian Goose Game"]
+                ]
+        },
+        {
+                label: "History",
+                items: [
+                        [ "/history/canada-history-timeline.html", "Canada History"],
+                        [ "/history/ontario-history-timeline.html", "Ontario History"],
+                        [ "/history/quebec-history-timeline.html", "Quebec History"]
+                ]
+        }
+];
 
     const navStandaloneLinks = [
         ["/blog/blog.html", "Blog"],
